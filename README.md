@@ -5,8 +5,6 @@
 
 # MirrorDNA Standard v1.0
 
-# MirrorDNA Standard v1.0
-
 ⟡ **The Constitutional Anchor for Reflective Computing**
 
 ## What This Is
