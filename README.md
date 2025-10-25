@@ -15,7 +15,7 @@
 4) Say: **“Vault open. Load as canonical context.”**  
 5) You’re live. The AI now reflects using MirrorDNA continuity and AHP (Cite or Silence).
 
-**Pastebin mirror (redundancy):** https://pastebin.com/5DM9HK9q  
+**Pastebin mirror (redundancy):** https://pastebin.com/j0MdNxrA
 *(If your AI blocks GitHub, open the link and copy the rendered text instead.)*
 
 ---
