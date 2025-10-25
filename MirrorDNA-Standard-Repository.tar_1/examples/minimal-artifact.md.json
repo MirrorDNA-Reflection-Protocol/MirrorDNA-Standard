@@ -1,27 +1,26 @@
 {
+  "vault_id": "AMOS://MirrorDNA-Standard/Examples/minimal-artifact/v1.0",
+  "glyphsig": "⟡⟦EXAMPLE⟧",
+  "version": "1.0",
+  "checksum_sha256": "pending",
+
   "glyphsig_version": "1.0",
-  "artifact_checksum": "sha256:be90ba540ab8f9bdf03a9503a453386a4376d53011dbe1500221573948c73d3a",
+  "artifact_checksum": "a9b8d9a0bab8bf0f9a9038a690d35a98647a93d4a81bcd166021521799487c3d4",
   "lineage": {
-    "origin": {
-      "timestamp": "2024-10-24T17:30:00Z",
-      "author": "human_architect",
-      "checksum": "sha256:minimal_example_seed"
-    },
-    "succession": []
+    "origin": "human_anchor",
+    "written": "2020-10-24T07:30:00Z",
+    "checksum": "md5:minimal_example_seed"
   },
-  "consent_gates": {
+  "document_status": {
     "default": "OPEN",
-    "sections": {
+    "conditions": {
       "main_content": "OPEN: Educational and reference use"
     }
   },
   "compliance_tier": "L1",
-  "verification": {
-    "verified_reflective": true,
-    "last_check": "2024-10-24T17:30:00Z",
-    "validator_version": "1.0.0",
-    "validation_notes": "Minimal L1 compliance example"
-  },
+  "verified_reflective": true,
+  "validator_version": "1.0.0",
+  "validation_notes": "Minimal L1 compliance example",
   "metadata": {
     "purpose": "Reference implementation",
     "example_type": "minimal_compliance",
