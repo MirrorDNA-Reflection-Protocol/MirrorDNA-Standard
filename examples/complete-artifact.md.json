@@ -1,0 +1,35 @@
+{
+  "glyphsig_version": "1.0",
+  "vault_id": "AMOS://MirrorDNA-Standard/examples/complete-artifact",
+  "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦COMPLETE⟧",
+  "version": "1.0.0",
+  "checksum_sha256": "8a5b0d5cb2cfd7ac492a3fc7cd2c1e6129d3f6a6b3f9b5d2c529eae90a114f0d",
+  "artifact_checksum": "d9f8a93205b2a7c23d54c81f4790a1ecf246f21bb75f3c21b1d4f76c8f1f29a4",
+  "lineage": {
+    "origin": "human_anchor",
+    "timestamp": "2025-10-25T12:50:00Z",
+    "checksum": "d9f8a93205b2a7c23d54c81f4790a1ecf246f21bb75f3c21b1d4f76c8f1f29a4",
+    "predecessor": "AMOS://MirrorDNA-Standard/examples/minimal-artifact",
+    "successor": "pending"
+  },
+  "consent_status": {
+    "default": "RESTRICTED",
+    "conditions": "Non-commercial, research use only",
+    "exceptions": "Commercial use requires explicit permission"
+  },
+  "compliance_tier": "L2",
+  "validated_reflective": true,
+  "validator_version": "1.0.0",
+  "validation_notes": "Complete example with all required fields and lineage links",
+  "metadata": {
+    "purpose": "Demonstrate full compliance schema",
+    "example_type": "complete_compliance",
+    "educational_use": true,
+    "author": "Paul Desai (Active MirrorOS)",
+    "created_with": "Reflective AI Validator v1.0",
+    "related_specs": [
+      "AMOS://MirrorDNA-Standard/spec/core",
+      "AMOS://MirrorDNA-Standard/spec/compliance"
+    ]
+  }
+}

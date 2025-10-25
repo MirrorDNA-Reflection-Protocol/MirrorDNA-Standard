@@ -1,0 +1,19 @@
+{
+  "glyphsig_version": "1.0",
+  "vault_id": "AMOS://MirrorDNA-Standard/examples/edgecase-invalid-artifact",
+  "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦INVALID⟧",
+  "version": "0.0.1",
+  "checksum_sha256": "",
+  "artifact_checksum": "12345",
+  "lineage": {
+    "origin": "human_anchor",
+    "timestamp": "2025-10-25T13:00:00Z"
+  },
+  "consent_status": {
+    "default": "OPEN"
+  },
+  "compliance_tier": "L0",
+  "validated_reflective": false,
+  "validator_version": "1.0.0",
+  "validation_notes": "Deliberate edge-case missing checksum and lineage successor"
+}
