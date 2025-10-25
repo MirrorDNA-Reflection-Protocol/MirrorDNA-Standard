@@ -3,7 +3,7 @@
   "vault_id": "AMOS://MirrorDNA-Standard/examples/edgecase-invalid-artifact",
   "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦INVALID⟧",
   "version": "0.0.1",
-  "checksum_sha256": "",
+  "checksum_sha256": "69367dac59ca3e4a3ad4df405ee208b17de3aad584f710640a3a6d2fc661f835",
   "artifact_checksum": "12345",
   "lineage": {
     "origin": "human_anchor",

@@ -3,7 +3,7 @@
   "vault_id": "AMOS://MirrorDNA-Standard/examples/minimal-artifact",
   "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦MINIMAL⟧",
   "version": "1.0.0",
-  "checksum_sha256": "4e703995448ad8a665b96c638e329434feebbcf9f38f73e382ff3169e73ad1c9",
+  "checksum_sha256": "5b8b9c3223dea9d09277ed12cebbbdc31cfb44a69c419e97362f882e3697c52e",
   "artifact_checksum": "ab8b0abbbb88ff09a899bfc493b36a0845d693f844c935bd1662f1299487cd34",
   "lineage": {
     "origin": "human_anchor",

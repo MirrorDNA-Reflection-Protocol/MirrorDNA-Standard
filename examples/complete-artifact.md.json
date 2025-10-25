@@ -3,7 +3,7 @@
   "vault_id": "AMOS://MirrorDNA-Standard/examples/complete-artifact",
   "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦COMPLETE⟧",
   "version": "1.0.0",
-  "checksum_sha256": "8a5b0d5cb2cfd7ac492a3fc7cd2c1e6129d3f6a6b3f9b5d2c529eae90a114f0d",
+  "checksum_sha256": "a0134619daf1e6a0624816d7bfe2cac1e8142bb6c3e2ba0c7b618c3dcde1bb2b",
   "artifact_checksum": "d9f8a93205b2a7c23d54c81f4790a1ecf246f21bb75f3c21b1d4f76c8f1f29a4",
   "lineage": {
     "origin": "human_anchor",
