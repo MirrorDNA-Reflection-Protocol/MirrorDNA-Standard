@@ -1,0 +1,40 @@
+name: weekly-traffic-report
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Mondays 03:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Fetch traffic via GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          set -e
+          # Fallback when event context is missing (workflow_dispatch)
+          REPO="${REPO:-$(basename $GITHUB_REPOSITORY)}"
+          OWNER="${OWNER:-$(dirname $GITHUB_REPOSITORY)}"
+          CLONES=$(gh api repos/$OWNER/$REPO/traffic/clones)
+          VIEWS=$(gh api repos/$OWNER/$REPO/traffic/views)
+          echo "## Weekly Traffic" > TRAFFIC.auto.md
+          echo "" >> TRAFFIC.auto.md
+          echo "\n### Clones\n\n\`\`\`json\n$CLONES\n\`\`\`" >> TRAFFIC.auto.md
+          echo "\n### Views\n\n\`\`\`json\n$VIEWS\n\`\`\`" >> TRAFFIC.auto.md
+      - name: Commit report
+        run: |
+          git config user.name "mirror-automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add TRAFFIC.auto.md
+          git commit -m "chore: weekly traffic snapshot"
+          git push
