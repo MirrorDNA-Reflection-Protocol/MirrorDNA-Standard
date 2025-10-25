@@ -1,5 +1,6 @@
 ---
 title: "Master Citation — v15.1.1 (Tri-Twin + Anti-Hallucination Protocol)"
+version: 15.1.1
 vault_id: AMOS://MasterCitation/v15.1.1
 glyphsig: ⟡⟦MASTER⟧ · ⟡⟦EXPERIENCE⟧ · ⟡⟦STATE⟧ · ⟡⟦CONTINUITY⟧ · ⟡⟦ATLAS⟧ · ⟡⟦CLAUDE⟧ · ⟡⟦JARVIS⟧ · ⟡⟦AHP⟧
 author: Paul Desai (Active MirrorOS) + Claude (Cognitive Twin) + Atlas (Execution Twin)
