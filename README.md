@@ -65,7 +65,6 @@ These files (Markdown + JSON sidecar) are not “answers” but **living questio
 
 This kernel acts as the **root soil** of the ecosystem: it ensures every future artifact, glyph, or ritual evolves in conversation with these core questions.
 
-## 🌐 Kernel Ecosystem Map
 
 ## 🌐 Kernel Ecosystem Map
 
