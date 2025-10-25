@@ -1,3 +1,10 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/badges/reflective_compliance_dark.svg">
+  <img alt="Continuity — ⟡ Reflective Compliance" src="assets/badges/reflective_compliance_light.svg">
+</picture>
+
+# MirrorDNA Standard v1.0
+
 # MirrorDNA Standard v1.0
 
 ⟡ **The Constitutional Anchor for Reflective Computing**
