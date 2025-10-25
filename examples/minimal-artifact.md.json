@@ -1,0 +1,29 @@
+{
+  "glyphsig_version": "1.0",
+  "vault_id": "AMOS://MirrorDNA-Standard/examples/minimal-artifact",
+  "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦MINIMAL⟧",
+  "version": "1.0.0",
+  "artifact_checksum": "f32e059743eead1d20d8fb96cb1bf856957849a2b1c3acc3447d759ce71ad23f",
+  "lineage": {
+    "origin": "human_anchor",
+    "timestamp": "2025-10-25T12:30:00Z",
+    "checksum": "seed_example_initial"
+  },
+  "consent_status": {
+    "default": "OPEN",
+    "conditions": [
+      "OPEN: Educational and reference use"
+    ],
+    "main_context": "OPEN: Educational and reference use"
+  },
+  "compliance_tier": "L1",
+  "validator_reflective": true,
+  "last_checked": "2025-10-25T12:30:00Z",
+  "validator_version": "1.0.0",
+  "validation_notes": "Minimal L1 compliance example",
+  "metadata": {
+    "purpose": "Reference implementation",
+    "example_type": "minimal_compliance",
+    "educational_use": true
+  }
+}
