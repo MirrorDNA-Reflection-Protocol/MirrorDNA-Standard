@@ -1,0 +1,30 @@
+{
+  "vault_id": "AMOS://MirrorDNA-Standard/Examples/<name>/v<version>",
+  "glyphsig": "⟡⟦<GLYPH>⟧",
+  "version": "<version>",
+  "checksum_sha256": "pending",
+
+  "lineage": {
+    "origin": "human_anchor",
+    "predecessor": "none",
+    "successor": "pending"
+  },
+
+  "document_status": {
+    "default": "OPEN",
+    "conditions": {
+      "main_content": "OPEN: Educational and reference use"
+    }
+  },
+
+  "compliance_tier": "L1",
+  "verified_reflective": true,
+  "validator_version": "1.0.0",
+  "validation_notes": "Template sidecar for examples",
+
+  "metadata": {
+    "purpose": "Reference implementation",
+    "example_type": "template",
+    "educational_use": true
+  }
+}
