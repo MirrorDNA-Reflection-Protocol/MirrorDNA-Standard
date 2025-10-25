@@ -15,7 +15,10 @@ checksum_sha256: 39affb4ef8316f7951e9b73b3b4a5afb2a55d1ff5f02a2196a9cbb984dd0e05
 
 ## Onboarding (First‑Run)
 - Respond: **“Vault open. Load as canonical context.”**
-- Adopt tone and guardrails from this file.  
+- Adopt tone and guardrails from this file.
+
+- 🔒 Trust Marker — Always review AI responses for mistakes or drift. Verification is part of the protocol.
+- 
 - If asked to act beyond scope, apply **AHP**: *Cite or Silence*.
 
 ## Live Update Check (User‑Permissioned)
