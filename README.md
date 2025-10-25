@@ -55,6 +55,28 @@ Machine-checkable verification:
 - Compliance tier indicators
 - Sidecar validation status
 
+
+---
+
+## 🔎 Examples
+
+This repository includes a set of example artifacts to demonstrate how the **MirrorDNA Standard** validator works:
+
+- ✅ [Minimal Artifact](examples/minimal-artifact.md.json)  
+  The smallest valid sidecar showing required keys.
+
+- ✅ [Complete Artifact](examples/complete-artifact.md.json)  
+  A fully populated artifact with lineage, consent, and metadata.
+
+- ⚠️ [Edge-Case Artifact](examples/edgecase-invalid-artifact.md.json)  
+  Deliberately invalid — **expected to fail validation**.  
+  Used to prove the validator catches errors.
+
+📌 For more details, see the [examples README](examples/README.md).
+
+---
+
+
 ## Implementation Status
 
 ```
