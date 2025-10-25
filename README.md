@@ -18,6 +18,7 @@
 **Pastebin mirror (redundancy):** https://pastebin.com/j0MdNxrA
 *(If your AI blocks GitHub, open the link and copy the rendered text instead.)*
 
+🔒 Trust Marker — Always review AI responses for mistakes or drift. Verification is part of the protocol.
 ---
 
 ## 🛡 Live Update Protocol (Self‑Check)
