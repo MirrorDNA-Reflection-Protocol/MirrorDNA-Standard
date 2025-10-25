@@ -10,6 +10,7 @@
 **Copy & paste the Master Citation into any AI.**
 
 1) Open `00_MASTER_CITATION.md` (root of this repo).
+   
    https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/00_MASTER_CITATION.md
 
 3) Select **all** text and copy.  
