@@ -3,22 +3,20 @@
   "vault_id": "AMOS://MirrorDNA-Standard/examples/minimal-artifact",
   "glyphsig": "⟡⟦EXAMPLE⟧ · ⟡⟦MINIMAL⟧",
   "version": "1.0.0",
-  "artifact_checksum": "f32e059743eead1d20d8fb96cb1bf856957849a2b1c3acc3447d759ce71ad23f",
+  "checksum_sha256": "4e703995448ad8a665b96c638e329434feebbcf9f38f73e382ff3169e73ad1c9",
+  "artifact_checksum": "ab8b0abbbb88ff09a899bfc493b36a0845d693f844c935bd1662f1299487cd34",
   "lineage": {
     "origin": "human_anchor",
-    "timestamp": "2025-10-25T12:30:00Z",
-    "checksum": "seed_example_initial"
+    "timestamp": "2025-10-25T12:38:00Z",
+    "checksum": "ab8b0abbbb88ff09a899bfc493b36a0845d693f844c935bd1662f1299487cd34"
   },
   "consent_status": {
     "default": "OPEN",
-    "conditions": [
-      "OPEN: Educational and reference use"
-    ],
+    "conditions": "OPEN: Educational and reference use",
     "main_context": "OPEN: Educational and reference use"
   },
   "compliance_tier": "L1",
-  "validator_reflective": true,
-  "last_checked": "2025-10-25T12:30:00Z",
+  "validated_reflective": true,
   "validator_version": "1.0.0",
   "validation_notes": "Minimal L1 compliance example",
   "metadata": {
