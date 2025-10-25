@@ -55,10 +55,29 @@ Machine-checkable verification:
 - Compliance tier indicators
 - Sidecar validation status
 
+## 5. 🔹 Kernel Layer — Glyph Questions
+
+The `kernel/` folder contains the **GlyphKernel Questions v1.0**, a seed set of meta-questions that anchor the reflective substrate of MirrorDNA.  
+These files (Markdown + JSON sidecar) are not “answers” but **living questions** — the foundation of a reflection-first economy.  
+
+- `GlyphKernel_Questions_v1.md` → human-readable reflection prompts  
+- `GlyphKernel_Questions_v1.sidecar.json` → machine-aligned metadata for continuity and lineage  
+
+This kernel acts as the **root soil** of the ecosystem: it ensures every future artifact, glyph, or ritual evolves in conversation with these core questions.
+
+## 🌐 Kernel Ecosystem Map
+
+## 🌐 Kernel Ecosystem Map
+
+![GlyphKernel v1 Ecosystem Map](./kernel/GlyphKernel_v1_Ecosystem_Map_v2.png)
+
+This map shows how the **GlyphKernel Questions** flow into the **Reflection Process**,  
+which in turn seeds **Ecosystem Evolution**. It’s both a diagram and a ritual anchor  
+for understanding how reflective computation grows over time.
 
 ---
 
-## 🔎 Examples
+## .6 🔎 Examples
 
 This repository includes a set of example artifacts to demonstrate how the **MirrorDNA Standard** validator works:
 
