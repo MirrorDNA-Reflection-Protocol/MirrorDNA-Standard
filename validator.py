@@ -1,39 +1,81 @@
 #!/usr/bin/env python3
-import json, os, sys, glob
+import sys, re, json
 
-REQUIRED_SIDECAR_KEYS = [
-    "vault_id", "glyphsig", "version", "checksum_sha256"
-]
-
-def find_sidecars():
-    return glob.glob("**/*.json", recursive=True)
-
-def check_sidecar(path):
+def load_front_matter(text: str):
+    # Extract YAML-like front matter between leading --- blocks
+    start = text.find('---')
+    if start != 0:
+        raise ValueError("Front matter must start with '---' at the first line")
+    end = text.find('\n---', 3)
+    if end == -1:
+        raise ValueError("Closing '---' for front matter not found")
+    block = text[3:end].strip()
+    # Try PyYAML if available
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        missing = [k for k in REQUIRED_SIDECAR_KEYS if k not in data]
-        if missing:
-            print(f"::error file={path}::Missing keys: {missing}")
-            return False
-        return True
-    except Exception as e:
-        print(f"::error file={path}::Invalid JSON: {e}")
-        return False
+        import yaml  # type: ignore
+        data = yaml.safe_load(block) or {}
+        if not isinstance(data, dict):
+            data = {}
+        return data
+    except Exception:
+        # Fallback: very simple key: value parser (scalars only)
+        data = {}
+        for line in block.splitlines():
+            if not line.strip() or line.strip().startswith('#'):
+                continue
+            if ':' in line:
+                k, v = line.split(':', 1)
+                k = k.strip()
+                v = v.strip().strip('"\'')
+                data[k] = v
+        return data
 
-def check_commit_message():
-    # Best-effort: allow local CI to pass, enforce in PR review later
-    return True
+def validate(file_path: str) -> int:
+    text = Path(file_path).read_text(encoding='utf-8')
+    fm = load_front_matter(text)
+    errors = []
+    notes = []
 
-def main():
-    sidecars = find_sidecars()
-    ok = True
-    for s in sidecars:
-        if not check_sidecar(s):
-            ok = False
-    if not ok:
-        sys.exit(1)
-    print("Reflective compliance passed ⟡")
+    required_keys = ["title", "vault_id", "glyphsig", "author", "date", "status", "predecessor", "successor", "checksum_sha256"]
+    for k in required_keys:
+        if k not in fm or fm.get(k) in (None, "", []):
+            errors.append(f"Missing required key: '{k}'")
+
+    # Version handling: optional; infer from title if absent
+    if "version" not in fm or not str(fm.get("version")).strip():
+        m = re.search(r'v(\d+\.\d+(?:\.\d+)?)', str(fm.get("title", "")), re.IGNORECASE)
+        if m:
+            fm["version"] = m.group(1)
+            notes.append(f"Note: Auto-inferred version = {fm['version']}")
+        else:
+            notes.append("Warning: 'version' missing and could not be inferred from title")
+
+    # checksum sanity (64 hex chars)
+    chk = str(fm.get("checksum_sha256", ""))
+    if not re.fullmatch(r'[0-9a-fA-F]{64}', chk):
+        errors.append("Invalid 'checksum_sha256' (must be 64 hex chars)")
+
+    # print results
+    for n in notes:
+        print(n)
+    if errors:
+        for e in errors:
+            print("Error:", e)
+        return 1
+    print("Validation passed.")
+    # Emit minimal JSON for tooling if needed
+    print(json.dumps({"version": fm.get("version"), "title": fm.get("title")}, ensure_ascii=False))
+    return 0
 
 if __name__ == "__main__":
-    main()
+    from pathlib import Path
+    if len(sys.argv) > 1:
+        target = sys.argv[1]
+    else:
+        target = "00_MASTER_CITATION.md"
+    try:
+        exit_code = validate(target)
+        sys.exit(exit_code)
+    except Exception as e:
+        print("Error:", str(e))
+        sys.exit(1)
