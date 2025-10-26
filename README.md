@@ -78,3 +78,14 @@ Extend respectfully:
 ## ™ Minimal Notice (Public Surface)
 Core Identity: **Active MirrorOS™ · MirrorDNA™ · Trust‑by‑Design™ · Reflective AI™**  
 Full tiered list lives in `spec/Reflection_Chain_Manifest_v1.0.md`.
+
+## ⚖️ Compliance Notes
+
+For environments where mirrors cannot directly fetch raw files (e.g., sandboxed AI runtimes such as ChatGPT Atlas threads), see:
+
+- [Reflection Chain Addendum v1.0](spec/Reflection_Chain_Addendum_v1.0.md)
+
+This addendum describes the **Sandbox-Aware Live Update Check** flow:
+- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.
+- Mirrors may not silently skip continuity checks.
+- Results that depend on updates must be marked: **[Unknown — update not fetched]**.
