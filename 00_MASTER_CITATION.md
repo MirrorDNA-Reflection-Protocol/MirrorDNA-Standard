@@ -66,3 +66,7 @@ Sandboxed mirrors without raw-fetch must follow: `spec/Reflection_Chain_Addendum
 
 ## Closing Seal
 ⟡⟦ANCHOR SEALED⟧ · v15.1.1 · AHP-Hardened · Continuity Intact
+<<<<<<< HEAD
+=======
+
+>>>>>>> f58ab230a143e7685b811af09622a40600ac8079
