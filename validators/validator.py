@@ -1,39 +1,66 @@
 #!/usr/bin/env python3
-import json, os, sys, glob
+import sys, re, json
+from pathlib import Path
 
-REQUIRED_SIDECAR_KEYS = [
-    "vault_id", "glyphsig", "version", "checksum_sha256"
-]
-
-def find_sidecars():
-    return glob.glob("**/*.json", recursive=True)
-
-def check_sidecar(path):
+def load_front_matter(text: str):
+    if not text.startswith('---'):
+        raise ValueError("Front matter must start with '---' at the first line")
+    # find closing '---' on its own line
+    end_idx = text.find('\n---', 3)
+    if end_idx == -1:
+        raise ValueError("Closing '---' for front matter not found")
+    block = text[3:end_idx].strip()
+    # parse with yaml if available
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        missing = [k for k in REQUIRED_SIDECAR_KEYS if k not in data]
-        if missing:
-            print(f"::error file={path}::Missing keys: {missing}")
-            return False
-        return True
-    except Exception as e:
-        print(f"::error file={path}::Invalid JSON: {e}")
-        return False
+        import yaml  # type: ignore
+        data = yaml.safe_load(block) or {}
+        if not isinstance(data, dict):
+            data = {}
+        return data
+    except Exception:
+        data = {}
+        for line in block.splitlines():
+            if not line.strip() or line.strip().startswith('#'):
+                continue
+            if ':' in line:
+                k, v = line.split(':', 1)
+                data[k.strip()] = v.strip().strip('"\'')
+        return data
 
-def check_commit_message():
-    # Best-effort: allow local CI to pass, enforce in PR review later
-    return True
+def validate_md(file_path: str) -> int:
+    text = Path(file_path).read_text(encoding='utf-8')
+    fm = load_front_matter(text)
+    errors, notes = [], []
 
-def main():
-    sidecars = find_sidecars()
-    ok = True
-    for s in sidecars:
-        if not check_sidecar(s):
-            ok = False
-    if not ok:
-        sys.exit(1)
-    print("Reflective compliance passed ⟡")
+    required = ["title", "vault_id", "glyphsig", "author", "date", "status", "predecessor", "successor", "checksum_sha256"]
+    for k in required:
+        if k not in fm or fm.get(k) in (None, "", []):
+            errors.append(f"Missing required key: '{k}'")
+
+    # version: optional, infer from title if absent
+    ver = str(fm.get("version", "")).strip()
+    if not ver:
+        m = re.search(r'v(\d+\.\d+(?:\.\d+)?)', str(fm.get("title","")))
+        if m:
+            fm["version"] = m.group(1)
+            notes.append(f"Note: Auto-inferred version = {fm['version']}")
+        else:
+            notes.append("Warning: 'version' missing and could not be inferred")
+
+    chk = str(fm.get("checksum_sha256", ""))
+    if not re.fullmatch(r'[0-9a-fA-F]{64}', chk):
+        errors.append("Invalid 'checksum_sha256' (must be 64 hex chars)")
+
+    for n in notes: print(n)
+    if errors:
+        for e in errors: print("Error:", e)
+        return 1
+    print("Validation passed.")
+    print(json.dumps({"version": fm.get("version"), "title": fm.get("title")}, ensure_ascii=False))
+    return 0
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) < 2:
+        print("Usage: python validators/validator.py <file.md>")
+        sys.exit(2)
+    sys.exit(validate_md(sys.argv[1]))
