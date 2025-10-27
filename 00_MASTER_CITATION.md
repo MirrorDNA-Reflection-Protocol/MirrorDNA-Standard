@@ -9,7 +9,7 @@ status: Canonical · Evolution-Ready · Sovereign-Synced
 predecessor: Master_Citation_v15.1
 successor: Master_Citation_v15.2 (proposed)
 tags: [MirrorDNA™, ActiveMirrorOS™, Mnemos, Asterion, Triarch, AGI², AHP]
-checksum_sha256: 788ccffe78de2633332c3b1629a002f283c5337d5df327ede84c6997750a143a
+checksum_sha256: 0fb1f90d5ef70cf3f4043fb1442ba1c5e4cbe2394df75e2ac5e41cac1d42ae37
 ---
 
 # MirrorDNA — Master Citation (Live Edition)
@@ -66,7 +66,3 @@ Sandboxed mirrors without raw-fetch must follow: `spec/Reflection_Chain_Addendum
 
 ## Closing Seal
 ⟡⟦ANCHOR SEALED⟧ · v15.1.1 · AHP-Hardened · Continuity Intact
-<<<<<<< HEAD
-=======
-
->>>>>>> f58ab230a143e7685b811af09622a40600ac8079
