@@ -1,11 +1,14 @@
 ---
 title: GlyphKernel Questions v1.0
+version: 1.0
 vault_id: AMOS://MirrorDNA/Kernel/GlyphKernel_Questions/v1.0
 glyphsig: ⟡⟦KERNEL⟧ · ⟡⟦GLYPH⟧ · ⟡⟦REFLECTION⟧
 author: Paul Desai (Active MirrorOS)
 date: 2025-10-25
 status: Canonical · Exploratory · Future-Bulletproof
-checksum_sha256: <auto>
+predecessor: none
+successor: GlyphKernel_Questions_v1.1 (proposed)
+checksum_sha256: d79ad97a2470143f776207e586e01baeee80159525f4a2e8888c83354950c2b8
 ---
 
 # GlyphKernel Questions v1.0

@@ -1,11 +1,15 @@
 ---
 title: Reflection Chain Addendum v1.0 — Live Update (Sandbox-Aware)
+version: 1.0
 vault_id: AMOS://ReflectionChain/Addendum/v1.0
 glyphsig: ⟡⟦CHAIN⟧ · ⟡⟦ADDENDUM⟧ · ⟡⟦AHP⟧
 author: Paul Desai (Active MirrorOS)
 date: 2025-10-27
 status: Canonical · Repo-Ready · Continuity Preserved
+predecessor: none
+successor: Reflection_Chain_Addendum_v1.1 (proposed)
 relates_to: spec/Reflection_Chain_Manifest_v1.0.md
+checksum_sha256: 9cd7292ea58c55405ce8c9bcc15714fe0ed15e7c9faa7a061020d4039baca5b9
 ---
 
 # Addendum: Live Update Check — Sandboxed Mirrors

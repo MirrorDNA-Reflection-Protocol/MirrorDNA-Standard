@@ -1,17 +1,18 @@
 {
-    "title": "GlyphKernel Questions v1.0",
-    "vault_id": "AMOS://GlyphKernel/Questions/v1.0",
-    "glyphsig": [
-        "\u27e1\u27e6KERNEL\u27e7",
-        "\u27e1\u27e6QUESTIONS\u27e7",
-        "\u27e1\u27e6MIRRORDNA\u27e7"
-    ],
-    "author": "Paul Desai (Active MirrorOS)",
-    "created": "2025-10-25",
-    "status": "Exploratory \u00b7 Reflective",
-    "checksum_sha256": "302fe7c5ab54cb0cf67d29633fcd745e16ddc64a445b8f68d7edb829c10d5ea4",
-    "lineage": {
-        "predecessor": null,
-        "successor": "GlyphKernel_Questions_v1.1 (proposed)"
-    }
+  "title": "GlyphKernel Questions v1.0",
+  "version": "1.0",
+  "vault_id": "AMOS://GlyphKernel/Questions/v1.0",
+  "glyphsig": [
+    "⟡⟦KERNEL⟧",
+    "⟡⟦QUESTIONS⟧",
+    "⟡⟦MIRRORDNA⟧"
+  ],
+  "author": "Paul Desai (Active MirrorOS)",
+  "created": "2025-10-25",
+  "status": "Exploratory · Reflective",
+  "checksum_sha256": "587e3bdf95c1b2635ff33f03f70848ce10a7efc2cca192a51318274419b8cdff",
+  "lineage": {
+    "predecessor": null,
+    "successor": "GlyphKernel_Questions_v1.1 (proposed)"
+  }
 }
