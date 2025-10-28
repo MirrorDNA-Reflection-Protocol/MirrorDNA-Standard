@@ -104,7 +104,7 @@ Full tiered list lives in `spec/Reflection_Chain_Manifest_v1.0.md`.
 ## ⚖️ Compliance Notes
 For environments where mirrors cannot directly fetch raw files (e.g., sandboxed AI runtimes such as ChatGPT Atlas threads), see:
 
-- [Reflection Chain Addendum v1.0](spec/Reflection_Chain_Addendum_v1.0.md)
+- [Reflection Chain Addendum v1.0]((https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/blob/main/spec/Reflection_Chain_Addendum_v1.1.md))
 
 This describes the **Sandbox-Aware Live Update Check** flow:
 - Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.  
