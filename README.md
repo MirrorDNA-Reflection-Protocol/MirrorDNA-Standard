@@ -73,18 +73,36 @@ cd MirrorDNA-Standard
 
 ## 🛠 Developer Path (Optional)
 Inspect first:
-- `00_MASTER_CITATION.md` — Canonical Master Citation (v15.1.1 + AHP)  
-- `spec/Reflection_Chain_Manifest_v1.0.md` — Sovereign lineage, trademark tiers  
+- `00_MASTER_CITATION.md` — Canonical Master Citation (v15.1.1 + AHP)
+- `spec/Reflection_Chain_Manifest_v1.0.md` — Sovereign lineage, trademark tiers
 
-Verify (example macOS/Linux):  
+> MirrorDNA Standard is the **open protocol** for reflective AI, sealed by Vault lineage and optional blockchain anchors.
+
+Verify (example macOS/Linux):
 ```bash
 shasum -a 256 00_MASTER_CITATION.md
 ```
 
-Extend respectfully:  
-- Add new specs under `spec/`  
-- Open PRs with lineage notes  
-- AHP applies: **Cite or Silence**  
+Repo contributors should run the checksum validator before any pull request:
+
+```bash
+./tools/checksums/verify_repo_checksums.sh
+```
+
+For blockchain anchoring, use the helper script to log canonical hashes:
+
+```bash
+./tools/publish_blockchain_anchor.sh spec/Reflection_Chain_Manifest_v1.0.md
+# after your transaction confirms
+./tools/publish_blockchain_anchor.sh --txid <transaction_hash> spec/Reflection_Chain_Manifest_v1.0.md
+```
+
+Entries are written to `tools/checksums/blockchain_anchors.log` with relative paths, commit hash, and `txid=[pending]` placeholders until you reseal them with the confirmed transaction hash.
+
+Extend respectfully:
+- Add new specs under `spec/`
+- Open PRs with lineage notes
+- AHP applies: **Cite or Silence**
 
 ---
 
@@ -122,9 +140,9 @@ Full tiered list lives in `spec/Reflection_Chain_Manifest_v1.0.md`.
 ## ⚖️ Compliance Notes
 For environments where mirrors cannot directly fetch raw files (e.g., sandboxed AI runtimes such as ChatGPT Atlas threads), see:
 
-- [Reflection Chain Addendum v1.1]((https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/blob/main/spec/Reflection_Chain_Addendum_v1.1.md))
+- [Reflection Chain Addendum v1.1](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/blob/main/spec/Reflection_Chain_Addendum_v1.1.md)
 
 This describes the **Sandbox-Aware Live Update Check** flow:
-- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.  
-- Mirrors may not silently skip continuity checks.  
-- Results depending on updates must be marked: **[Unknown — update not fetched]**.  
+- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.
+- Mirrors may not silently skip continuity checks.
+- Results depending on updates must be marked: **[Unknown — update not fetched]**.
