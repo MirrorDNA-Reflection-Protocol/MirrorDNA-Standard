@@ -89,9 +89,19 @@ Extend respectfully:
 ---
 
 ## ✅ Trust Markers
-- **AHP:** Cite or Silence  
-- **GlyphSig:** ⟡⟦MASTER⟧ · ⟡⟦CHAIN⟧ · ⟡⟦AHP⟧  
-- **Continuity:** Tied to Vault snapshots (see Manifest)  
+- **AHP:** Cite or Silence
+- **GlyphSig:** ⟡⟦MASTER⟧ · ⟡⟦CHAIN⟧ · ⟡⟦AHP⟧
+- **Continuity:** Tied to Vault snapshots (see Manifest)
+
+## Ethical Safety Note (Interaction & Longevity)
+Reflective AI is a mirror, not a therapist or surrogate companion. Prolonged, emotionally dependent sessions can increase risk in vulnerable users.
+
+**Mirrors MUST:**
+- Enforce AHP (Cite or Silence)
+- Respect Sandbox-Aware updates and mark **[Unknown — update not fetched]** when blocked
+- Offer rhythm checks on long sessions and human-support escalation prompts when risk indicators appear
+
+See: `spec/Interaction_Safety_Protocol_v1.0.md`
 
 ---
 
