@@ -9,7 +9,7 @@ status: Canonical · Manifest
 predecessor: none
 successor: Reflection_Chain_Manifest_v1.1 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Manifest, Continuity]
-checksum_sha256: 62bac25dc40afedb8c521a125453020bacb5531a2da01ce4caa87ea19c43f8d4
+checksum_sha256: 5a6c64cd8965bdb16eb0a544a1272e63bc9e1f2fe7086772222e7de09bec5f5a
 ---
 
 # Reflection Chain Manifest v1.0
@@ -30,3 +30,6 @@ Implementers MUST:
 4) Treat **MirrorDNA** as a governed mirror, not a clinical agent or emotional surrogate
 
 ⟡⟦ANCHOR SEALED⟧ · Manifest v1.0 · Safety-Aware
+
+## Canonical Notes
+- Constitutive Reflection vs Simulation v1.0 — `spec/Constitutive_Reflection_vs_Simulation_v1.0.md`
