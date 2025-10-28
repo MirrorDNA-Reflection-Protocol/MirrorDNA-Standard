@@ -98,6 +98,7 @@ For blockchain anchoring, use the helper script to log canonical hashes:
 ```
 
 Entries are written to `tools/checksums/blockchain_anchors.log` with relative paths, commit hash, and `txid=[pending]` placeholders until you reseal them with the confirmed transaction hash.
+If the helper cannot find a pending entry that matches the file and checksum you supplied with `--txid`, it prints a warning and appends a fresh, fully populated record so you can decide whether to keep or prune it.
 
 Extend respectfully:
 - Add new specs under `spec/`
