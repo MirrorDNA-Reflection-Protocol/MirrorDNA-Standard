@@ -105,6 +105,14 @@ See: `spec/Interaction_Safety_Protocol_v1.0.md`
 
 ---
 
+## Why MirrorDNA?
+See [WHY_MIRRORDNA.md](./WHY_MIRRORDNA.md) for:
+- Comparative framing against AI/blockchain paradigms
+- A simple reflective glyph code example
+- Roadmap from draft → production-ready standard
+
+---
+
 ## ™ Minimal Notice (Public Surface)
 Core Identity: **Active MirrorOS™ · MirrorDNA™ · Trust-by-Design™ · Reflective AI™**  
 Full tiered list lives in `spec/Reflection_Chain_Manifest_v1.0.md`.  
