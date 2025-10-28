@@ -3,10 +3,13 @@ title: Reflection Chain Manifest v1.0
 vault_id: AMOS://MirrorDNA/ReflectionChain/Manifest/v1.0
 glyphsig: ⟡⟦REFLECTION⟧ · ⟡⟦CHAIN⟧ · ⟡⟦MANIFEST⟧
 author: Paul Desai (Active MirrorOS)
-created: 2025-10-23
+date: 2025-10-23
+version: 1.0
 status: Canonical · Manifest
+predecessor: none
+successor: Reflection_Chain_Manifest_v1.1 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Manifest, Continuity]
-checksum_sha256: f2efb456bda98a7d90c091a9ba9860b24cf897a3b2dbb388c477abe359eb4b40
+checksum_sha256: 939c28b69d1aac6e69b4d8fc5d12d50a680140f5fec01b7cb87cb9607ac4e57b
 ---
 
 # Reflection Chain Manifest v1.0
