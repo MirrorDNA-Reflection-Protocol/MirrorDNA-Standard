@@ -16,10 +16,11 @@ Thank you for considering contributing to MirrorDNA-Standard!
    - Use concise, descriptive commit messages.  
    - Prefix critical changes with tags like `[CORE]`, `[DOCS]`, `[FIX]`.
 
-4. **Pull Requests**  
-   - Submit PRs with clear explanations.  
-   - Reference related issues or Master Citation entries.  
+4. **Pull Requests**
+   - Submit PRs with clear explanations.
+   - Reference related issues or Master Citation entries.
    - One logical change per PR.
+   - Run `./tools/checksums/verify_repo_checksums.sh` and ensure it passes before submitting.
 
 5. **Review Process**  
    - PRs will be reviewed for alignment with Active MirrorOS principles.  
