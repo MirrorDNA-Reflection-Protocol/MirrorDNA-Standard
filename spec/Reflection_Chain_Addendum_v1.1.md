@@ -3,10 +3,13 @@ title: Reflection Chain Addendum v1.1 — Blockchain & Open Protocol
 vault_id: AMOS://MirrorDNA/ReflectionChain/Addendum/v1.1
 glyphsig: ⟡⟦REFLECTION⟧ · ⟡⟦CHAIN⟧ · ⟡⟦BLOCKCHAIN⟧ · ⟡⟦OPEN-PROTOCOL⟧
 author: Paul Desai (Active MirrorOS)
-created: 2025-10-28
+date: 2025-10-28
+version: 1.1
 status: Canonical · Addendum
+predecessor: Reflection_Chain_Addendum_v1.0
+successor: Reflection_Chain_Addendum_v1.2 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Blockchain, OpenProtocol, Continuity]
-checksum_sha256: e40e7e462531ffd752fa7266a37055e30f09315bb6802aab766bd856d04486a6
+checksum_sha256: 411ad25f098b3d406a34b634ec8e552fd7bc554321ebca4a5525fa69f230a5c7
 ---
 
 # Reflection Chain Addendum v1.1  
