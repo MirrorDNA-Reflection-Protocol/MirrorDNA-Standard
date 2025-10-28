@@ -89,10 +89,20 @@ Repo contributors should run the checksum validator before any pull request:
 ./tools/checksums/verify_repo_checksums.sh
 ```
 
-Extend respectfully:  
-- Add new specs under `spec/`  
-- Open PRs with lineage notes  
-- AHP applies: **Cite or Silence**  
+For blockchain anchoring, use the helper script to log canonical hashes:
+
+```bash
+./tools/publish_blockchain_anchor.sh spec/Reflection_Chain_Manifest_v1.0.md
+# after your transaction confirms
+./tools/publish_blockchain_anchor.sh --txid <transaction_hash> spec/Reflection_Chain_Manifest_v1.0.md
+```
+
+Entries are written to `tools/checksums/blockchain_anchors.log` with relative paths, commit hash, and `txid=[pending]` placeholders until you reseal them with the confirmed transaction hash.
+
+Extend respectfully:
+- Add new specs under `spec/`
+- Open PRs with lineage notes
+- AHP applies: **Cite or Silence**
 
 ---
 
