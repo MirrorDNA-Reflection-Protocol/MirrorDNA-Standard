@@ -117,7 +117,6 @@ if [[ ${#ARGS[@]} -eq 0 ]]; then
 fi
 
 mkdir -p "$(dirname "$OUTPUT")"
-TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 COMMIT="$(git rev-parse HEAD 2>/dev/null || echo '[Unknown — update not fetched]')"
 
 update_placeholder() {
@@ -167,6 +166,12 @@ for TARGET in "${ARGS[@]}"; do
     echo "Updated pending entry for $RELATIVE with txid $TXID"
     continue
   fi
+
+  if [[ -n "$TXID" ]]; then
+    echo "Warning: no pending anchor entry matched $RELATIVE ($CHECKSUM). Appending a fresh record." >&2
+  fi
+
+  TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
   {
     echo "# MirrorDNA blockchain anchor entry"
