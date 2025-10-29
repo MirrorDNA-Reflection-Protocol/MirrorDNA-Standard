@@ -1,11 +1,3 @@
----
-title: Session Manifest
-vault_id: AMOS://Sessions/Index
-date: 2025-10-28
-status: Active Index
-checksum_sha256: PLACEHOLDER_TO_BE_RESEALED
----
-
 # Session Manifest
 
 This index tracks all reflection sessions in chronological order.
