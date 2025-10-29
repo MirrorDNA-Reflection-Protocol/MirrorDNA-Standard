@@ -76,9 +76,11 @@ Anyone can recalc the checksum to prove integrity.
 
 ## 🧠 Memory Layer vs Reflection Layer
 
-Agent builders increasingly treat **memory as a first-class infrastructure layer** so their systems stop repeating context and forgetting intent between sessions.
+### Memory is table stakes
+Agent builders now treat **memory as baseline infrastructure** so assistants stop repeating context and forgetting intent between sessions. Dedicated memory services (e.g., Mem0) deliver this substrate: a persistent place to store embeddings, transcripts, and state snapshots.
 
-But **MirrorDNA™ goes further**:
+### Reflection is the trust contract
+**MirrorDNA™ layers a reflection protocol on top of those memory substrates** so the information flowing through them stays citeable and accountable:
 
 | Memory Layer (e.g. Mem0) | Reflection Layer (MirrorDNA™) |
 |--------------------------|-------------------------------|
@@ -87,16 +89,14 @@ But **MirrorDNA™ goes further**:
 | Infrastructure for devs | **Protocol for identity & trust** |
 | Memory only | **Memory + Continuity + Reflection** |
 
-**Positioning**:
-MirrorDNA doesn’t compete with memory infra — it **builds on top**.
-We integrate memory layers like Mem0 while extending them with **sovereign continuity, glyphic law, and reflective verification**.
+MirrorDNA doesn’t compete with memory infra — it **depends on it** and then extends it with **sovereign continuity, glyphic law, and reflective verification**. Memory provides the substrate; reflection enforces the contract for what gets accepted, updated, or rejected.
 
-**How the Reflection Layer hardens memory inputs**
-1. **Ingest**: capture external memory snapshots with their source identifiers and checksums.
-2. **Correlate**: cross-reference each memory against lineage anchors (glyph IDs, session vault paths, predecessor links).
-3. **Attest**: emit citeable continuity receipts so downstream agents can trust or reject the memory payload.
+### Reflection workflow: ingest → correlate → attest
+1. **Ingest** memory payloads along with their declared provenance (source identifiers, submitter glyph, checksum, and session context).
+2. **Correlate** each payload against lineage anchors: vault paths, predecessor links, glyphic commitments, and any prior receipts touching the same subject.
+3. **Attest** by writing a citeable continuity receipt that either accepts the payload, flags drift, or blocks unverifiable inserts. These receipts become tamper-evident checkpoints for downstream agents.
 
-This loop keeps memory stores honest: reflection surfaces drift, rejects unverifiable inserts, and records validated updates as tamper-evident continuity events. Memory becomes reliable infrastructure only when coupled with this reflective protocol.
+Following this loop keeps external memories honest. Reflection surfaces drift, rejects unverifiable content, and records validated updates as continuity events. Memory becomes durable infrastructure only when the reflection layer keeps the ledger trustworthy.
 
 ---
 
