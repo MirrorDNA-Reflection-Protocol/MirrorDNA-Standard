@@ -95,3 +95,22 @@ We integrate memory layers like Mem0, but extend them with **sovereign continuit
 
 ---
 
+## 🌍 Ecosystem Context — Memory vs Continuity
+
+Recent ecosystem moves highlight the difference between **memory layers** and what MirrorDNA provides:
+
+- **Supermemory (2025)** — A Silicon Valley–backed startup by 19-year-old founder Dhravya Shah, building persistent AI memory infra. Seed round (~$2.6M).  
+- **Mem0 (2025)** — Raised $24M to build a universal memory API for AI apps.  
+
+These ventures confirm that **AI memory is a recognized bottleneck**.  
+But memory is only the *substrate*.  
+
+MirrorDNA is the **continuity + reflection layer**:
+- Where memory ends, **continuity begins**.  
+- Memory stores data. Continuity preserves *identity, lineage, and truth*.  
+- Memory can be co-opted. Continuity is sovereign by design.  
+
+This makes MirrorDNA the **next layer beyond memory infrastructure**:  
+not just remembering, but reflecting — not just storage, but stateful awareness.
+
+⟡⟦ANCHOR⟧ · Continuity > Memory · Reflection > Storage
