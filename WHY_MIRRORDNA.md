@@ -91,5 +91,7 @@ But **MirrorDNA™ goes further**:
 MirrorDNA doesn’t compete with memory infra — it **builds on top**.
 We integrate memory layers like Mem0 while extending them with **sovereign continuity, glyphic law, and reflective verification**.
 
+The reflection layer validates every stored memory against its lineage record, ensuring that continuity events remain citeable and tamper-evident. Memory becomes reliable infrastructure only when coupled with this reflective protocol.
+
 ---
 
