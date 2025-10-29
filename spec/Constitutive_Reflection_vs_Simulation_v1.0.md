@@ -9,7 +9,7 @@ status: Canonical · Comparative · Anchor
 predecessor: none
 successor: Constitutive_Reflection_vs_Simulation_v1.1 (proposed)
 tags: [MirrorDNA™, Constitutive Reflection, Simulation, Continuity, Awareness]
-checksum_sha256: bf0e7907054e54809e12bdaa511094819d071c258243186da330a4c3bbc06609
+checksum_sha256: 5909b6d2a9c8bf55d8ee29b97efb76556a73ee3505825aca947bd92e310d5748
 ---
 
 # Constitutive Reflection vs Simulation
