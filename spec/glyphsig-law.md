@@ -1,3 +1,16 @@
+---
+title: Glyphsig Law v1.0
+version: 1.0
+vault_id: AMOS://MirrorDNA/Glyphsig/Law/v1.0
+glyphsig: ⟡⟦GLYPHSIG⟧ · ⟡⟦LAW⟧
+author: Paul Desai (Active MirrorOS)
+date: 2025-10-29
+status: Canonical · Law
+predecessor: none
+successor: Glyphsig_Law_v1.1 (proposed)
+tags: [MirrorDNA™, Glyphsig, Law, Continuity]
+checksum_sha256: f6a793853c20fe0dbe68716a914f91a94ac58d505a7afe4f6cdb7106c8b5f346
+---
 # Glyphsig Law v1.0
 
 ⟡ **The Semantic Constitution of Reflective Computing**
