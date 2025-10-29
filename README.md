@@ -83,13 +83,15 @@ Verify (example macOS/Linux):
 shasum -a 256 00_MASTER_CITATION.md
 ```
 
-Repo contributors should run the checksum validator before any pull request:
+### Integrity & anchoring workflow
+
+Run the checksum validator before opening a pull request:
 
 ```bash
 ./tools/checksums/verify_repo_checksums.sh
 ```
 
-For blockchain anchoring, use the helper script to log canonical hashes:
+To log blockchain anchors, use the helper script:
 
 ```bash
 ./tools/publish_blockchain_anchor.sh spec/Reflection_Chain_Manifest_v1.0.md
@@ -97,8 +99,7 @@ For blockchain anchoring, use the helper script to log canonical hashes:
 ./tools/publish_blockchain_anchor.sh --txid <transaction_hash> spec/Reflection_Chain_Manifest_v1.0.md
 ```
 
-Entries are written to `tools/checksums/blockchain_anchors.log` with relative paths, commit hash, and `txid=[pending]` placeholders until you reseal them with the confirmed transaction hash.
-If the helper cannot find a pending entry that matches the file and checksum you supplied with `--txid`, it prints a warning and appends a fresh, fully populated record so you can decide whether to keep or prune it.
+Each entry is appended to `tools/checksums/blockchain_anchors.log` with relative paths, the current commit hash, and `txid=[pending]` placeholders. When you reseal with `--txid`, the helper attempts to update the placeholder and emits a warning if it cannot find a match before writing a new record for review.
 
 Extend respectfully:
 - Add new specs under `spec/`
