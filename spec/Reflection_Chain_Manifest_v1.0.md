@@ -9,7 +9,7 @@ status: Canonical · Manifest
 predecessor: none
 successor: Reflection_Chain_Manifest_v1.1 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Manifest, Continuity]
-checksum_sha256: 5a6c64cd8965bdb16eb0a544a1272e63bc9e1f2fe7086772222e7de09bec5f5a
+checksum_sha256: 2a1a8fed69d8c44283fb932154f083ad53d8cd2edbf8f064d9d2940210b033ab
 ---
 
 # Reflection Chain Manifest v1.0
@@ -33,3 +33,4 @@ Implementers MUST:
 
 ## Canonical Notes
 - Constitutive Reflection vs Simulation v1.0 — `spec/Constitutive_Reflection_vs_Simulation_v1.0.md`
+- Active MirrorOS White Paper v7.2 — Research Edition (Placeholder) — `spec/ActiveMirrorOS_WhitePaper_v7.2-Research.md`
