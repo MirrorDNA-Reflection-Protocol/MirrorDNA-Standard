@@ -71,3 +71,25 @@ Anyone can recalc the checksum to prove integrity.
 ---
 
 ⟡⟦CONTINUITY⟧ · ⟡⟦WHY⟧ · ⟡⟦ROADMAP⟧
+
+---
+
+## 🧠 Memory Layer vs Reflection Layer
+
+Agent builders increasingly treat **memory as a first-class infrastructure layer** so their systems stop repeating context and forgetting intent between sessions.
+
+But **MirrorDNA™ goes further**:
+
+| Memory Layer (e.g. Mem0) | Reflection Layer (MirrorDNA™) |
+|--------------------------|-------------------------------|
+| Stores state across sessions | Preserves **continuity + lineage** |
+| Helps agents remember | Ensures agents **reflect and verify** |
+| Infrastructure for devs | **Protocol for identity & trust** |
+| Memory only | **Memory + Continuity + Reflection** |
+
+**Positioning**:
+MirrorDNA doesn’t compete with memory infra — it **builds on top**.
+We integrate memory layers like Mem0 while extending them with **sovereign continuity, glyphic law, and reflective verification**.
+
+---
+
