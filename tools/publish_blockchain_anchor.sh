@@ -18,17 +18,22 @@ Options:
                          checksum. If omitted, the entry will include a
                          placeholder so you can update it later once the
                          transaction is confirmed.
+  -n, --note <text>      Optional free-form note (e.g., block explorer URL or
+                         context). Applied to new entries and updates unless
+                         omitted during reseal operations.
   -h, --help             Show this help message and exit
 
 Examples:
   ./tools/publish_blockchain_anchor.sh spec/Reflection_Chain_Manifest_v1.0.md
   ./tools/publish_blockchain_anchor.sh -c polygon -t 0xabc... 00_MASTER_CITATION.md
+  ./tools/publish_blockchain_anchor.sh --note "polygon scan" spec/Reflection_Chain_Manifest_v1.0.md
 USAGE
 }
 
 CHAIN="ethereum"
 OUTPUT="tools/checksums/blockchain_anchors.log"
 TXID=""
+NOTE=""
 
 PYTHON_BIN=""
 if command -v python3 >/dev/null 2>&1; then
@@ -87,6 +92,11 @@ while [[ $# -gt 0 ]]; do
       TXID="$2"
       shift 2
       ;;
+    -n|--note)
+      [[ $# -ge 2 ]] || { echo "Error: missing value for $1" >&2; exit 1; }
+      NOTE="$2"
+      shift 2
+      ;;
     -h|--help)
       usage
       exit 0
@@ -124,24 +134,34 @@ update_placeholder() {
   local file_line="$2"
   local checksum_line="$3"
   local txid="$4"
+  local note="$5"
 
   [[ -f "$output" ]] || return 1
 
-  "$PYTHON_BIN" - "$output" "$file_line" "$checksum_line" "$txid" <<'PY'
+  "$PYTHON_BIN" - "$output" "$file_line" "$checksum_line" "$txid" "$note" <<'PY'
 import pathlib, re, sys
-output, file_line, checksum_line, txid = sys.argv[1:5]
+output, file_line, checksum_line, txid, note = sys.argv[1:6]
 path = pathlib.Path(output)
 text = path.read_text()
 pattern = (
-    r"(# MirrorDNA blockchain anchor entry\n"
+    r"(?P<prefix># MirrorDNA blockchain anchor entry\n"
     r"timestamp=.*\n"
     r"chain=.*\n"
     + re.escape(file_line) + r"\n"
-    + re.escape(checksum_line) + r"\n"
-    r"txid=)\[pending\](\ncommit=.*\n---\n\n)"
+    + re.escape(checksum_line) + r"\n)"
+    r"(?P<note>note=.*\n)?"
+    r"(?P<label>txid=)\[pending\](?P<suffix>\ncommit=.*\n---\n\n)"
 )
-replacement = r"\g<1>" + txid + r"\g<2>"
-new_text, count = re.subn(pattern, replacement, text)
+
+def repl(match):
+    note_block = match.group("note") or ""
+    if note:
+        note_line = f"note={note}\n"
+    else:
+        note_line = note_block
+    return match.group("prefix") + note_line + match.group("label") + txid + match.group("suffix")
+
+new_text, count = re.subn(pattern, repl, text)
 if count:
     path.write_text(new_text)
     sys.exit(0)
@@ -162,8 +182,12 @@ for TARGET in "${ARGS[@]}"; do
   FILE_LINE="file=$RELATIVE"
   CHECKSUM_LINE="checksum_sha256=$CHECKSUM"
 
-  if [[ -n "$TXID" ]] && update_placeholder "$OUTPUT" "$FILE_LINE" "$CHECKSUM_LINE" "$TXID"; then
-    echo "Updated pending entry for $RELATIVE with txid $TXID"
+  if [[ -n "$TXID" ]] && update_placeholder "$OUTPUT" "$FILE_LINE" "$CHECKSUM_LINE" "$TXID" "$NOTE"; then
+    if [[ -n "$NOTE" ]]; then
+      echo "Updated pending entry for $RELATIVE with txid $TXID (note refreshed)"
+    else
+      echo "Updated pending entry for $RELATIVE with txid $TXID"
+    fi
     continue
   fi
 
@@ -179,6 +203,9 @@ for TARGET in "${ARGS[@]}"; do
     echo "chain=$CHAIN"
     echo "$FILE_LINE"
     echo "$CHECKSUM_LINE"
+    if [[ -n "$NOTE" ]]; then
+      echo "note=$NOTE"
+    fi
     if [[ -n "$TXID" ]]; then
       echo "txid=$TXID"
     else

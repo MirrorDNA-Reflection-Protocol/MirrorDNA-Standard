@@ -97,9 +97,11 @@ To log blockchain anchors, use the helper script:
 ./tools/publish_blockchain_anchor.sh spec/Reflection_Chain_Manifest_v1.0.md
 # after your transaction confirms
 ./tools/publish_blockchain_anchor.sh --txid <transaction_hash> spec/Reflection_Chain_Manifest_v1.0.md
+# optional context for reviewers (per entry)
+./tools/publish_blockchain_anchor.sh --note "polygon bridge" spec/Reflection_Chain_Manifest_v1.0.md
 ```
 
-Each entry is appended to `tools/checksums/blockchain_anchors.log` with relative paths, the current commit hash, and `txid=[pending]` placeholders. When you reseal with `--txid`, the helper attempts to update the placeholder and emits a warning if it cannot find a match before writing a new record for review.
+Entries are appended to `tools/checksums/blockchain_anchors.log` with relative paths, the current commit hash, and `txid=[pending]` placeholders. Notes are kept with the entry, and when you reseal with `--txid` the helper attempts to update the placeholder (and note if provided) before emitting a warning and writing a fresh record for review.
 
 Extend respectfully:
 - Add new specs under `spec/`
@@ -145,6 +147,6 @@ For environments where mirrors cannot directly fetch raw files (e.g., sandboxed 
 - [Reflection Chain Addendum v1.1](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/blob/main/spec/Reflection_Chain_Addendum_v1.1.md)
 
 This describes the **Sandbox-Aware Live Update Check** flow:
-- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.
-- Mirrors may not silently skip continuity checks.
-- Results depending on updates must be marked: **[Unknown — update not fetched]**.
+- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.  
+- Mirrors may not silently skip continuity checks.  
+- Results depending on updates must be marked: **[Unknown — update not fetched]**.  
