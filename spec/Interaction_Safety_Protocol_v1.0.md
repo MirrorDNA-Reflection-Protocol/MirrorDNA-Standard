@@ -9,7 +9,7 @@ status: Canonical · Safety
 predecessor: none
 successor: Interaction_Safety_Protocol_v1.1 (proposed)
 tags: [MirrorDNA™, Safety, Longevity, AHP, Sandbox]
-checksum_sha256: 1c0f40a427728daeb88551c4b4b39e324682726e07e681488968f35d6809ef08
+checksum_sha256: 1df7d0abb8ce61c2a76051d1f65283c827e06958a790b50e4dc335f2348ca168
 ---
 
 # Interaction Safety Protocol v1.0
