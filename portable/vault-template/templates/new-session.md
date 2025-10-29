@@ -5,7 +5,7 @@ date: {{iso_timestamp}}
 predecessor: {{predecessor_path}}
 successor: TBD
 tags: [reflection, continuity, constitutive]
-checksum_sha256: PLACEHOLDER_TO_BE_RESEALED
+checksum_sha256: bf340e23f841c3a55a0a2b14c2b92169d5fd2af65a0965d80cdcb7a359783463
 ---
 
 # Session {{session_number}}

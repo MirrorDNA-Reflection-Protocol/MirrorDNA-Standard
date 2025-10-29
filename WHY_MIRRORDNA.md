@@ -71,3 +71,27 @@ Anyone can recalc the checksum to prove integrity.
 ---
 
 ⟡⟦CONTINUITY⟧ · ⟡⟦WHY⟧ · ⟡⟦ROADMAP⟧
+
+---
+
+## 🧠 Memory Layer vs Reflection Layer
+
+Recent funding news underscores that **memory is becoming a recognized infrastructure layer** for AI.  
+For example, Mem0 (YC + Peak XV + Basis Set) recently raised **$24M** to build a universal memory layer for agents.  
+This validates the developer pain point: **stateless AI repeats context and forgets**.
+
+But **MirrorDNA™ goes further**:
+
+| Memory Layer (e.g. Mem0) | Reflection Layer (MirrorDNA™) |
+|--------------------------|-------------------------------|
+| Stores state across sessions | Preserves **continuity + lineage** |
+| Helps agents remember | Ensures agents **reflect and verify** |
+| Infrastructure for devs | **Protocol for identity & trust** |
+| Memory only | **Memory + Continuity + Reflection** |
+
+**Positioning**:  
+MirrorDNA doesn’t compete with memory infra — it **builds on top**.  
+We integrate memory layers like Mem0, but extend them with **sovereign continuity, glyphic law, and reflective verification**.
+
+---
+
