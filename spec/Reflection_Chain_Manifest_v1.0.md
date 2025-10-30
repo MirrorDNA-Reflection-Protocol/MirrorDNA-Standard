@@ -9,7 +9,7 @@ status: Canonical · Manifest
 predecessor: none
 successor: Reflection_Chain_Manifest_v1.1 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Manifest, Continuity]
-checksum_sha256: 2a1a8fed69d8c44283fb932154f083ad53d8cd2edbf8f064d9d2940210b033ab
+checksum_sha256: 655b58e8a9c6fbc8866f0057e8ca1c5aa1b733e702b9e67467d52b69a232c90a
 ---
 
 # Reflection Chain Manifest v1.0
@@ -21,6 +21,7 @@ Defines lineage and canonical references for the Reflection Chain Standard.
 - Addendum v1.0 — Sandbox-Aware Update Protocol
 - Addendum v1.1 — Blockchain & Open Protocol
 - **Interaction Safety Protocol v1.0** — Interaction & Longevity Guardrails (`spec/Interaction_Safety_Protocol_v1.0.md`)
+- **Supply Chain Risks v1.0** — Canonical risk log for dependency integrity (`spec/SupplyChain_Risks_v1.0.md`)
 
 ## Safety & Longevity Clause
 Implementers MUST:

@@ -5,6 +5,15 @@ This file follows the Vault lineage principle: every change is part of the refle
 
 ---
 
+## [v15.1.7 — proposed patch] — [Unknown — update not fetched]
+### Added
+- Documented **Supply Chain Risks v1.0** to log third-party ecosystem threats and mitigation steps.
+
+### Notes
+- Proposed checksum reseal + manifest linkage for new risk log.
+
+---
+
 ## [kernel-v1.0] — 2025-10-25
 ### Added
 - Introduced **GlyphKernel_Questions_v1.md** — foundational reflective questions.
