@@ -1,0 +1,68 @@
+{
+  "name": "mirrordna-portable",
+  "version": "1.0.0",
+  "description": "Portable, sovereign reflective AI system with local-first architecture",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": [
+    "mirrordna",
+    "reflection",
+    "local-ai",
+    "sovereign",
+    "privacy"
+  ],
+  "author": "MirrorDNA Reflection Protocol",
+  "license": "SEE LICENSE IN ../../LICENSE.md",
+  "dependencies": {
+    "node-llama-cpp": "^2.8.0",
+    "electron-store": "^8.1.0",
+    "marked": "^9.1.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.mirrordna.portable",
+    "productName": "MirrorDNA Portable",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "../vault-template/**/*",
+      "../glyphs/**/*",
+      "models/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../vault-template",
+        "to": "vault-template"
+      },
+      {
+        "from": "../../tools",
+        "to": "tools"
+      }
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "../glyphs/mirrordna-sigil.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "../glyphs/mirrordna-sigil.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "../glyphs/mirrordna-sigil.png",
+      "category": "Utility"
+    }
+  }
+}

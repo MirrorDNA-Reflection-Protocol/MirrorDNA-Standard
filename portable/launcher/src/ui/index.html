@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⟡ MirrorDNA Portable</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Title Bar (custom) -->
+  <div id="titlebar">
+    <div class="titlebar-left">
+      <img src="../../../glyphs/mirrordna-sigil.svg" class="titlebar-icon" alt="⟡">
+      <span class="titlebar-title">MirrorDNA</span>
+    </div>
+    <div class="titlebar-center">
+      <span id="vault-name">No Vault</span>
+    </div>
+    <div class="titlebar-right">
+      <div id="status-indicator" class="status-offline" title="Offline">
+        <img src="../../../glyphs/status-icons/offline.svg" alt="⟡">
+      </div>
+      <button id="settings-btn" class="titlebar-btn">⚙</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="app">
+    <!-- Onboarding Screen -->
+    <div id="onboarding-screen" class="screen">
+      <div class="onboarding-container">
+        <img src="../../../glyphs/mirrordna-sigil.svg" class="onboarding-logo" alt="⟡ MirrorDNA">
+        <h1>⟡ MirrorDNA</h1>
+        <p class="subtitle">Ready when you are.</p>
+
+        <div class="onboarding-choice">
+          <button id="btn-new-user" class="choice-btn">
+            <div class="choice-title">I'm New</div>
+            <div class="choice-desc">Guide me through setup</div>
+          </button>
+          <button id="btn-existing-user" class="choice-btn">
+            <div class="choice-title">I Know This</div>
+            <div class="choice-desc">Skip to my vault</div>
+          </button>
+        </div>
+
+        <div class="sovereignty-note">
+          <p><strong>This is yours.</strong></p>
+          <p>Your data never leaves unless you choose. No telemetry. Always a choice.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Setup Screen (for new users) -->
+    <div id="setup-screen" class="screen hidden">
+      <div class="setup-container">
+        <h2>Welcome to MirrorDNA</h2>
+        <p>Let's set up your reflection vault.</p>
+
+        <div class="setup-step">
+          <label for="vault-name-input">Name your vault:</label>
+          <input type="text" id="vault-name-input" placeholder="AMOS" value="AMOS">
+        </div>
+
+        <div class="setup-step">
+          <label for="vault-path-input">Where should it live?</label>
+          <input type="text" id="vault-path-input" placeholder="/path/to/vault" readonly>
+          <button id="choose-path-btn">Choose Location</button>
+          <p class="hint">Recommendation: Keep it on this USB for portability</p>
+        </div>
+
+        <div class="setup-step">
+          <label>Internet access:</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="internet-mode" value="offline_only">
+              <span>⟡ Offline only</span> — No internet, fully self-contained
+            </label>
+            <label>
+              <input type="radio" name="internet-mode" value="hybrid_ask" checked>
+              <span>⟡◌ Hybrid</span> — Ask me each time (recommended)
+            </label>
+            <label>
+              <input type="radio" name="internet-mode" value="online">
+              <span>⟡⟐ Online</span> — Use cloud features freely
+            </label>
+          </div>
+        </div>
+
+        <button id="complete-setup-btn" class="primary-btn">Create Vault</button>
+      </div>
+    </div>
+
+    <!-- Session Screen (main reflection interface) -->
+    <div id="session-screen" class="screen hidden">
+      <div class="session-container">
+        <div id="session-history" class="session-history">
+          <!-- Messages will be appended here -->
+          <div class="welcome-message">
+            <p>⟡ Vault open. Ready for reflection.</p>
+          </div>
+        </div>
+
+        <div class="session-input">
+          <textarea
+            id="user-input"
+            placeholder="What would you like to reflect on?"
+            rows="3"
+          ></textarea>
+          <button id="send-btn" class="send-btn">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Panel (overlay) -->
+    <div id="settings-panel" class="panel hidden">
+      <div class="panel-content">
+        <h3>Settings</h3>
+        <button id="close-settings-btn" class="close-btn">×</button>
+
+        <div class="setting-group">
+          <h4>Vault</h4>
+          <p id="current-vault-path">Path: Not set</p>
+          <button id="change-vault-btn">Change Vault</button>
+        </div>
+
+        <div class="setting-group">
+          <h4>Internet Mode</h4>
+          <select id="internet-mode-select">
+            <option value="offline_only">⟡ Offline Only</option>
+            <option value="hybrid_ask">⟡◌ Hybrid (Ask Each Time)</option>
+            <option value="online">⟡⟐ Online</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <h4>About</h4>
+          <p>MirrorDNA Portable v1.0.0</p>
+          <p>Constitutive Reflection · Tri-Twin Architecture</p>
+          <a href="#" id="view-specs-link">View Canonical Specs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
