@@ -8,6 +8,7 @@ This file follows the Vault lineage principle: every change is part of the refle
 ## [v15.1.7 — proposed patch] — [Unknown — update not fetched]
 ### Added
 - Documented **Supply Chain Risks v1.0** to log third-party ecosystem threats and mitigation steps.
+- Anchored **Active MirrorOS White Paper v7.2 — Research Edition** with preliminary Claude Desktop online metrics and continuity seal.
 
 ### Notes
 - Proposed checksum reseal + manifest linkage for new risk log.
