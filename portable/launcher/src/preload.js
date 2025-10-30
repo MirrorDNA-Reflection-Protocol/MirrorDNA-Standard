@@ -12,7 +12,10 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   writeSession: (dialogue) => ipcRenderer.invoke('write-session', dialogue),
 
   // LLM operations
+  initLLM: (modelPath, vaultPath) => ipcRenderer.invoke('init-llm', modelPath, vaultPath),
   generateReflection: (prompt) => ipcRenderer.invoke('generate-reflection', prompt),
+  getLLMInfo: () => ipcRenderer.invoke('get-llm-info'),
+  updateLLMContext: (contextUpdate) => ipcRenderer.invoke('update-llm-context', contextUpdate),
 
   // Internet consent
   requestInternet: (action, details) => ipcRenderer.invoke('request-internet', action, details),

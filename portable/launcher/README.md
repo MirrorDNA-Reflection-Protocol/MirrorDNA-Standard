@@ -2,9 +2,9 @@
 
 Electron-based desktop application for portable, sovereign reflective AI.
 
-## Status: 🚧 Development Prototype
+## Status: ✅ Functional Prototype with LLM Integration
 
-This is a functional UI prototype demonstrating the launcher architecture. Core components are implemented, LLM integration pending.
+Complete launcher with local AI integration. Ready for testing with downloaded Phi-3 model.
 
 ---
 
@@ -37,16 +37,21 @@ This is a functional UI prototype demonstrating the launcher architecture. Core 
 - ✅ Status icons (offline, hybrid, online with distinct colors)
 - ✅ Glyph-based status communication
 
+### LLM Integration ✅
+- ✅ llama.cpp runtime integration (node-llama-cpp)
+- ✅ Phi-3 Mini model loading (GGUF format)
+- ✅ Context injection (Master Citation + session state)
+- ✅ Master Citation system prompt injection
+- ✅ Session state continuity
+- ✅ Graceful fallback (placeholder mode when model not present)
+
 ---
 
 ## What's Pending ⏳
 
-### LLM Integration
-- ⏳ llama.cpp runtime integration
-- ⏳ Phi-3 Mini model loading (GGUF format)
-- ⏳ Context injection (Master Citation + session state)
-- ⏳ Streaming response support
-- ⏳ Model fallback strategy
+### Streaming Support
+- ⏳ Real-time token streaming for responses
+- ⏳ Progress indicator during generation
 
 ### Cloud Enhancement
 - ⏳ Claude API bridge
@@ -103,6 +108,50 @@ npm run build:linux  # Linux
 ```
 
 Built files appear in `dist/` directory.
+
+---
+
+## Local AI Model Setup
+
+### Download Phi-3 Mini (Required for AI functionality)
+
+**Without a model, the launcher runs in placeholder mode with instructions.**
+
+#### Quick Download (Recommended)
+
+1. **Visit**: https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf
+2. **Download**: `Phi-3-mini-4k-instruct-q4.gguf` (~2.4GB)
+3. **Rename** to: `phi3-mini-4k.Q4_K_M.gguf`
+4. **Place** in: `portable/launcher/models/`
+
+#### Command Line Download
+
+```bash
+cd portable/launcher/models
+
+# Using wget
+wget https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/Phi-3-mini-4k-instruct-q4.gguf -O phi3-mini-4k.Q4_K_M.gguf
+
+# Or using curl
+curl -L https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/Phi-3-mini-4k-instruct-q4.gguf -o phi3-mini-4k.Q4_K_M.gguf
+```
+
+#### Verify Download
+
+```bash
+# Check file exists and size (~2.3-2.4GB)
+ls -lh portable/launcher/models/phi3-mini-4k.Q4_K_M.gguf
+```
+
+### First Run with Model
+
+1. Ensure model is in `models/` directory
+2. Run `npm run dev`
+3. Complete onboarding (create vault)
+4. Wait 30-60 seconds for model to load
+5. Start reflecting with local AI!
+
+**Model loads automatically** when you reach the session screen.
 
 ---
 
