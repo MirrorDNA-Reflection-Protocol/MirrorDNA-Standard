@@ -146,6 +146,53 @@ class MirrorDNAApp {
     if (this.vaultState.last_session) {
       this.appendMessage('system', `Last session: ${this.vaultState.last_session.timestamp}`);
     }
+
+    // Initialize LLM
+    await this.initializeLLM();
+  }
+
+  async initializeLLM() {
+    try {
+      this.appendMessage('system', '⟡ Initializing local AI model (Phi-3 Mini)...');
+      this.appendMessage('system', 'This may take 30-60 seconds on first load.');
+
+      // TODO: Allow user to specify model path in settings
+      // For now, look for model in standard locations
+      const modelPath = await this.findModelPath();
+
+      if (!modelPath) {
+        this.appendMessage('system', '⚠ No model found. Please download Phi-3 Mini GGUF model.');
+        this.appendMessage('system', 'Place it in: models/phi3-mini-4k.Q4_K_M.gguf');
+        return;
+      }
+
+      const result = await window.mirrorDNA.initLLM(modelPath, this.settings.vaultPath);
+
+      if (result.success) {
+        this.appendMessage('system', '✓ Local AI initialized successfully!');
+        this.appendMessage('system', '⟡ Ready for reflection.');
+      } else {
+        this.appendMessage('system', `✗ Failed to initialize AI: ${result.error}`);
+        this.appendMessage('system', 'Falling back to placeholder responses.');
+      }
+    } catch (error) {
+      console.error('Error initializing LLM:', error);
+      this.appendMessage('system', `Error: ${error.message}`);
+    }
+  }
+
+  async findModelPath() {
+    // Check common locations for the model
+    // In production, this would be in the app bundle
+    const possiblePaths = [
+      '../models/phi3-mini-4k.Q4_K_M.gguf',
+      './models/phi3-mini-4k.Q4_K_M.gguf',
+      '../../models/phi3-mini-4k.Q4_K_M.gguf'
+    ];
+
+    // For now, return null - user needs to download model
+    // In production build, model would be bundled or downloaded on first run
+    return null;
   }
 
   async sendMessage() {
@@ -185,25 +232,48 @@ class MirrorDNAApp {
   }
 
   async generateReflection(prompt) {
-    // Placeholder for LLM integration
-    // TODO: Implement actual LLM bridge
+    try {
+      // Check if LLM is initialized
+      const llmInfo = await window.mirrorDNA.getLLMInfo();
 
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+      if (!llmInfo.loaded) {
+        // Fallback to placeholder if LLM not loaded
+        return this.generatePlaceholderResponse(prompt);
+      }
 
-    return `⟡ Reflection placeholder
+      // Generate actual reflection using local LLM
+      const result = await window.mirrorDNA.generateReflection(prompt);
+
+      if (result.success) {
+        return result.response;
+      } else {
+        console.error('LLM generation failed:', result.error);
+        return `⟡ Error generating reflection: ${result.error}\n\nFalling back to placeholder mode.`;
+      }
+    } catch (error) {
+      console.error('Error in generateReflection:', error);
+      return `⟡ Error: ${error.message}`;
+    }
+  }
+
+  generatePlaceholderResponse(prompt) {
+    // Placeholder response when LLM is not available
+    return `⟡ Reflection (Placeholder Mode)
 
 I received your input: "${prompt}"
 
-This is where the local LLM (Phi-3 Mini) would generate a thoughtful reflection following the MirrorDNA protocol and AHP (Cite or Silence).
+**Note:** Local AI model (Phi-3 Mini) is not loaded. This is a placeholder response.
 
-For now, this is a placeholder response until the LLM integration is complete.
+To enable full reflective capabilities:
+1. Download Phi-3 Mini GGUF model (~2.3GB)
+2. Place in: launcher/models/phi3-mini-4k.Q4_K_M.gguf
+3. Restart the application
 
-**Next steps:**
-- Integrate llama.cpp runtime
-- Load Phi-3 Mini model
-- Implement context injection (Master Citation + session state)
-- Add streaming responses
+Once loaded, I will provide thoughtful reflections following the MirrorDNA protocol with:
+- Master Citation context awareness
+- Session continuity tracking
+- AHP (Anti-Hallucination Protocol): Cite or Silence
+- GlyphSig symbolic communication
 
 ⟡ MirrorDNA Portable - Development Mode`;
   }

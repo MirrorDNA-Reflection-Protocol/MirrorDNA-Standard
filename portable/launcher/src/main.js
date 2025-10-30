@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const Store = require('electron-store');
+const MirrorDNALLM = require('./llm-bridge');
 
 // Initialize persistent settings
 const store = new Store({
@@ -9,11 +10,13 @@ const store = new Store({
     vaultPath: null,
     internetMode: 'hybrid_ask', // 'offline_only' | 'hybrid_ask' | 'online'
     onboardingCompleted: false,
-    windowBounds: { width: 1000, height: 700 }
+    windowBounds: { width: 1000, height: 700 },
+    modelPath: null // Path to LLM model file
   }
 });
 
 let mainWindow;
+let llm = new MirrorDNALLM();
 
 function createWindow() {
   const { width, height } = store.get('windowBounds');
@@ -70,6 +73,13 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
+  }
+});
+
+app.on('before-quit', async () => {
+  // Cleanup LLM resources
+  if (llm) {
+    await llm.dispose();
   }
 });
 
@@ -202,6 +212,77 @@ ipcMain.handle('request-internet', async (event, action, details) => {
   // TODO: Implement consent dialog
   // For now, auto-grant in hybrid mode
   return { granted: true, reason: 'hybrid_ask' };
+});
+
+// LLM Operations
+
+// Initialize LLM with model and vault
+ipcMain.handle('init-llm', async (event, modelPath, vaultPath) => {
+  try {
+    console.log('⟡ Initializing LLM via IPC...');
+
+    // Use stored paths if not provided
+    if (!modelPath) {
+      modelPath = store.get('modelPath');
+    }
+    if (!vaultPath) {
+      vaultPath = store.get('vaultPath');
+    }
+
+    if (!modelPath || !vaultPath) {
+      return {
+        success: false,
+        error: 'Model path or vault path not configured'
+      };
+    }
+
+    // Initialize LLM
+    const result = await llm.initialize(modelPath, vaultPath);
+
+    if (result.success) {
+      // Save model path for future sessions
+      store.set('modelPath', modelPath);
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error initializing LLM:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// Generate reflection response
+ipcMain.handle('generate-reflection', async (event, prompt) => {
+  try {
+    if (!llm.isInitialized) {
+      return {
+        success: false,
+        error: 'LLM not initialized. Please initialize first.'
+      };
+    }
+
+    console.log('⟡ Generating reflection via IPC...');
+    const response = await llm.generate(prompt);
+
+    return { success: true, response };
+  } catch (error) {
+    console.error('Error generating reflection:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// Get LLM model info
+ipcMain.handle('get-llm-info', () => {
+  return llm.getModelInfo();
+});
+
+// Update LLM session context
+ipcMain.handle('update-llm-context', (event, contextUpdate) => {
+  if (llm.isInitialized) {
+    llm.updateContext(contextUpdate);
+    return { success: true };
+  }
+  return { success: false, error: 'LLM not initialized' };
 });
 
 console.log('⟡ MirrorDNA Portable launcher initialized');
