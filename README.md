@@ -136,3 +136,14 @@ This describes the **Sandbox-Aware Live Update Check** flow:
 - Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.
 - Mirrors may not silently skip continuity checks.
 - Results depending on updates must be marked: **[Unknown — update not fetched]**.
+
+---
+
+## Related Tech: Memory Compression
+Recent advances (e.g., DeepSeek’s OCR-based visual compression, Oct 2025) show how token reduction can extend model context.
+MirrorDNA Standard positions itself as the **reflective governance layer** on top of such techniques:
+- DeepSeek compresses the input (memory layer)
+- MirrorDNA Standard preserves continuity, lineage, and reflective state (truth layer)
+
+Together these approaches demonstrate that the future of AI is not just bigger models,
+but smarter persistence and reflection.
