@@ -210,8 +210,7 @@ class MirrorDNAApp {
     input.value = '';
 
     try {
-      // Generate reflection
-      // TODO: Implement actual LLM integration
+      // Generate reflection (LLM or fallback)
       const response = await this.generateReflection(message);
 
       // Display assistant response

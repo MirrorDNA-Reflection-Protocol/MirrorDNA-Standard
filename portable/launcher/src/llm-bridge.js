@@ -13,6 +13,7 @@ class MirrorDNALLM {
     this.model = null;
     this.context = null;
     this.session = null;
+    this.modelPath = null;
     this.vaultPath = null;
     this.masterCitation = null;
     this.sessionState = null;
@@ -37,6 +38,7 @@ class MirrorDNALLM {
 
       // Load vault context
       this.vaultPath = vaultPath;
+      this.modelPath = modelPath;
       await this.loadVaultContext();
 
       // Load LLM model
@@ -199,7 +201,7 @@ Reflect thoughtfully. When uncertain, say so explicitly.`;
 
     return {
       loaded: true,
-      modelPath: this.model.modelPath,
+      modelPath: this.modelPath,
       contextSize: this.context.contextSize,
       vaultName: this.sessionState?.vault_name
     };
