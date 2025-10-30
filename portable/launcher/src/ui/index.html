@@ -134,11 +134,42 @@
         </div>
 
         <div class="setting-group">
+          <h4>LLM Model</h4>
+          <p id="current-model-path" class="hint">Not configured</p>
+          <button id="choose-model-btn">Choose Model File</button>
+        </div>
+
+        <div class="setting-group">
           <h4>About</h4>
           <p>MirrorDNA Portable v1.0.0</p>
           <p>Constitutive Reflection · Tri-Twin Architecture</p>
           <a href="#" id="view-specs-link">View Canonical Specs</a>
         </div>
+      </div>
+    </div>
+
+    <!-- Consent Dialog (overlay) -->
+    <div id="consent-dialog" class="dialog hidden">
+      <div class="dialog-content">
+        <h3>⟡ Internet Permission Request</h3>
+        <p id="consent-action" class="consent-action">Action requested</p>
+        <p id="consent-details" class="consent-details">Details</p>
+
+        <div class="consent-buttons">
+          <button id="consent-allow-btn" class="consent-btn allow">Allow Once</button>
+          <button id="consent-deny-btn" class="consent-btn deny">Deny</button>
+        </div>
+
+        <div class="consent-remember">
+          <label>
+            <input type="checkbox" id="consent-remember">
+            <span>Remember this choice for this session</span>
+          </label>
+        </div>
+
+        <p class="consent-note">
+          <strong>Your sovereignty:</strong> You can change internet mode anytime in settings.
+        </p>
       </div>
     </div>
   </div>

@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
-    "test": "node tests/smoke.test.js",
+    "test": "npm run test:smoke && npm run test:integration",
+    "test:smoke": "node tests/smoke.test.js",
+    "test:integration": "node tests/integration.test.js",
     "build": "electron-builder",
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",

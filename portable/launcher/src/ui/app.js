@@ -35,15 +35,27 @@ class MirrorDNAApp {
     });
 
     document.getElementById('btn-existing-user').addEventListener('click', async () => {
-      // TODO: Implement vault selection dialog
-      alert('Vault selection not yet implemented. Please use "I\'m New" for now.');
+      const result = await window.mirrorDNA.chooseDirectory({
+        title: 'Choose Existing Vault',
+        buttonLabel: 'Open Vault'
+      });
+
+      if (!result.canceled) {
+        // Load existing vault
+        await this.loadExistingVault(result.path);
+      }
     });
 
     // Setup form
-    document.getElementById('choose-path-btn').addEventListener('click', () => {
-      // TODO: Implement directory picker
-      const defaultPath = process.platform === 'win32' ? 'D:\\MirrorDNA' : '/home/user/MirrorDNA';
-      document.getElementById('vault-path-input').value = defaultPath;
+    document.getElementById('choose-path-btn').addEventListener('click', async () => {
+      const result = await window.mirrorDNA.chooseDirectory({
+        title: 'Choose Vault Location',
+        buttonLabel: 'Select Location'
+      });
+
+      if (!result.canceled) {
+        document.getElementById('vault-path-input').value = result.path;
+      }
     });
 
     document.getElementById('complete-setup-btn').addEventListener('click', async () => {
@@ -73,6 +85,46 @@ class MirrorDNAApp {
 
     document.getElementById('internet-mode-select').addEventListener('change', async (e) => {
       await this.updateInternetMode(e.target.value);
+    });
+
+    // Change vault button
+    document.getElementById('change-vault-btn').addEventListener('click', async () => {
+      const result = await window.mirrorDNA.chooseDirectory({
+        title: 'Choose Vault Directory',
+        buttonLabel: 'Select Vault'
+      });
+
+      if (!result.canceled) {
+        await this.loadExistingVault(result.path);
+        this.toggleSettings(); // Close settings after changing vault
+      }
+    });
+
+    // Choose model file button
+    document.getElementById('choose-model-btn').addEventListener('click', async () => {
+      const result = await window.mirrorDNA.chooseFile({
+        title: 'Choose LLM Model File',
+        buttonLabel: 'Select Model',
+        filters: [
+          { name: 'GGUF Models', extensions: ['gguf'] },
+          { name: 'All Files', extensions: ['*'] }
+        ]
+      });
+
+      if (!result.canceled) {
+        // Update settings with new model path
+        await window.mirrorDNA.updateSettings({ modelPath: result.path });
+        this.settings.modelPath = result.path;
+
+        // Update UI
+        document.getElementById('current-model-path').textContent = result.path;
+
+        // Reinitialize LLM if vault is loaded
+        if (this.settings.vaultPath) {
+          this.appendMessage('system', '⟡ Reinitializing LLM with new model...');
+          await this.initializeLLM();
+        }
+      }
     });
 
     // Status indicator click
@@ -125,6 +177,20 @@ class MirrorDNAApp {
     await this.loadSessionScreen();
   }
 
+  async loadExistingVault(vaultPath) {
+    // Update settings with chosen vault
+    await window.mirrorDNA.updateSettings({
+      vaultPath,
+      onboardingCompleted: true
+    });
+
+    // Reload settings
+    this.settings = await window.mirrorDNA.getSettings();
+
+    // Load session screen
+    await this.loadSessionScreen();
+  }
+
   async loadSessionScreen() {
     // Load vault state
     const result = await window.mirrorDNA.readVaultState();
@@ -156,8 +222,7 @@ class MirrorDNAApp {
       this.appendMessage('system', '⟡ Initializing local AI model (Phi-3 Mini)...');
       this.appendMessage('system', 'This may take 30-60 seconds on first load.');
 
-      // TODO: Allow user to specify model path in settings
-      // For now, look for model in standard locations
+      // Find model path (user can configure via settings → Choose Model File)
       const modelPath = await this.findModelPath();
 
       if (!modelPath) {

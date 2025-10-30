@@ -20,6 +20,10 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   // Internet consent
   requestInternet: (action, details) => ipcRenderer.invoke('request-internet', action, details),
 
+  // File system dialogs
+  chooseDirectory: (options) => ipcRenderer.invoke('choose-directory', options),
+  chooseFile: (options) => ipcRenderer.invoke('choose-file', options),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });

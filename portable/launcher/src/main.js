@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const Store = require('electron-store');
@@ -208,10 +208,27 @@ ipcMain.handle('request-internet', async (event, action, details) => {
     return { granted: true, reason: 'always_online' };
   }
 
-  // Hybrid mode: show dialog
-  // TODO: Implement consent dialog
-  // For now, auto-grant in hybrid mode
-  return { granted: true, reason: 'hybrid_ask' };
+  // Hybrid mode: show consent dialog
+
+  const choice = await dialog.showMessageBox({
+    type: 'question',
+    buttons: ['Allow Once', 'Deny'],
+    defaultId: 0,
+    title: '⟡ Internet Permission Request',
+    message: `Permission to access internet`,
+    detail: `Action: ${action}\n\n${details || 'No additional details'}\n\nYour sovereignty: You can change internet mode anytime in settings.`,
+    cancelId: 1,
+    noLink: true
+  });
+
+  const granted = choice.response === 0;
+
+  return {
+    granted,
+    reason: granted ? 'user_approved' : 'user_denied',
+    action,
+    timestamp: new Date().toISOString()
+  };
 });
 
 // LLM Operations
@@ -283,6 +300,50 @@ ipcMain.handle('update-llm-context', (event, contextUpdate) => {
     return { success: true };
   }
   return { success: false, error: 'LLM not initialized' };
+});
+
+// Directory Selection
+
+// Choose directory (for vault path or model path)
+ipcMain.handle('choose-directory', async (event, options = {}) => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory', 'createDirectory'],
+    title: options.title || 'Choose Directory',
+    defaultPath: options.defaultPath || app.getPath('home'),
+    buttonLabel: options.buttonLabel || 'Select'
+  });
+
+  if (result.canceled) {
+    return { canceled: true };
+  }
+
+  return {
+    canceled: false,
+    path: result.filePaths[0]
+  };
+});
+
+// Choose file (for model file selection)
+ipcMain.handle('choose-file', async (event, options = {}) => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openFile'],
+    title: options.title || 'Choose File',
+    defaultPath: options.defaultPath || app.getPath('home'),
+    filters: options.filters || [
+      { name: 'GGUF Models', extensions: ['gguf'] },
+      { name: 'All Files', extensions: ['*'] }
+    ],
+    buttonLabel: options.buttonLabel || 'Select'
+  });
+
+  if (result.canceled) {
+    return { canceled: true };
+  }
+
+  return {
+    canceled: false,
+    path: result.filePaths[0]
+  };
 });
 
 console.log('⟡ MirrorDNA Portable launcher initialized');

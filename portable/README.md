@@ -82,7 +82,7 @@ portable/
 - Consent manager (internet permission system)
 - Status indicator (⟡ offline, ⟡◌ hybrid, ⟡⟐ online)
 
-**Status**: 🚧 UI prototype complete, LLM integration pending
+**Status**: ✅ Functional prototype with local LLM integration
 
 ### 2. Vault Template
 **Pre-configured Obsidian vault with MirrorDNA specs**
@@ -105,15 +105,17 @@ portable/
 
 **Status**: ✅ Complete
 
-### 4. LLM Runtime (Pending)
+### 4. LLM Runtime
 **Local inference with Phi-3 Mini**
 
-- llama.cpp integration (CPU-optimized)
+- llama.cpp integration (CPU-optimized, node-llama-cpp)
 - Phi-3 Mini 4K model (2.3GB quantized)
-- Context injection (Master Citation + session state)
-- Streaming response support
+- Master Citation context injection (system prompt)
+- Session state continuity (vault/state/current.json)
+- Graceful fallback (placeholder mode when model not present)
+- Streaming architecture ready (UI implementation pending)
 
-**Status**: ⏳ Architecture designed, implementation pending
+**Status**: ✅ Complete
 
 ### 5. Documentation
 **Comprehensive guides for users and developers**
@@ -177,17 +179,20 @@ portable/
 
 ## Development Roadmap
 
-### Phase 1: Foundation (Current)
+### Phase 1: Foundation (Complete ✅)
 - [x] Vault template structure
 - [x] Launcher UI prototype
 - [x] Visual language (glyphs, icons)
 - [x] Architecture documentation
-- [ ] LLM integration (Phi-3 + llama.cpp)
+- [x] LLM integration (Phi-3 + llama.cpp)
+- [x] Test suite (smoke tests)
 
-### Phase 2: Core Features
-- [ ] Session continuity engine
+### Phase 2: Core Features (Current)
+- [x] Session continuity engine (basic)
 - [ ] Consent dialog implementation
 - [ ] Obsidian external launch
+- [ ] Vault selection dialog
+- [ ] Model path settings UI
 - [ ] Checksum verification
 - [ ] Model downloader
 

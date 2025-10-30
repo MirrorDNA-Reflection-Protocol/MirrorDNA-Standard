@@ -365,10 +365,20 @@ this.showScreen('my'); // Shows #my-screen
 - [ ] Status indicator changes with internet mode
 - [ ] Settings panel opens/closes
 
-### Automated Testing (TODO)
+### Automated Testing
+
+**Smoke Tests** (✅ Implemented)
+```bash
+npm test
+```
+- 20 tests validating file structure, APIs, and integration
+- Tests run without dependencies (pure Node.js)
+- Verifies LLM integration, Master Citation, session state
+
+**Planned Tests**
 - Unit tests for vault operations
 - Integration tests for IPC handlers
-- UI tests with Spectron
+- UI tests with Spectron or Playwright
 
 ---
 
