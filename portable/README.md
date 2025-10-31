@@ -82,7 +82,7 @@ portable/
 - Consent manager (internet permission system)
 - Status indicator (⟡ offline, ⟡◌ hybrid, ⟡⟐ online)
 
-**Status**: 🚧 UI prototype complete, LLM integration pending
+**Status**: ✅ Complete
 
 ### 2. Vault Template
 **Pre-configured Obsidian vault with MirrorDNA specs**
@@ -105,15 +105,16 @@ portable/
 
 **Status**: ✅ Complete
 
-### 4. LLM Runtime (Pending)
-**Local inference with Phi-3 Mini**
+### 4. LLM Runtime
+**Local inference with Phi-3 Mini via node-llama-cpp**
 
-- llama.cpp integration (CPU-optimized)
-- Phi-3 Mini 4K model (2.3GB quantized)
+- node-llama-cpp integration (CPU-optimized)
+- Phi-3 Mini 4K model support (2.3GB quantized)
 - Context injection (Master Citation + session state)
 - Streaming response support
+- Complete IPC bridge for Electron integration
 
-**Status**: ⏳ Architecture designed, implementation pending
+**Status**: ✅ Complete
 
 ### 5. Documentation
 **Comprehensive guides for users and developers**
@@ -177,12 +178,12 @@ portable/
 
 ## Development Roadmap
 
-### Phase 1: Foundation (Current)
+### Phase 1: Foundation ✅ COMPLETE
 - [x] Vault template structure
 - [x] Launcher UI prototype
 - [x] Visual language (glyphs, icons)
 - [x] Architecture documentation
-- [ ] LLM integration (Phi-3 + llama.cpp)
+- [x] LLM integration (Phi-3 + node-llama-cpp)
 
 ### Phase 2: Core Features
 - [ ] Session continuity engine
@@ -317,7 +318,7 @@ See `../LICENSE.md` for details.
 
 MirrorDNA Portable builds on:
 - **Electron** - Cross-platform desktop framework
-- **llama.cpp** - Efficient local LLM inference
+- **node-llama-cpp** - Node.js bindings for llama.cpp (efficient local LLM inference)
 - **Obsidian** - Powerful markdown-based knowledge management
 - **Phi-3 Mini** (Microsoft) - Compact, capable language model
 
