@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- ⟡◌ Partial - Bridge Available (Hybrid Mode) -->
+  <defs>
+    <linearGradient id="hybridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f4d03f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Half-filled hexagon (local + optional cloud) -->
+  <path
+    d="M 16 4 L 26 10 L 26 22 L 16 28 L 6 22 L 6 10 Z"
+    fill="none"
+    stroke="url(#hybridGradient)"
+    stroke-width="1.5"
+  />
+
+  <!-- Left half filled (local/offline) -->
+  <path
+    d="M 16 4 L 6 10 L 6 22 L 16 28 L 16 4 Z"
+    fill="url(#hybridGradient)"
+    opacity="0.5"
+  />
+
+  <!-- Bridge symbol (connection available) -->
+  <circle cx="16" cy="16" r="2" fill="#fff"/>
+  <line x1="16" y1="16" x2="23" y2="16" stroke="#fff" stroke-width="1" stroke-dasharray="2,1"/>
+</svg>

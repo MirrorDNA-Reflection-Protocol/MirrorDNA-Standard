@@ -16,3 +16,6 @@ build/
 **/__LOCK/**
 *.priv*
 *.locksidecar.json
+
+# Release artifacts (build separately, attach to GitHub Releases)
+*.zip

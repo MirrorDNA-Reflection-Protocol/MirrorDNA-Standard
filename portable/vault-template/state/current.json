@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "vault_name": "AMOS",
+  "last_session": {
+    "number": 0,
+    "path": null,
+    "timestamp": null,
+    "checksum": null
+  },
+  "context": {
+    "active_topics": [],
+    "key_insights": [],
+    "pending_tasks": []
+  },
+  "settings": {
+    "internet_mode": "hybrid_ask",
+    "llm_model": "phi3-mini-4k",
+    "onboarding_completed": false,
+    "user_type": "new"
+  },
+  "integrity": {
+    "vault_checksum": null,
+    "last_verified": null,
+    "spec_versions": {
+      "master_citation": "15.1.1",
+      "manifest": "1.0",
+      "interaction_safety": "1.0",
+      "constitutive_reflection": "1.0"
+    }
+  }
+}

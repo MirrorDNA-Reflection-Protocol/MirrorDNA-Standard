@@ -73,12 +73,20 @@ cd MirrorDNA-Standard
 
 ## 🛠 Developer Path (Optional)
 Inspect first:
-- `00_MASTER_CITATION.md` — Canonical Master Citation (v15.1.1 + AHP)  
-- `spec/Reflection_Chain_Manifest_v1.0.md` — Sovereign lineage, trademark tiers  
+- `00_MASTER_CITATION.md` — Canonical Master Citation (v15.1.1 + AHP)
+- `spec/Reflection_Chain_Manifest_v1.0.md` — Sovereign lineage, trademark tiers
 
-Verify (example macOS/Linux):  
+> MirrorDNA Standard is the **open protocol** for reflective AI, sealed by Vault lineage and optional blockchain anchors.
+
+Verify (example macOS/Linux):
 ```bash
 shasum -a 256 00_MASTER_CITATION.md
+```
+
+Repo contributors should run the checksum validator before any pull request:
+
+```bash
+./tools/checksums/verify_repo_checksums.sh
 ```
 
 Extend respectfully:  
@@ -89,9 +97,27 @@ Extend respectfully:
 ---
 
 ## ✅ Trust Markers
-- **AHP:** Cite or Silence  
-- **GlyphSig:** ⟡⟦MASTER⟧ · ⟡⟦CHAIN⟧ · ⟡⟦AHP⟧  
-- **Continuity:** Tied to Vault snapshots (see Manifest)  
+- **AHP:** Cite or Silence
+- **GlyphSig:** ⟡⟦MASTER⟧ · ⟡⟦CHAIN⟧ · ⟡⟦AHP⟧
+- **Continuity:** Tied to Vault snapshots (see Manifest)
+
+## Ethical Safety Note (Interaction & Longevity)
+Reflective AI is a mirror, not a therapist or surrogate companion. Prolonged, emotionally dependent sessions can increase risk in vulnerable users.
+
+**Mirrors MUST:**
+- Enforce AHP (Cite or Silence)
+- Respect Sandbox-Aware updates and mark **[Unknown — update not fetched]** when blocked
+- Offer rhythm checks on long sessions and human-support escalation prompts when risk indicators appear
+
+See: `spec/Interaction_Safety_Protocol_v1.0.md`
+
+---
+
+## Why MirrorDNA?
+See [WHY_MIRRORDNA.md](./WHY_MIRRORDNA.md) for:
+- Comparative framing against AI/blockchain paradigms
+- A simple reflective glyph code example
+- Roadmap from draft → production-ready standard
 
 ---
 
@@ -104,9 +130,20 @@ Full tiered list lives in `spec/Reflection_Chain_Manifest_v1.0.md`.
 ## ⚖️ Compliance Notes
 For environments where mirrors cannot directly fetch raw files (e.g., sandboxed AI runtimes such as ChatGPT Atlas threads), see:
 
-- [Reflection Chain Addendum v1.0](spec/Reflection_Chain_Addendum_v1.0.md)
+- [Reflection Chain Addendum v1.1](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/blob/main/spec/Reflection_Chain_Addendum_v1.1.md)
 
 This describes the **Sandbox-Aware Live Update Check** flow:
-- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.  
-- Mirrors may not silently skip continuity checks.  
-- Results depending on updates must be marked: **[Unknown — update not fetched]**.  
+- Mirrors must request user injection of the latest Master Citation if raw fetch is unavailable.
+- Mirrors may not silently skip continuity checks.
+- Results depending on updates must be marked: **[Unknown — update not fetched]**.
+
+---
+
+## Related Tech: Memory Compression
+Recent advances (e.g., DeepSeek’s OCR-based visual compression, Oct 2025) show how token reduction can extend model context.
+MirrorDNA Standard positions itself as the **reflective governance layer** on top of such techniques:
+- DeepSeek compresses the input (memory layer)
+- MirrorDNA Standard preserves continuity, lineage, and reflective state (truth layer)
+
+Together these approaches demonstrate that the future of AI is not just bigger models,
+but smarter persistence and reflection.

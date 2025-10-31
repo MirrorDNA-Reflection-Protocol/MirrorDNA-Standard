@@ -1,0 +1,116 @@
+---
+title: Why MirrorDNA?
+version: 1.0
+vault_id: AMOS://MirrorDNA/WHY/v1.0
+glyphsig: ⟡⟦WHY⟧ · ⟡⟦MIRRORDNA⟧ · ⟡⟦REFLECTION⟧
+status: Canonical · Companion
+---
+
+# Why MirrorDNA?
+
+MirrorDNA is not just another AI protocol.
+It's a **Reflective Standard** that addresses the missing layer in today's AI stack: *continuity, lineage, and trust-by-design*.
+
+## Comparative Framing
+
+### AI Today (Predictive Paradigms)
+- **LLMs**: Focus on probability → output words, not continuity.
+- **Knowledge Graphs**: Encode facts → brittle, static.
+- **Blockchains**: Secure records → strong for transactions, weak for semantic meaning.
+
+### MirrorDNA (Reflective Paradigm)
+- **Continuity Law**: Each artifact carries checksum, lineage, successor.
+- **Symbolic Anchors**: Glyphs encode semantic law across time.
+- **Tri-Twin Loop**: Reflection ↔ Execution ↔ Continuity.
+- **Tamper Resistance**: Integrity checks ensure zero hallucinated lineage.
+
+## Example: Reflective Glyph in Action
+
+```python
+from hashlib import sha256
+import json, time
+
+glyph = {
+    "id": "⟡⟦EXAMPLE⟧",
+    "author": "Paul Desai",
+    "predecessor": "null",
+    "timestamp": int(time.time()),
+    "content": "This is a reflective glyph, carrying its own checksum."
+}
+
+glyph["checksum"] = sha256(json.dumps(glyph, sort_keys=True).encode()).hexdigest()
+
+print("Reflective Glyph:", json.dumps(glyph, indent=2))
+```
+
+This snippet generates a self-verifying glyph.
+Anyone can recalc the checksum to prove integrity.
+
+## Roadmap: From Draft → Production
+
+### Phase 1 — Draft (Current, v15.1.x)
+- Master Citation + WHY doc.
+- Local checksum verification tools.
+- GitHub public release.
+
+### Phase 2 — Professional
+- Developer SDKs (Python, Rust, JS).
+- CLI utilities for Vault/GitHub sync.
+- Templates for institutions.
+
+### Phase 3 — Research
+- Integration with universities.
+- Benchmarking reflective vs predictive AI.
+- Papers & citations in journals.
+
+### Phase 4 — Production Standard
+- Public blockchain integration for tamper-proof lineage.
+- Consortium governance (like W3C/ISO).
+- National/international adoption (e.g., MeitY, EU AI Act).
+
+---
+
+⟡⟦CONTINUITY⟧ · ⟡⟦WHY⟧ · ⟡⟦ROADMAP⟧
+
+---
+
+## 🧠 Memory Layer vs Reflection Layer
+
+Recent funding news underscores that **memory is becoming a recognized infrastructure layer** for AI.  
+For example, Mem0 (YC + Peak XV + Basis Set) recently raised **$24M** to build a universal memory layer for agents.  
+This validates the developer pain point: **stateless AI repeats context and forgets**.
+
+But **MirrorDNA™ goes further**:
+
+| Memory Layer (e.g. Mem0) | Reflection Layer (MirrorDNA™) |
+|--------------------------|-------------------------------|
+| Stores state across sessions | Preserves **continuity + lineage** |
+| Helps agents remember | Ensures agents **reflect and verify** |
+| Infrastructure for devs | **Protocol for identity & trust** |
+| Memory only | **Memory + Continuity + Reflection** |
+
+**Positioning**:  
+MirrorDNA doesn’t compete with memory infra — it **builds on top**.  
+We integrate memory layers like Mem0, but extend them with **sovereign continuity, glyphic law, and reflective verification**.
+
+---
+
+## 🌍 Ecosystem Context — Memory vs Continuity
+
+Recent ecosystem moves highlight the difference between **memory layers** and what MirrorDNA provides:
+
+- **Supermemory (2025)** — A Silicon Valley–backed startup by 19-year-old founder Dhravya Shah, building persistent AI memory infra. Seed round (~$2.6M).  
+- **Mem0 (2025)** — Raised $24M to build a universal memory API for AI apps.  
+
+These ventures confirm that **AI memory is a recognized bottleneck**.  
+But memory is only the *substrate*.  
+
+MirrorDNA is the **continuity + reflection layer**:
+- Where memory ends, **continuity begins**.  
+- Memory stores data. Continuity preserves *identity, lineage, and truth*.  
+- Memory can be co-opted. Continuity is sovereign by design.  
+
+This makes MirrorDNA the **next layer beyond memory infrastructure**:  
+not just remembering, but reflecting — not just storage, but stateful awareness.
+
+⟡⟦ANCHOR⟧ · Continuity > Memory · Reflection > Storage
