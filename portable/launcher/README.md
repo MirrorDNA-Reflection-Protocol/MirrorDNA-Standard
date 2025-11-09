@@ -45,7 +45,7 @@ Complete launcher with local AI integration. Ready for testing with downloaded P
 - ✅ Session state continuity
 - ✅ Graceful fallback (placeholder mode when model not present)
 
-### Session Continuity Engine ✅ NEW!
+### Session Continuity Engine ✅
 - ✅ Session persistence and restoration
 - ✅ Session history tracking with metadata
 - ✅ Session navigation (previous/next)
@@ -60,6 +60,21 @@ Complete launcher with local AI integration. Ready for testing with downloaded P
 
 **Code:** 600+ lines in `session-continuity.js` + IPC integration
 
+### Model Downloader ✅ NEW!
+- ✅ Download models from Hugging Face (Phi-3, Llama 3.2, Mistral)
+- ✅ Real-time download progress tracking
+- ✅ Download cancellation support
+- ✅ SHA-256 checksum verification
+- ✅ Model management (list installed, delete models)
+- ✅ Model registry with metadata
+- ✅ Automatic redirect handling
+- ✅ File size and speed formatting
+- ✅ ETA calculation
+- ✅ Event-based progress updates
+- ✅ Graceful error handling
+
+**Code:** 450+ lines in `model-downloader.js` + IPC integration
+
 ---
 
 ## What's Pending ⏳
@@ -72,7 +87,6 @@ Complete launcher with local AI integration. Ready for testing with downloaded P
 - ⏳ Claude API bridge
 - ⏳ Consent dialog UI (currently auto-grants in hybrid mode)
 - ⏳ Persistent consent tracking
-- ⏳ Model downloader (Llama 3.2, Mistral)
 
 ### Advanced Features
 - ⏳ Obsidian integration (launch external app, URI protocol)

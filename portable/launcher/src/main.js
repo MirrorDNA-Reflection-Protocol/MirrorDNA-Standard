@@ -4,6 +4,7 @@ const fs = require('fs');
 const Store = require('electron-store');
 const MirrorDNALLM = require('./llm-bridge');
 const SessionContinuity = require('./session-continuity');
+const ModelDownloader = require('./model-downloader');
 
 // Initialize persistent settings
 const store = new Store({
@@ -19,6 +20,35 @@ const store = new Store({
 let mainWindow;
 let llm = new MirrorDNALLM();
 let sessionContinuity = null;
+
+// Initialize model downloader
+const modelsPath = path.join(__dirname, '../models');
+const modelDownloader = new ModelDownloader(modelsPath);
+
+// Forward download events to renderer
+modelDownloader.on('download-progress', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('model-download-progress', data);
+  }
+});
+
+modelDownloader.on('download-complete', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('model-download-complete', data);
+  }
+});
+
+modelDownloader.on('download-error', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('model-download-error', data);
+  }
+});
+
+modelDownloader.on('download-cancelled', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('model-download-cancelled', data);
+  }
+});
 
 function createWindow() {
   const { width, height } = store.get('windowBounds');
@@ -419,6 +449,63 @@ ipcMain.handle('validate-vault-integrity', async () => {
   }
 
   return await sessionContinuity.validateIntegrity();
+});
+
+// ===== Model Downloader Operations =====
+
+// Get available models from registry
+ipcMain.handle('get-available-models', () => {
+  try {
+    const models = modelDownloader.getAvailableModels();
+    return { success: true, models };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get installed models
+ipcMain.handle('get-installed-models', () => {
+  try {
+    const models = modelDownloader.getInstalledModels();
+    return { success: true, models };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Download a model
+ipcMain.handle('download-model', async (event, modelId, options) => {
+  try {
+    const result = await modelDownloader.downloadModel(modelId, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Cancel a download
+ipcMain.handle('cancel-download', (event, modelId) => {
+  return modelDownloader.cancelDownload(modelId);
+});
+
+// Delete a model
+ipcMain.handle('delete-model', (event, filename) => {
+  return modelDownloader.deleteModel(filename);
+});
+
+// Verify model checksum
+ipcMain.handle('verify-model', async (event, filename, expectedChecksum) => {
+  return await modelDownloader.verifyModel(filename, expectedChecksum);
+});
+
+// Get active downloads
+ipcMain.handle('get-active-downloads', () => {
+  try {
+    const downloads = modelDownloader.getActiveDownloads();
+    return { success: true, downloads };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
 });
 
 console.log('⟡ MirrorDNA Portable launcher initialized');

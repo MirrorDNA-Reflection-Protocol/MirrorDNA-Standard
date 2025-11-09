@@ -34,6 +34,21 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   updateSessionContext: (updates) => ipcRenderer.invoke('update-session-context', updates),
   validateVaultIntegrity: () => ipcRenderer.invoke('validate-vault-integrity'),
 
+  // Model Downloader operations
+  getAvailableModels: () => ipcRenderer.invoke('get-available-models'),
+  getInstalledModels: () => ipcRenderer.invoke('get-installed-models'),
+  downloadModel: (modelId, options) => ipcRenderer.invoke('download-model', modelId, options),
+  cancelDownload: (modelId) => ipcRenderer.invoke('cancel-download', modelId),
+  deleteModel: (filename) => ipcRenderer.invoke('delete-model', filename),
+  verifyModel: (filename, expectedChecksum) => ipcRenderer.invoke('verify-model', filename, expectedChecksum),
+  getActiveDownloads: () => ipcRenderer.invoke('get-active-downloads'),
+
+  // Model download event listeners
+  onDownloadProgress: (callback) => ipcRenderer.on('model-download-progress', (event, data) => callback(data)),
+  onDownloadComplete: (callback) => ipcRenderer.on('model-download-complete', (event, data) => callback(data)),
+  onDownloadError: (callback) => ipcRenderer.on('model-download-error', (event, data) => callback(data)),
+  onDownloadCancelled: (callback) => ipcRenderer.on('model-download-cancelled', (event, data) => callback(data)),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });

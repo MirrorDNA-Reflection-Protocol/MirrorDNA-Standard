@@ -186,10 +186,10 @@ portable/
 
 ### Phase 2: Core Features (Current)
 - [x] Session continuity engine ✅ COMPLETE
+- [x] Model downloader ✅ COMPLETE
 - [ ] Consent dialog implementation
 - [ ] Obsidian external launch
 - [ ] Checksum verification
-- [ ] Model downloader
 
 ### Phase 3: Cloud Enhancement
 - [ ] Claude API bridge
