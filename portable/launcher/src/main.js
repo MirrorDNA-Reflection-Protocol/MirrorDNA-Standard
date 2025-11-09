@@ -9,6 +9,8 @@ const { ConsentDialogManager } = require('./consent-dialog');
 const { ChecksumVerifier } = require('./checksum-verifier');
 const { ObsidianLauncher } = require('./obsidian-launcher');
 const { ClaudeAPIBridge } = require('./claude-api-bridge');
+const { GitSyncManager } = require('./git-sync-manager');
+const { SessionManager } = require('./session-manager');
 
 // Initialize persistent settings
 const store = new Store({
@@ -27,6 +29,8 @@ let mainWindow;
 let llm = new MirrorDNALLM();
 let sessionContinuity = null;
 let checksumVerifier = null;
+let gitSyncManager = null;
+let sessionManager = null;
 
 // Initialize model downloader
 const modelsPath = path.join(__dirname, '../models');
@@ -1002,6 +1006,206 @@ ipcMain.handle('get-internet-mode', () => {
   try {
     const mode = store.get('internetMode');
     return { success: true, mode };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Git Sync Manager Operations =====
+
+// Initialize Git sync manager
+const getGitSyncManager = () => {
+  const vaultPath = store.get('vaultPath');
+  if (!vaultPath) throw new Error('No vault configured');
+  if (!gitSyncManager || gitSyncManager.vaultPath !== vaultPath) {
+    gitSyncManager = new GitSyncManager(vaultPath);
+  }
+  return gitSyncManager;
+};
+
+// Initialize repository
+ipcMain.handle('git-init', async (event, options) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.initRepository(options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Set remote
+ipcMain.handle('git-set-remote', async (event, url, name) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.setRemote(url, name);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get status
+ipcMain.handle('git-status', async () => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.getStatus();
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Commit changes
+ipcMain.handle('git-commit', async (event, message, options) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.commit(message, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Push to remote
+ipcMain.handle('git-push', async (event, options) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.push(options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Pull from remote
+ipcMain.handle('git-pull', async (event, options) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.pull(options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Full sync (commit + pull + push)
+ipcMain.handle('git-sync', async (event, commitMessage, options) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.sync(commitMessage, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get commit history
+ipcMain.handle('git-history', async (event, limit) => {
+  try {
+    const manager = getGitSyncManager();
+    const result = await manager.getHistory(limit);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Session Manager Operations =====
+
+// Initialize session manager
+const getSessionManager = () => {
+  const vaultPath = store.get('vaultPath');
+  if (!vaultPath) throw new Error('No vault configured');
+  if (!sessionManager || sessionManager.vaultPath !== vaultPath) {
+    sessionManager = new SessionManager(vaultPath);
+  }
+  return sessionManager;
+};
+
+// Initialize session manager
+ipcMain.handle('session-manager-init', async () => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.initialize();
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Pause session
+ipcMain.handle('pause-session', async (event, sessionData, options) => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.pauseSession(sessionData, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Resume session
+ipcMain.handle('resume-session', async (event, pauseId) => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.resumeSession(pauseId);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get paused sessions
+ipcMain.handle('get-paused-sessions', async () => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.getPausedSessions();
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Delete paused session
+ipcMain.handle('delete-paused-session', async (event, pauseId) => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.deletePausedSession(pauseId);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Auto-save session
+ipcMain.handle('auto-save-session', async (event, sessionData) => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.autoSaveSession(sessionData);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Load checkpoint
+ipcMain.handle('load-checkpoint', async () => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.loadCheckpoint();
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Clean old paused sessions
+ipcMain.handle('clean-old-paused-sessions', async (event, maxAge) => {
+  try {
+    const manager = getSessionManager();
+    const result = await manager.cleanOldPausedSessions(maxAge);
+    return result;
   } catch (error) {
     return { success: false, error: error.message };
   }

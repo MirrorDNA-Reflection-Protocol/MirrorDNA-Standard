@@ -7,9 +7,15 @@
     "start": "electron .",
     "dev": "electron . --dev",
     "build": "electron-builder",
-    "build:win": "electron-builder --win",
-    "build:mac": "electron-builder --mac",
-    "build:linux": "electron-builder --linux"
+    "build:all": "electron-builder --win --mac --linux",
+    "build:win": "electron-builder --win portable",
+    "build:win:installer": "electron-builder --win nsis",
+    "build:mac": "electron-builder --mac dmg",
+    "build:mac:universal": "electron-builder --mac universal --target dmg",
+    "build:linux": "electron-builder --linux AppImage",
+    "build:linux:deb": "electron-builder --linux deb",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "mirrordna",
@@ -32,37 +38,127 @@
   "build": {
     "appId": "com.mirrordna.portable",
     "productName": "MirrorDNA Portable",
+    "copyright": "Copyright © 2025 MirrorDNA Reflection Protocol",
+    "compression": "maximum",
+    "asar": true,
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
     "files": [
       "src/**/*",
+      "!src/**/*.map",
       "../vault-template/**/*",
       "../glyphs/**/*",
-      "models/**/*"
+      "models/**/*",
+      "!models/.gitkeep"
     ],
     "extraResources": [
       {
         "from": "../vault-template",
-        "to": "vault-template"
+        "to": "vault-template",
+        "filter": ["**/*", "!**/.DS_Store"]
       },
       {
-        "from": "../../tools",
-        "to": "tools"
+        "from": "../../specs",
+        "to": "specs",
+        "filter": ["**/*.md"]
       }
     ],
     "win": {
-      "target": "portable",
-      "icon": "../glyphs/mirrordna-sigil.png"
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "../glyphs/mirrordna-sigil.png",
+      "artifactName": "${productName}-${version}-${os}-${arch}-portable.${ext}",
+      "publisherName": "MirrorDNA Protocol",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "../glyphs/mirrordna-sigil.png",
+      "uninstallerIcon": "../glyphs/mirrordna-sigil.png",
+      "license": "../../LICENSE.md",
+      "artifactName": "${productName}-${version}-${os}-${arch}-installer.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-${os}-${arch}-portable.${ext}"
     },
     "mac": {
-      "target": "dmg",
-      "icon": "../glyphs/mirrordna-sigil.icns"
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        }
+      ],
+      "icon": "../glyphs/mirrordna-sigil.icns",
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        }
+      ],
       "icon": "../glyphs/mirrordna-sigil.png",
-      "category": "Utility"
+      "category": "Utility;Office;Education",
+      "synopsis": "Sovereign reflective AI with local-first architecture",
+      "description": "MirrorDNA Portable is a sovereign, USB-portable reflective AI system with local-first architecture, session continuity, and consent-based cloud enhancement.",
+      "desktop": {
+        "Name": "MirrorDNA Portable",
+        "Comment": "Sovereign Reflective AI",
+        "Categories": "Utility;Office;Education",
+        "Terminal": false,
+        "Type": "Application"
+      },
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
+    "appImage": {
+      "license": "../../LICENSE.md",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
+    "deb": {
+      "depends": ["libgtk-3-0", "libnotify4", "libnss3", "libxtst6", "xdg-utils"],
+      "priority": "optional",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
     }
   }
 }

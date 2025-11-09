@@ -94,6 +94,26 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   onClaudeStreamEnd: (callback) => ipcRenderer.on('claude-stream-end', (event, data) => callback(data)),
   onClaudeStreamError: (callback) => ipcRenderer.on('claude-stream-error', (event, data) => callback(data)),
 
+  // Git Sync Manager operations
+  gitInit: (options) => ipcRenderer.invoke('git-init', options),
+  gitSetRemote: (url, name) => ipcRenderer.invoke('git-set-remote', url, name),
+  gitStatus: () => ipcRenderer.invoke('git-status'),
+  gitCommit: (message, options) => ipcRenderer.invoke('git-commit', message, options),
+  gitPush: (options) => ipcRenderer.invoke('git-push', options),
+  gitPull: (options) => ipcRenderer.invoke('git-pull', options),
+  gitSync: (commitMessage, options) => ipcRenderer.invoke('git-sync', commitMessage, options),
+  gitHistory: (limit) => ipcRenderer.invoke('git-history', limit),
+
+  // Session Manager operations
+  sessionManagerInit: () => ipcRenderer.invoke('session-manager-init'),
+  pauseSession: (sessionData, options) => ipcRenderer.invoke('pause-session', sessionData, options),
+  resumeSession: (pauseId) => ipcRenderer.invoke('resume-session', pauseId),
+  getPausedSessions: () => ipcRenderer.invoke('get-paused-sessions'),
+  deletePausedSession: (pauseId) => ipcRenderer.invoke('delete-paused-session', pauseId),
+  autoSaveSession: (sessionData) => ipcRenderer.invoke('auto-save-session', sessionData),
+  loadCheckpoint: () => ipcRenderer.invoke('load-checkpoint'),
+  cleanOldPausedSessions: (maxAge) => ipcRenderer.invoke('clean-old-paused-sessions', maxAge),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });
