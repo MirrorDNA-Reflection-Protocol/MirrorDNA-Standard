@@ -2,7 +2,7 @@
 date: 2025-11-09
 document: test_document_invalid.md
 result: FAIL
-generated: 2025-11-09 11:56:54
+generated: 2025-11-09 16:56:48
 tool: rcc_validator.py v1.0
 ---
 
@@ -10,7 +10,7 @@ tool: rcc_validator.py v1.0
 
 **Document:** test_document_invalid.md
 **Status:** FAIL
-**Generated:** 2025-11-09 at 11:56:54
+**Generated:** 2025-11-09 at 16:56:48
 
 ❌ **Validation failed!**
 
