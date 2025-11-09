@@ -1,0 +1,20 @@
+name: lineage-guard
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify front matter
+        run: |
+          REQUIRED=(title vault_id predecessor)
+          FAIL=0
+          while IFS= read -r -d '' f; do
+            for k in "${REQUIRED[@]}"; do
+              if ! grep -q "^${k}:" "$f"; then
+                echo "::error file=$f::Missing $k"
+                FAIL=1
+              fi
+            done
+          done < <(find specs -type f -name "*.md" -print0)
+          exit $FAIL
