@@ -76,6 +76,24 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   openFileInObsidian: (filePath) => ipcRenderer.invoke('open-file-in-obsidian', filePath),
   checkObsidianInstallation: () => ipcRenderer.invoke('check-obsidian-installation'),
 
+  // Claude API Bridge operations
+  setClaudeApiKey: (apiKey) => ipcRenderer.invoke('set-claude-api-key', apiKey),
+  getClaudeApiKeyStatus: () => ipcRenderer.invoke('get-claude-api-key-status'),
+  testClaudeConnection: () => ipcRenderer.invoke('test-claude-connection'),
+  generateClaudeReflection: (prompt, context, options) => ipcRenderer.invoke('generate-claude-reflection', prompt, context, options),
+  generateClaudeReflectionStream: (prompt, context, options) => ipcRenderer.invoke('generate-claude-reflection-stream', prompt, context, options),
+  getClaudeStats: () => ipcRenderer.invoke('get-claude-stats'),
+  resetClaudeStats: () => ipcRenderer.invoke('reset-claude-stats'),
+  removeClaudeApiKey: () => ipcRenderer.invoke('remove-claude-api-key'),
+  setInternetMode: (mode) => ipcRenderer.invoke('set-internet-mode', mode),
+  getInternetMode: () => ipcRenderer.invoke('get-internet-mode'),
+
+  // Claude streaming event listeners
+  onClaudeStreamStart: (callback) => ipcRenderer.on('claude-stream-start', (event, data) => callback(data)),
+  onClaudeStreamChunk: (callback) => ipcRenderer.on('claude-stream-chunk', (event, data) => callback(data)),
+  onClaudeStreamEnd: (callback) => ipcRenderer.on('claude-stream-end', (event, data) => callback(data)),
+  onClaudeStreamError: (callback) => ipcRenderer.on('claude-stream-error', (event, data) => callback(data)),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });

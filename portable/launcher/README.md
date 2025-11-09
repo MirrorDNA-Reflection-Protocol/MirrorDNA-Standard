@@ -2,9 +2,9 @@
 
 Electron-based desktop application for portable, sovereign reflective AI.
 
-## Status: ✅ Phase 2 Complete - Full Feature Set
+## Status: ✅ Phase 3 Complete - Cloud-Enhanced Sovereign AI
 
-Complete launcher with local AI integration, session continuity, model management, consent system, integrity verification, and Obsidian integration. Ready for testing and Phase 3 enhancements.
+Complete launcher with local AI integration, session continuity, model management, consent system, integrity verification, Obsidian integration, and cloud enhancement via Claude API. Full hybrid mode with consent-based cloud access. Ready for Phase 4 platform builds.
 
 ---
 
@@ -112,17 +112,30 @@ Complete launcher with local AI integration, session continuity, model managemen
 
 **Code:** 260+ lines in `obsidian-launcher.js` + IPC integration
 
+### Claude API Bridge ✅ NEW!
+- ✅ Full Claude API integration (Anthropic Messages API)
+- ✅ API key management and secure storage
+- ✅ Consent-based API access (hybrid mode)
+- ✅ Streaming response support
+- ✅ Context injection (Master Citation + session state)
+- ✅ Usage statistics tracking (tokens, requests, success rate)
+- ✅ Connection testing and validation
+- ✅ Automatic fallback to local LLM
+- ✅ Internet mode switching (offline, hybrid, online)
+- ✅ Session-based consent caching
+
+**Code:** 450+ lines in `claude-api-bridge.js` + IPC integration
+
 ---
 
 ## What's Pending ⏳
 
-### Streaming Support
-- ⏳ Real-time token streaming for responses
+### UI Enhancements
+- ⏳ Real-time streaming display in chat UI
 - ⏳ Progress indicator during generation
-
-### Cloud Enhancement
-- ⏳ Claude API bridge
-- ⏳ Hybrid mode full implementation
+- ⏳ API key input dialog
+- ⏳ Mode switcher UI component
+- ⏳ Consent prompt UI
 
 ### Advanced Features
 - ⏳ Session pause/resume

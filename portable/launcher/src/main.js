@@ -8,6 +8,7 @@ const ModelDownloader = require('./model-downloader');
 const { ConsentDialogManager } = require('./consent-dialog');
 const { ChecksumVerifier } = require('./checksum-verifier');
 const { ObsidianLauncher } = require('./obsidian-launcher');
+const { ClaudeAPIBridge } = require('./claude-api-bridge');
 
 // Initialize persistent settings
 const store = new Store({
@@ -16,7 +17,9 @@ const store = new Store({
     internetMode: 'hybrid_ask', // 'offline_only' | 'hybrid_ask' | 'online'
     onboardingCompleted: false,
     windowBounds: { width: 1000, height: 700 },
-    modelPath: null // Path to LLM model file
+    modelPath: null, // Path to LLM model file
+    claudeApiKey: null, // Claude API key (encrypted in production)
+    preferredMode: 'hybrid_ask' // User's preferred reflection mode
   }
 });
 
@@ -63,6 +66,44 @@ const consentManager = new ConsentDialogManager({ userDataPath });
 
 // Initialize Obsidian launcher
 const obsidianLauncher = new ObsidianLauncher();
+
+// Initialize Claude API bridge
+const claudeAPI = new ClaudeAPIBridge();
+
+// Load Claude API key if available
+const savedApiKey = store.get('claudeApiKey');
+if (savedApiKey) {
+  try {
+    claudeAPI.setApiKey(savedApiKey);
+  } catch (error) {
+    console.warn('Saved API key is invalid:', error.message);
+  }
+}
+
+// Forward Claude API streaming events to renderer
+claudeAPI.on('stream-start', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('claude-stream-start', data);
+  }
+});
+
+claudeAPI.on('stream-chunk', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('claude-stream-chunk', data);
+  }
+});
+
+claudeAPI.on('stream-end', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('claude-stream-end', data);
+  }
+});
+
+claudeAPI.on('stream-error', (data) => {
+  if (mainWindow) {
+    mainWindow.webContents.send('claude-stream-error', data);
+  }
+});
 
 function createWindow() {
   const { width, height } = store.get('windowBounds');
@@ -776,6 +817,191 @@ ipcMain.handle('check-obsidian-installation', async () => {
   try {
     const result = await obsidianLauncher.checkInstallation();
     return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Claude API Bridge Operations =====
+
+// Set Claude API key
+ipcMain.handle('set-claude-api-key', async (event, apiKey) => {
+  try {
+    claudeAPI.setApiKey(apiKey);
+    store.set('claudeApiKey', apiKey);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get Claude API key status
+ipcMain.handle('get-claude-api-key-status', () => {
+  return {
+    success: true,
+    hasKey: claudeAPI.hasApiKey(),
+    keyPrefix: claudeAPI.hasApiKey() ? 'sk-ant-***' : null
+  };
+});
+
+// Test Claude API connection
+ipcMain.handle('test-claude-connection', async () => {
+  try {
+    const result = await claudeAPI.testConnection();
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Generate reflection with Claude (with consent)
+ipcMain.handle('generate-claude-reflection', async (event, prompt, context, options) => {
+  try {
+    const internetMode = store.get('internetMode');
+
+    // Check if user allows cloud access
+    if (internetMode === 'offline_only') {
+      return {
+        success: false,
+        error: 'Cloud mode disabled. Switch to hybrid or online mode.',
+        fallbackToLocal: true
+      };
+    }
+
+    // Request consent if in hybrid mode
+    if (internetMode === 'hybrid_ask') {
+      const consentResult = await consentManager.requestConsent({
+        type: 'external_api',
+        purpose: 'Generate reflection using Claude API',
+        url: 'https://api.anthropic.com',
+        duration: 'session'
+      });
+
+      if (consentResult.requiresPrompt) {
+        return {
+          success: false,
+          requiresConsent: true,
+          promptId: consentResult.promptId,
+          prompt: consentResult.prompt
+        };
+      }
+
+      if (!consentResult.granted) {
+        return {
+          success: false,
+          error: 'API access denied by user',
+          fallbackToLocal: true
+        };
+      }
+    }
+
+    // Generate reflection with Claude
+    const result = await claudeAPI.generateReflection(prompt, context, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Generate streaming reflection with Claude (with consent)
+ipcMain.handle('generate-claude-reflection-stream', async (event, prompt, context, options) => {
+  try {
+    const internetMode = store.get('internetMode');
+
+    // Check if user allows cloud access
+    if (internetMode === 'offline_only') {
+      return {
+        success: false,
+        error: 'Cloud mode disabled. Switch to hybrid or online mode.',
+        fallbackToLocal: true
+      };
+    }
+
+    // Request consent if in hybrid mode
+    if (internetMode === 'hybrid_ask') {
+      const consentResult = await consentManager.requestConsent({
+        type: 'external_api',
+        purpose: 'Generate reflection using Claude API (streaming)',
+        url: 'https://api.anthropic.com',
+        duration: 'session'
+      });
+
+      if (consentResult.requiresPrompt) {
+        return {
+          success: false,
+          requiresConsent: true,
+          promptId: consentResult.promptId,
+          prompt: consentResult.prompt
+        };
+      }
+
+      if (!consentResult.granted) {
+        return {
+          success: false,
+          error: 'API access denied by user',
+          fallbackToLocal: true
+        };
+      }
+    }
+
+    // Start streaming
+    await claudeAPI.generateReflectionStream(prompt, context, options);
+    return { success: true, streaming: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get Claude API statistics
+ipcMain.handle('get-claude-stats', () => {
+  try {
+    const stats = claudeAPI.getStats();
+    return { success: true, stats };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Reset Claude API statistics
+ipcMain.handle('reset-claude-stats', () => {
+  try {
+    claudeAPI.resetStats();
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Remove Claude API key
+ipcMain.handle('remove-claude-api-key', () => {
+  try {
+    claudeAPI.apiKey = null;
+    store.set('claudeApiKey', null);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Set internet mode
+ipcMain.handle('set-internet-mode', (event, mode) => {
+  try {
+    if (!['offline_only', 'hybrid_ask', 'online'].includes(mode)) {
+      return { success: false, error: 'Invalid mode' };
+    }
+
+    store.set('internetMode', mode);
+    return { success: true, mode };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get internet mode
+ipcMain.handle('get-internet-mode', () => {
+  try {
+    const mode = store.get('internetMode');
+    return { success: true, mode };
   } catch (error) {
     return { success: false, error: error.message };
   }
