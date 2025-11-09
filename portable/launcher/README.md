@@ -2,9 +2,9 @@
 
 Electron-based desktop application for portable, sovereign reflective AI.
 
-## Status: ✅ Functional Prototype with LLM Integration
+## Status: ✅ Phase 2 Complete - Full Feature Set
 
-Complete launcher with local AI integration. Ready for testing with downloaded Phi-3 model.
+Complete launcher with local AI integration, session continuity, model management, consent system, integrity verification, and Obsidian integration. Ready for testing and Phase 3 enhancements.
 
 ---
 
@@ -75,6 +75,43 @@ Complete launcher with local AI integration. Ready for testing with downloaded P
 
 **Code:** 450+ lines in `model-downloader.js` + IPC integration
 
+### Consent Dialog Manager ✅ NEW!
+- ✅ Privacy-first consent management
+- ✅ Explicit user consent for all network operations
+- ✅ Consent persistence with duration control (once, session, always)
+- ✅ Consent types: download, update_check, telemetry, external_api
+- ✅ Revocation and management of consents
+- ✅ Export/import for backups
+- ✅ Consent statistics and reporting
+- ✅ Session-based consent clearing on restart
+- ✅ Pending prompt management
+
+**Code:** 330+ lines in `consent-dialog.js` + IPC integration
+
+### Checksum Verification ✅ NEW!
+- ✅ SHA-256 verification for vault files
+- ✅ Frontmatter checksum validation
+- ✅ Whole-vault integrity checking
+- ✅ Session-specific verification
+- ✅ Checksum update and batch operations
+- ✅ Verification caching for performance
+- ✅ Markdown report generation
+- ✅ Integration with session continuity
+
+**Code:** 360+ lines in `checksum-verifier.js` + IPC integration
+
+### Obsidian Launcher ✅ NEW!
+- ✅ Cross-platform Obsidian detection
+- ✅ Launch vault in Obsidian app
+- ✅ Open specific files within vault
+- ✅ obsidian:// URI scheme support
+- ✅ Platform-specific executable paths
+- ✅ Installation check and guidance
+- ✅ Detached process management
+- ✅ macOS, Windows, Linux support
+
+**Code:** 260+ lines in `obsidian-launcher.js` + IPC integration
+
 ---
 
 ## What's Pending ⏳
@@ -85,12 +122,9 @@ Complete launcher with local AI integration. Ready for testing with downloaded P
 
 ### Cloud Enhancement
 - ⏳ Claude API bridge
-- ⏳ Consent dialog UI (currently auto-grants in hybrid mode)
-- ⏳ Persistent consent tracking
+- ⏳ Hybrid mode full implementation
 
 ### Advanced Features
-- ⏳ Obsidian integration (launch external app, URI protocol)
-- ⏳ Checksum verification on vault load
 - ⏳ Session pause/resume
 - ⏳ Cross-device sync (Git-based)
 - ⏳ Vault encryption (VeraCrypt container support)

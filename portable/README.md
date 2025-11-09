@@ -184,12 +184,12 @@ portable/
 - [x] Architecture documentation
 - [x] LLM integration (Phi-3 + node-llama-cpp)
 
-### Phase 2: Core Features (Current)
+### Phase 2: Core Features ✅ COMPLETE
 - [x] Session continuity engine ✅ COMPLETE
 - [x] Model downloader ✅ COMPLETE
-- [ ] Consent dialog implementation
-- [ ] Obsidian external launch
-- [ ] Checksum verification
+- [x] Consent dialog implementation ✅ COMPLETE
+- [x] Obsidian external launch ✅ COMPLETE
+- [x] Checksum verification ✅ COMPLETE
 
 ### Phase 3: Cloud Enhancement
 - [ ] Claude API bridge

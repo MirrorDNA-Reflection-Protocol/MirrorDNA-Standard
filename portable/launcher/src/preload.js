@@ -49,6 +49,33 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   onDownloadError: (callback) => ipcRenderer.on('model-download-error', (event, data) => callback(data)),
   onDownloadCancelled: (callback) => ipcRenderer.on('model-download-cancelled', (event, data) => callback(data)),
 
+  // Consent Dialog operations
+  requestConsent: (request) => ipcRenderer.invoke('request-consent', request),
+  respondToConsent: (promptId, granted, duration) => ipcRenderer.invoke('respond-to-consent', promptId, granted, duration),
+  getAllConsents: () => ipcRenderer.invoke('get-all-consents'),
+  revokeConsent: (consentKey) => ipcRenderer.invoke('revoke-consent', consentKey),
+  revokeConsentsByType: (type) => ipcRenderer.invoke('revoke-consents-by-type', type),
+  clearAllConsents: () => ipcRenderer.invoke('clear-all-consents'),
+  getConsentStats: () => ipcRenderer.invoke('get-consent-stats'),
+  exportConsents: () => ipcRenderer.invoke('export-consents'),
+  importConsents: (data, merge) => ipcRenderer.invoke('import-consents', data, merge),
+  getPendingPrompts: () => ipcRenderer.invoke('get-pending-prompts'),
+
+  // Checksum Verification operations
+  verifyFileChecksum: (filePath, expectedChecksum) => ipcRenderer.invoke('verify-file-checksum', filePath, expectedChecksum),
+  verifyVaultChecksums: (options) => ipcRenderer.invoke('verify-vault-checksums', options),
+  verifySessionsChecksums: (sessionPaths) => ipcRenderer.invoke('verify-sessions-checksums', sessionPaths),
+  updateFileChecksum: (filePath) => ipcRenderer.invoke('update-file-checksum', filePath),
+  batchUpdateChecksums: (filePaths) => ipcRenderer.invoke('batch-update-checksums', filePaths),
+  getVerificationCache: () => ipcRenderer.invoke('get-verification-cache'),
+  clearVerificationCache: () => ipcRenderer.invoke('clear-verification-cache'),
+  generateVerificationReport: (results) => ipcRenderer.invoke('generate-verification-report', results),
+
+  // Obsidian Launcher operations
+  launchObsidian: (vaultPath, options) => ipcRenderer.invoke('launch-obsidian', vaultPath, options),
+  openFileInObsidian: (filePath) => ipcRenderer.invoke('open-file-in-obsidian', filePath),
+  checkObsidianInstallation: () => ipcRenderer.invoke('check-obsidian-installation'),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });

@@ -5,6 +5,9 @@ const Store = require('electron-store');
 const MirrorDNALLM = require('./llm-bridge');
 const SessionContinuity = require('./session-continuity');
 const ModelDownloader = require('./model-downloader');
+const { ConsentDialogManager } = require('./consent-dialog');
+const { ChecksumVerifier } = require('./checksum-verifier');
+const { ObsidianLauncher } = require('./obsidian-launcher');
 
 // Initialize persistent settings
 const store = new Store({
@@ -20,6 +23,7 @@ const store = new Store({
 let mainWindow;
 let llm = new MirrorDNALLM();
 let sessionContinuity = null;
+let checksumVerifier = null;
 
 // Initialize model downloader
 const modelsPath = path.join(__dirname, '../models');
@@ -49,6 +53,16 @@ modelDownloader.on('download-cancelled', (data) => {
     mainWindow.webContents.send('model-download-cancelled', data);
   }
 });
+
+// Initialize consent dialog manager
+const userDataPath = app.getPath('userData');
+const consentManager = new ConsentDialogManager({ userDataPath });
+
+// Forward consent prompt events to renderer
+// (Prompts are handled synchronously through IPC, so no events needed)
+
+// Initialize Obsidian launcher
+const obsidianLauncher = new ObsidianLauncher();
 
 function createWindow() {
   const { width, height } = store.get('windowBounds');
@@ -92,7 +106,11 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  // Initialize consent manager
+  await consentManager.initialize();
+  await consentManager.clearSessionConsents(); // Clear session-only consents on restart
+
   createWindow();
 
   app.on('activate', () => {
@@ -503,6 +521,261 @@ ipcMain.handle('get-active-downloads', () => {
   try {
     const downloads = modelDownloader.getActiveDownloads();
     return { success: true, downloads };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Consent Dialog Operations =====
+
+// Request consent for an operation
+ipcMain.handle('request-consent', async (event, request) => {
+  try {
+    const result = await consentManager.requestConsent(request);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Respond to a consent prompt
+ipcMain.handle('respond-to-consent', async (event, promptId, granted, duration) => {
+  try {
+    const consent = await consentManager.respondToPrompt(promptId, granted, duration);
+    return { success: true, consent };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get all consents
+ipcMain.handle('get-all-consents', () => {
+  try {
+    const consents = consentManager.getAllConsents();
+    return { success: true, consents };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Revoke specific consent
+ipcMain.handle('revoke-consent', async (event, consentKey) => {
+  try {
+    const result = await consentManager.revokeConsent(consentKey);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Revoke consents by type
+ipcMain.handle('revoke-consents-by-type', async (event, type) => {
+  try {
+    const result = await consentManager.revokeConsentsByType(type);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Clear all consents
+ipcMain.handle('clear-all-consents', async () => {
+  try {
+    const result = await consentManager.clearAllConsents();
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get consent statistics
+ipcMain.handle('get-consent-stats', () => {
+  try {
+    const stats = consentManager.getConsentStats();
+    return { success: true, stats };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Export consents
+ipcMain.handle('export-consents', async () => {
+  try {
+    const data = await consentManager.exportConsents();
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Import consents
+ipcMain.handle('import-consents', async (event, data, merge) => {
+  try {
+    const result = await consentManager.importConsents(data, merge);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get pending prompts
+ipcMain.handle('get-pending-prompts', () => {
+  try {
+    const prompts = consentManager.getPendingPrompts();
+    return { success: true, prompts };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Checksum Verification Operations =====
+
+// Initialize checksum verifier (or get existing instance)
+const getChecksumVerifier = () => {
+  const vaultPath = store.get('vaultPath');
+  if (!vaultPath) {
+    throw new Error('No vault configured');
+  }
+
+  if (!checksumVerifier || checksumVerifier.vaultPath !== vaultPath) {
+    checksumVerifier = new ChecksumVerifier(vaultPath);
+  }
+
+  return checksumVerifier;
+};
+
+// Verify single file
+ipcMain.handle('verify-file-checksum', async (event, filePath, expectedChecksum) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const result = await verifier.verifyFile(filePath, expectedChecksum);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Verify entire vault
+ipcMain.handle('verify-vault-checksums', async (event, options) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const result = await verifier.verifyVault(options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Verify specific sessions
+ipcMain.handle('verify-sessions-checksums', async (event, sessionPaths) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const result = await verifier.verifySessions(sessionPaths);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Update checksum for a file
+ipcMain.handle('update-file-checksum', async (event, filePath) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const result = await verifier.updateChecksum(filePath);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Batch update checksums
+ipcMain.handle('batch-update-checksums', async (event, filePaths) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const result = await verifier.batchUpdateChecksums(filePaths);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get verification cache
+ipcMain.handle('get-verification-cache', () => {
+  try {
+    if (!checksumVerifier) {
+      return { success: true, cache: [] };
+    }
+    const cache = checksumVerifier.getCache();
+    return { success: true, cache };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Clear verification cache
+ipcMain.handle('clear-verification-cache', () => {
+  try {
+    if (checksumVerifier) {
+      checksumVerifier.clearCache();
+    }
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Generate verification report
+ipcMain.handle('generate-verification-report', async (event, results) => {
+  try {
+    const verifier = getChecksumVerifier();
+    const report = verifier.generateReport(results);
+    return { success: true, report };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// ===== Obsidian Launcher Operations =====
+
+// Launch Obsidian with vault
+ipcMain.handle('launch-obsidian', async (event, vaultPath, options) => {
+  try {
+    // Use configured vault if no path provided
+    if (!vaultPath) {
+      vaultPath = store.get('vaultPath');
+    }
+
+    if (!vaultPath) {
+      return { success: false, error: 'No vault configured' };
+    }
+
+    const result = await obsidianLauncher.launchVault(vaultPath, options);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Open specific file in Obsidian
+ipcMain.handle('open-file-in-obsidian', async (event, filePath) => {
+  try {
+    const vaultPath = store.get('vaultPath');
+    if (!vaultPath) {
+      return { success: false, error: 'No vault configured' };
+    }
+
+    const result = await obsidianLauncher.openFile(vaultPath, filePath);
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Check Obsidian installation
+ipcMain.handle('check-obsidian-installation', async () => {
+  try {
+    const result = await obsidianLauncher.checkInstallation();
+    return { success: true, ...result };
   } catch (error) {
     return { success: false, error: error.message };
   }
