@@ -9,7 +9,7 @@ status: Canonical · Manifest
 predecessor: none
 successor: Reflection_Chain_Manifest_v1.1 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Manifest, Continuity]
-checksum_sha256: 655b58e8a9c6fbc8866f0057e8ca1c5aa1b733e702b9e67467d52b69a232c90a
+checksum_sha256: c625697f5c1c9178dab9660be9080dbc39708c0ab6c43b1568208c630c809b76
 ---
 
 # Reflection Chain Manifest v1.0

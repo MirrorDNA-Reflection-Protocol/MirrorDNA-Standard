@@ -9,7 +9,7 @@ status: Canonical · Addendum
 predecessor: Reflection_Chain_Addendum_v1.0
 successor: Reflection_Chain_Addendum_v1.2 (proposed)
 tags: [MirrorDNA™, ReflectionChain, Blockchain, OpenProtocol, Continuity]
-checksum_sha256: 7d7140daac8e347f86617cb8eb1204f90d544ebb442a2893b477168f1cb196e6
+checksum_sha256: 81c65bf91a320991011ec29d0c94e96aabe02a5c1097dc2502230597c65752b4
 ---
 
 # Reflection Chain Addendum v1.1  

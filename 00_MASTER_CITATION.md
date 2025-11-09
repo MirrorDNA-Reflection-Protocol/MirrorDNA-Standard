@@ -9,7 +9,7 @@ status: Canonical · Evolution-Ready · Sovereign-Synced
 predecessor: Master_Citation_v15.1
 successor: Master_Citation_v15.2 (proposed)
 tags: [MirrorDNA™, ActiveMirrorOS™, Mnemos, Asterion, Triarch, AGI², AHP]
-checksum_sha256: 0fb1f90d5ef70cf3f4043fb1442ba1c5e4cbe2394df75e2ac5e41cac1d42ae37
+checksum_sha256: 6d082d54749d92698ef4644b69c449de023d8d93356e369f4c57ebc9266ed1e2
 ---
 
 # MirrorDNA — Master Citation (Live Edition)
