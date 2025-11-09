@@ -1,0 +1,54 @@
+vault_automation:
+  version: "1.0"
+
+  paths:
+    personal_root: "/Users/pauldesai/Documents/ActiveMirrorOS"
+    continuity_roots:
+      - "https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard"
+      - "/Users/pauldesai/Documents/Paul-Desai"  # Local Drive mirror
+    backup_root: "/Users/pauldesai/Backups/AMOS"
+    output_reports: "./reports"
+
+  sync_report:
+    enabled: true
+    frequency: "daily"
+    check_checksums: true
+    compare_versions: true
+
+  rcc:
+    truth_state_required: true
+    glyph_drift_max: 0.15
+    block_on_placeholder: true
+    required_glyphs:
+      - "⟡⟦MASTER⟧"
+      - "⟡⟦CONTINUITY⟧"
+      - "⟡⟦AHP⟧"
+
+  checksum:
+    algorithm: "sha256"
+    manifest_file: "checksums.json"
+    exclude_patterns:
+      - "*.log"
+      - ".DS_Store"
+      - "__pycache__"
+
+  drift_audit:
+    enabled: true
+    frequency: "weekly"
+    max_drift_percent: 15
+    public_signals:
+      - "README.md"
+      - "WHY_MIRRORDNA.md"
+      - "00_MASTER_CITATION.md"
+
+  backup:
+    enabled: true
+    frequency: "daily"
+    encryption: true
+    retention_days: 30
+
+  notifications:
+    enabled: false
+    email: "paul@activemirror.ai"
+    on_conflict: true
+    on_drift_exceed: true
