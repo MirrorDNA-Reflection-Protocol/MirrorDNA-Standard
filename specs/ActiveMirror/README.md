@@ -1,3 +1,12 @@
+---
+title: "Active Mirror™ — Product Specifications Directory"
+vault_id: AMOS://ActiveMirror/ProductSpec/Index
+predecessor: Master_Citation_v15.1.1
+successor: TBD
+status: Directory Index
+date: 2025-11-09
+---
+
 # Active Mirror™ — Product Specifications
 
 **Canonical specification directory for Active Mirror™ product family**
