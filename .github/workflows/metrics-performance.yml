@@ -1,0 +1,116 @@
+name: Metrics • Performance
+
+on:
+  push:
+    paths:
+      - "specs/ActiveMirror/**.md"
+      - ".github/workflows/metrics-performance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SPEC_PATH: specs/ActiveMirror/Active_Mirror_ProductSpec_v2.0_Canonical.md
+  STRICT: "false"
+
+jobs:
+  spec-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compute metrics & checks
+        run: |
+          python - <<'PY'
+          import re, sys, json, hashlib, pathlib, textwrap, os
+          SPEC_PATH = pathlib.Path(os.environ.get("SPEC_PATH",""))
+          STRICT = os.environ.get("STRICT","false").lower() == "true"
+
+          def warn(m): print(f"::warning::{m}")
+          def error(m): print(f"::error::{m}")
+
+          out = pathlib.Path("metrics/performance/REPORT.md")
+          out.parent.mkdir(parents=True, exist_ok=True)
+
+          if not SPEC_PATH.exists():
+              warn(f"Spec not found: {SPEC_PATH}. Non-strict PASS.")
+              out.write_text("# Active Mirror™ Spec Metrics\n\nSpec not found (non-strict).", encoding="utf-8")
+              if STRICT: sys.exit(1)
+              sys.exit(0)
+
+          txt = SPEC_PATH.read_text(encoding="utf-8")
+          fm, body = {}, txt
+          if txt.startswith("---"):
+              try:
+                  _, yml, body = txt.split("---", 2)
+                  for line in yml.strip().splitlines():
+                      if ":" in line:
+                          k,v = line.split(":",1)
+                          fm[k.strip()] = v.strip().strip('"')
+              except Exception:
+                  warn("Front matter parse issue; continuing.")
+
+          sha = hashlib.sha256(body.encode("utf-8")).hexdigest()
+          fm_checksum = (fm.get("checksum_sha256","") or "").lower()
+          checksum_match = (fm_checksum == sha)
+
+          heads = re.findall(r"^#{1,6}\s+.+$", body, flags=re.M)
+          hdepths = [h.split(" ")[0].count("#") for h in heads]
+          avg_depth = (sum(hdepths)/len(hdepths)) if hdepths else 0.0
+          words = re.findall(r"[A-Za-z0-9_]+", body)
+          links = re.findall(r"\[[^\]]+\]\([^\)]+\)", body)
+          link_density = (len(links)/max(len(words),1))*1000
+
+          required = ["title","vault_id","checksum_sha256","predecessor"]
+          missing = [k for k in required if k not in fm]
+          lineage_ok = "Master_Citation_v15.1.1" in txt and "Active_Mirror_Product_Spec_v2.0" in txt
+
+          report = f'''
+          # Active Mirror™ Spec Metrics
+
+          **Spec:** `{SPEC_PATH}`
+          **Computed SHA-256 (body):** `{sha}`
+          **Front-matter checksum:** `{fm_checksum or '[missing]'}`
+          **Checksum match:** **{'✅' if checksum_match else '❌'}**
+
+          ## Structure
+          - Headings: {len(heads)}
+          - Avg heading depth: {avg_depth:.2f}
+          - Word count (approx): {len(words):,}
+          - Link density: {link_density:.2f} / 1k words
+
+          ## Lineage & Front-matter
+          - Required keys present: **{'✅' if not missing else '❌'}** {'' if not missing else '(missing: ' + ', '.join(missing) + ')'}
+          - Lineage mentions Master_Citation_v15.1.1 + Product_Spec_v2.0: **{'✅' if lineage_ok else '❌'}**
+
+          ## Guidance
+          - If checksum mismatch: update `checksum_sha256` to the computed value.
+          - Keep the lineage block updated when bumping versions.
+          '''
+          report = "\n".join([l.rstrip() for l in report.strip().splitlines()])
+          out.write_text(report, encoding="utf-8")
+
+          if STRICT and (missing or not checksum_match or not lineage_ok):
+              error("Strict mode enabled: failing on validation issues.")
+              sys.exit(1)
+          sys.exit(0)
+          PY
+
+      - name: Upload metrics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: active-mirror-spec-metrics
+          path: metrics/performance/REPORT.md
+
+      - name: Append Report to Job Summary
+        run: |
+          echo "## Metrics Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat metrics/performance/REPORT.md >> $GITHUB_STEP_SUMMARY
