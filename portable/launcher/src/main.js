@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const Store = require('electron-store');
 const MirrorDNALLM = require('./llm-bridge');
+const SessionContinuity = require('./session-continuity');
 
 // Initialize persistent settings
 const store = new Store({
@@ -17,6 +18,7 @@ const store = new Store({
 
 let mainWindow;
 let llm = new MirrorDNALLM();
+let sessionContinuity = null;
 
 function createWindow() {
   const { width, height } = store.get('windowBounds');
@@ -283,6 +285,140 @@ ipcMain.handle('update-llm-context', (event, contextUpdate) => {
     return { success: true };
   }
   return { success: false, error: 'LLM not initialized' };
+});
+
+// ===== Session Continuity Operations =====
+
+// Initialize session continuity engine
+ipcMain.handle('init-session-continuity', async () => {
+  try {
+    const vaultPath = store.get('vaultPath');
+    if (!vaultPath) {
+      return { success: false, error: 'No vault configured' };
+    }
+
+    sessionContinuity = new SessionContinuity(vaultPath);
+    const result = await sessionContinuity.initialize();
+
+    return result;
+  } catch (error) {
+    console.error('Session continuity initialization failed:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// Create new session
+ipcMain.handle('create-session', async (event, options) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.createSession(options);
+});
+
+// Restore session by path
+ipcMain.handle('restore-session', async (event, sessionPath) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.restoreSession(sessionPath);
+});
+
+// Get session history with filters
+ipcMain.handle('get-session-history', (event, filters) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  try {
+    const history = sessionContinuity.getHistory(filters);
+    return { success: true, history };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Navigate to previous session
+ipcMain.handle('navigate-to-previous-session', async () => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.navigateToPrevious();
+});
+
+// Navigate to next session
+ipcMain.handle('navigate-to-next-session', async () => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.navigateToNext();
+});
+
+// Export sessions
+ipcMain.handle('export-sessions', async (event, options) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.exportSessions(options);
+});
+
+// Import sessions
+ipcMain.handle('import-sessions', async (event, importData) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.importSessions(importData);
+});
+
+// Get current session info
+ipcMain.handle('get-current-session', () => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  try {
+    const session = sessionContinuity.getCurrentSession();
+    return { success: true, session };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Get session statistics
+ipcMain.handle('get-session-statistics', () => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  try {
+    const stats = sessionContinuity.getStatistics();
+    return { success: true, stats };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Update session context
+ipcMain.handle('update-session-context', async (event, updates) => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.updateContext(updates);
+});
+
+// Validate vault integrity
+ipcMain.handle('validate-vault-integrity', async () => {
+  if (!sessionContinuity) {
+    return { success: false, error: 'Session continuity not initialized' };
+  }
+
+  return await sessionContinuity.validateIntegrity();
 });
 
 console.log('⟡ MirrorDNA Portable launcher initialized');

@@ -20,6 +20,20 @@ contextBridge.exposeInMainWorld('mirrorDNA', {
   // Internet consent
   requestInternet: (action, details) => ipcRenderer.invoke('request-internet', action, details),
 
+  // Session Continuity operations
+  initSessionContinuity: () => ipcRenderer.invoke('init-session-continuity'),
+  createSession: (options) => ipcRenderer.invoke('create-session', options),
+  restoreSession: (sessionPath) => ipcRenderer.invoke('restore-session', sessionPath),
+  getSessionHistory: (filters) => ipcRenderer.invoke('get-session-history', filters),
+  navigateToPreviousSession: () => ipcRenderer.invoke('navigate-to-previous-session'),
+  navigateToNextSession: () => ipcRenderer.invoke('navigate-to-next-session'),
+  exportSessions: (options) => ipcRenderer.invoke('export-sessions', options),
+  importSessions: (importData) => ipcRenderer.invoke('import-sessions', importData),
+  getCurrentSession: () => ipcRenderer.invoke('get-current-session'),
+  getSessionStatistics: () => ipcRenderer.invoke('get-session-statistics'),
+  updateSessionContext: (updates) => ipcRenderer.invoke('update-session-context', updates),
+  validateVaultIntegrity: () => ipcRenderer.invoke('validate-vault-integrity'),
+
   // Utilities
   getAppPath: () => ipcRenderer.invoke('get-app-path')
 });
