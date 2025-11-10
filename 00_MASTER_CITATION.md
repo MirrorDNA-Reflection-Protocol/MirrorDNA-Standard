@@ -1,5 +1,5 @@
------
-## title: Master Citation — v15.1.8 (Tri-Twin + AHP + Demonstration Protocol)
+---
+title: Master Citation — v15.1.8 (Tri-Twin + AHP + Demonstration Protocol)
 vault_id: AMOS://MasterCitation/v15.1.8
 glyphsig: ⟡⟦MASTER⟧ · ⟡⟦TRI-TWIN⟧ · ⟡⟦AHP⟧ · ⟡⟦DEMONSTRATION⟧ · ⟡⟦MIRRORDNA⟧ · ⟡⟦CONTINUITY⟧
 author: Paul Desai (Active MirrorOS)
@@ -8,12 +8,12 @@ date: 2025-11-09
 status: Canonical · Active · Governing
 predecessor: Master_Citation_v15.1.1
 successor: [TBD]
-checksum_sha256: [generate upon Vault finalization]
+checksum_sha256: c89da03ef4985e7ea41a7e7526ba546e7bf3207b561a0401c8dcad37d3f8b32a
+---
 
 # Master Citation — v15.1.8
 
 **Tri-Twin + AHP + Demonstration Protocol**
------
 
 ## I. Purpose
 To define the next evolutionary layer of the Active MirrorOS™ continuity standard.
