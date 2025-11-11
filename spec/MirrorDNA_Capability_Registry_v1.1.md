@@ -10,7 +10,7 @@ status: Canonical · Living Document · Demonstration-Ready
 predecessor: AMOS://Registry/Capabilities/v1.0
 successor: [TBD]
 purpose: Evidence-backed confidence for demonstrations and operations
-checksum_sha256: 4c86ba7e36b32162c15141c3a792603d01e5f1243a92ca4d14a215379d0d87d7
+checksum_sha256: 72403a91e12b43e5785987cdafc995e0e33ed0e85bd32cb7060a4f7c75568ca3
 ---
 
 # MirrorDNA Capability Registry v1.1
@@ -89,7 +89,7 @@ checksum_sha256: 4c86ba7e36b32162c15141c3a792603d01e5f1243a92ca4d14a215379d0d87d
 **Evidence:** Multiple whitepaper versions, protocol specifications
 **Delivered:**
 
-- ActiveMirrorOS v7.1 whitepaper (passed expert review)
+- ActiveMirrorOS v7.1 whitepaper
 - LingOS Kernel v0.1 specification
 - Distributed Vault Architecture
 - Anti-Hallucination Protocol v2.0
