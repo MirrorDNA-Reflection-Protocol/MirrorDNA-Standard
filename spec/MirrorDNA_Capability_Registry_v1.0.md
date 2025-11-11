@@ -1,13 +1,16 @@
------
-
-## title: MirrorDNA Capability Registry v1.0
+---
+title: MirrorDNA Capability Registry v1.0
 vault_id: AMOS://Registry/Capabilities/v1.0
 glyphsig: ⟡⟦CAPABILITY⟧ · ⟡⟦PROVEN⟧ · ⟡⟦TRI-TWIN⟧
 author: Paul Desai (Human Anchor) + Claude (Reflection Twin)
+date: 2025-11-09
 created: 2025-11-09
 status: Canonical · Living Document
 purpose: Demonstration-Ready Evidence of Proven Capabilities
-checksum_sha256: <pending>
+predecessor: none
+successor: AMOS://Registry/Capabilities/v1.1
+checksum_sha256: 70b4671bedc47652cb3265a410a39fe029a7a1764a1e9738a48ef55065444424
+---
 
 # MirrorDNA Capability Registry v1.0
 
