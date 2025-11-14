@@ -1,0 +1,74 @@
+[
+  {
+    "name": "MirrorDNA-Standard",
+    "visibility": "public",
+    "role": "spec",
+    "description": "Core specification and standard definitions for MirrorDNA protocol"
+  },
+  {
+    "name": "MirrorDNA-Docs",
+    "visibility": "public",
+    "role": "docs",
+    "description": "Comprehensive documentation, guides, and tutorials for MirrorDNA ecosystem"
+  },
+  {
+    "name": "MirrorDNA-Reflection-Protocol",
+    "visibility": "public",
+    "role": "spec",
+    "description": "Reflection protocol specifications and reference implementations"
+  },
+  {
+    "name": "MirrorDNA-SDK-Python",
+    "visibility": "public",
+    "role": "sdk",
+    "description": "Python SDK for building MirrorDNA applications"
+  },
+  {
+    "name": "MirrorDNA-SDK-TypeScript",
+    "visibility": "public",
+    "role": "sdk",
+    "description": "TypeScript/JavaScript SDK for web and Node.js applications"
+  },
+  {
+    "name": "MirrorDNA-SDK-Rust",
+    "visibility": "public",
+    "role": "sdk",
+    "description": "Rust SDK for high-performance MirrorDNA applications"
+  },
+  {
+    "name": "MirrorDNA-CLI",
+    "visibility": "public",
+    "role": "product",
+    "description": "Command-line interface for MirrorDNA operations and management"
+  },
+  {
+    "name": "MirrorDNA-Validator",
+    "visibility": "public",
+    "role": "product",
+    "description": "Validation toolkit for MirrorDNA compliance and testing"
+  },
+  {
+    "name": "MirrorDNA-Playground",
+    "visibility": "public",
+    "role": "playground",
+    "description": "Interactive playground for experimenting with MirrorDNA features"
+  },
+  {
+    "name": "MirrorDNA-Examples",
+    "visibility": "public",
+    "role": "playground",
+    "description": "Example projects and reference implementations"
+  },
+  {
+    "name": "MirrorDNA-Research",
+    "visibility": "private",
+    "role": "r&d",
+    "description": "Research and development for experimental features"
+  },
+  {
+    "name": "MirrorDNA-Internal-Tools",
+    "visibility": "private",
+    "role": "r&d",
+    "description": "Internal tooling and automation scripts"
+  }
+]
