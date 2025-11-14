@@ -19,3 +19,4 @@ build/
 
 # Release artifacts (build separately, attach to GitHub Releases)
 *.zip
+site/site/
