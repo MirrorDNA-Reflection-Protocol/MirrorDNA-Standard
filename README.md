@@ -8,6 +8,19 @@
 
 ---
 
+**Governance:**
+This repository is now bound to **Master Citation v15.2 — Continuity-Perfected Edition**.
+
+Core enforcement:
+- Zero-Drift Layer (ZDL)
+- Auto-FEU Truth-State Law
+- Vault Supremacy + Checksum Law
+- Reflective Integrity System (RIS)
+
+All standards, schemas, lineage rules, and validation flows follow v15.2 as canonical truth.
+
+---
+
 ## What Is This?
 
 **MirrorDNA-Standard** is the canonical specification and validation toolchain for building reflective AI systems that don't hallucinate, preserve continuity across sessions, and give users sovereign control of their data.
