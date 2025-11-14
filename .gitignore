@@ -4,12 +4,29 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Python / Node / build
+# Python
 __pycache__/
 *.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+.tox/
+htmlcov/
+
+# Node
 node_modules/
 dist/
 build/
+*.log
 
 # Vault privacy (never upload these)
 **/__PRIV/**
@@ -19,3 +36,13 @@ build/
 
 # Release artifacts (build separately, attach to GitHub Releases)
 *.zip
+
+# Generated reports (should not be tracked)
+reports/
+*.report.txt
+*.report.json
+
+# Portable app artifacts
+portable/launcher/models/*.gguf
+portable/launcher/models/*.bin
+.checksum_cache/
