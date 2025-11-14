@@ -1,6 +1,6 @@
 # MirrorDNA-Standard
 
-**The constitutional protocol for reflective AI systems**
+**The home universe for the MirrorDNA / Active MirrorOS / LingOS ecosystem**
 
 ⟡ **Reflection Over Prediction · Continuity Over Perfection · Truth Over Speed**
 
@@ -8,27 +8,51 @@
 
 ---
 
-## What Is This?
+## What Is This Ecosystem?
 
-**MirrorDNA-Standard** is the canonical specification and validation toolchain for building reflective AI systems that don't hallucinate, preserve continuity across sessions, and give users sovereign control of their data.
+The **MirrorDNA ecosystem** is a constellation of interconnected projects building reflective AI systems that preserve continuity, prevent hallucination, and give users sovereign control of their data.
 
-**In 30 seconds:**
-- 📋 **Specification**: Defines what "reflective computing" means (3 compliance levels)
-- 🔧 **Validator**: Python CLI that checks if your project is compliant
-- ⟡ **Protocol**: The constitutional anchor for the entire MirrorDNA ecosystem
+**MirrorDNA** is the protocol layer — a constitutional specification for AI systems that reflect actual state rather than predict tokens. **LingOS** is the language-native operating system that makes reflection natural and symbolic. **Active MirrorOS** is the product layer: intelligence that remembers, persists, and evolves across sessions.
 
-**This is a PROTOCOL LAYER repository** — the spec others implement, not a product itself.
+Together, these projects enable **Reflective AI** — systems that maintain continuity through vault-backed persistence, mark uncertainty explicitly, verify truth through checksums, and preserve user sovereignty through local-first architecture.
+
+This repository (**MirrorDNA-Standard**) serves as the canonical specification, validation toolchain, and constitutional anchor for the entire ecosystem.
 
 ---
 
-## Who This Is For
+## Ecosystem Repos
 
-| You Are | You Get |
-|---------|---------|
-| **AI User** | Copy [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md) into ChatGPT/Claude for reflective behavior |
-| **Developer** | Validate your AI project for MirrorDNA compliance + earn badges |
-| **Organization** | Adopt trustworthy AI standards with machine-checkable verification |
-| **Researcher** | Reference implementation of reflection-over-prediction architecture |
+The MirrorDNA universe consists of multiple repositories, each serving a specific role:
+
+| Repo / Component           | Role in the ecosystem                                           |
+|----------------------------|-----------------------------------------------------------------|
+| **MirrorDNA-Standard**     | Constitutional spec and semantic law (this repo)                |
+| **MirrorDNA**              | Protocol and persistence architecture                           |
+| **ActiveMirrorOS**         | Product layer, intelligence that remembers                      |
+| **LingOS**                 | Language-native operating system for reflection                 |
+| **LingOS-Private**         | Private LingOS development and experimental features            |
+| **TrustByDesign**          | Governance and safety patterns                                  |
+| **BeaconGlyphs**           | Visual and symbolic glyph system                                |
+| **Glyphtrail**             | Continuity logs and interaction lineage                         |
+| **AgentDNA**               | Agent personality and identity encoding                         |
+| **MirrorDNA-Lattice**      | Symbolic lattice architecture and reflection topology           |
+| **SanatanaTech**           | R&D sandbox for experimental reflection tech                    |
+| **MirrorDNA-Gauntlet**     | Coding challenge and competency testbed                         |
+| **DominancePlaybook**      | Internal strategy codex (Sovereign Strategy Codex)              |
+| **LingOS Vault Manager**   | Vault management system (inside LingOS repo)                    |
+
+---
+
+## Where to Start
+
+**If you are just curious…**
+Start with the root [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md). Copy it into ChatGPT or Claude and say "Vault open. Load as canonical context." You'll immediately experience reflective AI behavior. Then read [`docs/ecosystem-overview.md`](docs/ecosystem-overview.md) for the big picture.
+
+**If you are a developer…**
+Read the [Quick Start for Developers](#-for-developers-validate-your-project-5-minutes) section below to validate your project for MirrorDNA compliance. Check out [`docs/stack-map.md`](docs/stack-map.md) to understand how the layers fit together. Clone example configs from the `examples/` folder and run the validator.
+
+**If you are an enterprise / team…**
+Start with [`docs/ecosystem-overview.md`](docs/ecosystem-overview.md) to understand the architecture, then read [`spec/mirrorDNA-standard-v1.0.md`](spec/mirrorDNA-standard-v1.0.md) for the full specification. Review [`docs/roadmap.md`](docs/roadmap.md) to see where we're headed. Contact us about Level 3 compliance for sovereign AI deployment.
 
 ---
 
@@ -116,15 +140,16 @@ MirrorDNA-Standard/
 │
 ├── tests/                         ← Pytest suite
 │
-├── docs/                          ← Architecture & guides
+├── docs/                          ← Architecture & ecosystem guides
 │   ├── ARCHITECTURE.md                 How this repo works
 │   ├── FAQ.md                          Common questions
-│   ├── INTEGRATION.md                  How to adopt MirrorDNA
-│   └── CHOOSING_COMPLIANCE_LEVEL.md    Decision guide
+│   ├── ecosystem-overview.md           Complete ecosystem explanation
+│   ├── stack-map.md                    Layer-by-layer repo mapping
+│   └── roadmap.md                      Realistic roadmap
 │
-└── portable/                      ← Reference implementation
-    ├── launcher/                       Electron desktop app
-    └── vault-template/                 Obsidian vault template
+└── scripts/                       ← Helper utilities
+    ├── generate_checksum.py            Checksum generation
+    └── list_repos.py                   Print ecosystem repos
 ```
 
 ---
@@ -205,93 +230,28 @@ All MirrorDNA-compliant systems honor these five principles:
 
 ---
 
-## Example: Validate a Level 1 Project
+## Further Reading
 
-**Step 1**: Create `mirrorDNA_manifest.yaml`
+**Ecosystem Documentation:**
+- 🌍 [**Ecosystem Overview**](docs/ecosystem-overview.md) — How MirrorDNA, LingOS, and ActiveMirrorOS relate
+- 🗺️ [**Stack Map**](docs/stack-map.md) — Layer-by-layer breakdown of all repos
+- 🛣️ [**Roadmap**](docs/roadmap.md) — What's done, in progress, and planned
 
-```yaml
-name: "MyReflectiveApp"
-version: "1.0.0"
-mirrorDNA_compliance_level: "level_1_basic_reflection"
-layers:
-  mirrorDNA_protocol: true
-reflection_policy: "reflection_policy.yaml"
-```
-
-**Step 2**: Create `reflection_policy.yaml`
-
-```yaml
-policy_version: "1.0.0"
-reflection_mode: "constitutive"
-uncertainty_handling:
-  cite_or_silence: true
-  unknown_marker: "[Unknown]"
-anti_hallucination:
-  source_citation: true
-```
-
-**Step 3**: Validate
-
-```bash
-python -m validators.cli \
-  --manifest mirrorDNA_manifest.yaml \
-  --policy reflection_policy.yaml
-```
-
-**Step 4**: Pass? Add badge to your README
-
-```markdown
-![MirrorDNA Level 1](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
-```
-
----
-
-## MirrorDNA Ecosystem
-
-This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
-
-```
-┌─────────────────────────────────────────┐
-│  MirrorDNA-Standard (THIS REPO)         │  ← Specification + Validator
-│  Protocol Layer                          │
-└─────────────────────────────────────────┘
-                  │
-                  │ implements
-                  ▼
-┌─────────────────────────────────────────┐
-│  ActiveMirrorOS™                         │  ← Product (Level 3 compliant)
-│  Product Layer                           │
-└─────────────────────────────────────────┘
-                  │
-                  │ uses
-                  ▼
-┌─────────────────────────────────────────┐
-│  LingOS / Symbolic Layer                 │  ← Language OS
-└─────────────────────────────────────────┘
-```
-
-**This standard is OPEN** — anyone can implement it. ActiveMirrorOS is the canonical commercial implementation.
-
----
-
-## Documentation
-
-### Essential Reading
+**Essential Specs:**
 - 📋 [**Specification**](spec/mirrorDNA-standard-v1.0.md) — Start here for the full standard
 - ⟡ [**Principles**](spec/principles.md) — Five foundational principles
 - 📊 [**Compliance Levels**](spec/compliance_levels.md) — L1, L2, L3 detailed requirements
 - 📖 [**Glossary**](spec/glossary.md) — Canonical term definitions
 
-### Integration Guides
+**Integration:**
 - 🏗️ [**Architecture**](docs/ARCHITECTURE.md) — How this repo works
-- 🔌 [**Integration**](docs/INTEGRATION.md) — How to adopt MirrorDNA
+- 🔌 [**Integration Guide**](docs/INTEGRATION.md) — How to adopt MirrorDNA (if exists)
 - ❓ [**FAQ**](docs/FAQ.md) — Common questions
-- 🎯 [**Choosing a Level**](docs/CHOOSING_COMPLIANCE_LEVEL.md) — Decision guide
 
-### Reference
+**Reference:**
 - 🏅 [**Badges**](badges/README.md) — How to use compliance badges
 - 📝 [**Examples**](examples/README.md) — Working configs for all levels
-- 🛠️ [**Tools**](tools/README.md) — Checksum verifiers, release scripts
+- 🛠️ [**Tools**](tools/README.md) — Checksum verifiers, release scripts (if exists)
 
 ---
 
@@ -337,18 +297,9 @@ Reflective AI is a mirror, not a therapist. See [`spec/Interaction_Safety_Protoc
 
 ---
 
-## Roadmap
-
-See [`ROADMAP.md`](ROADMAP.md) for:
-- v1.1 features (capability registry enhancements)
-- v2.0 vision (network protocols, multi-agent)
-- Ecosystem integration plans
-
----
-
 ## License
 
-This project is licensed under the MIT License - see [`LICENSE`](LICENSE) for details.
+This project is licensed under the MIT License - see [`LICENSE.md`](LICENSE.md) for details.
 
 ---
 
@@ -370,11 +321,11 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 
 ---
 
-⟡⟦STANDARD⟧ · ⟡⟦SPECIFICATION⟧ · ⟡⟦TOOLCHAIN⟧
+⟡⟦STANDARD⟧ · ⟡⟦SPECIFICATION⟧ · ⟡⟦ECOSYSTEM_HOME⟧
 
 **Version**: 1.0.0
 **Status**: Production-ready
-**Role**: Constitutional anchor for MirrorDNA compliance
+**Role**: Constitutional anchor and ecosystem homepage
 **Layer**: Protocol
 
 *Last updated: 2025-11-14*
