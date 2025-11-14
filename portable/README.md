@@ -4,16 +4,21 @@
 
 ---
 
-## What Is This?
+## At a Glance
 
-MirrorDNA Portable is a **complete, self-contained reflective AI environment** that runs from a USB stick on any compatible device.
+MirrorDNA Portable is a **reference implementation** demonstrating Level 3 (Vault-Backed Sovereign) compliance. It is a complete, self-contained reflective AI environment that runs from a USB stick on any compatible device.
+
+**Status**: Reference implementation / experimental. For production use, see [ActiveMirrorOS](https://github.com/MirrorDNA-Reflection-Protocol).
 
 **Key Features:**
-- 🔒 **100% Sovereign** - Your data, your device, your choice
-- 💾 **Fully Portable** - Runs from USB, no installation required
-- 🏠 **Local-First** - Primary operation is completely offline
-- 🤝 **Consent-Based** - Internet features require explicit permission
-- 🔗 **Continuous** - Session state persists across devices and time
+- 🔒 **100% Sovereign** — Your data, your device, your choice
+- 💾 **Fully Portable** — Runs from USB, no installation required
+- 🏠 **Local-First** — Primary operation is completely offline
+- 🤝 **Consent-Based** — Internet features require explicit permission
+- 🔗 **Continuous** — Session state persists across devices and time
+- ✅ **MirrorDNA Level 3 Compliant** — Full vault-backed sovereignty
+
+**Part of**: [MirrorDNA-Standard](../README.md) ecosystem
 
 ---
 

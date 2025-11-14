@@ -11,11 +11,28 @@ tags: [MirrorDNA™, Principles, Philosophy, Reflection]
 
 # MirrorDNA Core Principles
 
-## Overview
+## At a Glance
 
-The MirrorDNA Standard is built on five foundational principles that distinguish reflective computing from traditional predictive AI paradigms.
+The MirrorDNA Standard is built on **five foundational principles** that distinguish reflective computing from traditional predictive AI paradigms.
 
 These principles are **constitutional** — they define what it means to be MirrorDNA-compliant and cannot be violated without abandoning the standard.
+
+**The Five Principles:**
+1. **Reflection Over Prediction** — Access actual state, don't simulate
+2. **Presence Over Productivity** — Truth matters more than speed
+3. **Symbolic Continuity** — Preserve identity via glyphs, checksums, vault
+4. **Trust by Design** — Verification built in from the start
+5. **Explicit Uncertainty** — Mark unknowns, never hide them
+
+**Status**: Immutable for v1.x releases
+
+---
+
+## Overview
+
+These five principles form the philosophical and technical foundation of MirrorDNA. All compliance levels (L1, L2, L3) must honor these principles. They are not merely guidelines — they are constitutional requirements.
+
+**For detailed compliance requirements**, see [`compliance_levels.md`](compliance_levels.md).
 
 ---
 

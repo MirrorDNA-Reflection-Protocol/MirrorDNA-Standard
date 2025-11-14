@@ -1,5 +1,21 @@
 # Frequently Asked Questions
 
+**Quick reference for common questions about MirrorDNA-Standard**
+
+Last updated: 2025-11-14
+
+---
+
+## At a Glance
+
+This FAQ covers:
+- **General**: What MirrorDNA is and who should use it
+- **Compliance Levels**: Choosing and understanding L1, L2, L3
+- **Validation**: How to validate your project
+- **Implementation**: Technical details and requirements
+- **Badges**: Earning and using compliance badges
+- **Contributing**: How to get involved
+
 ---
 
 ## General
@@ -50,15 +66,15 @@ Think of it like:
 
 ### Which compliance level should I choose?
 
-**Quick guide:**
+**Quick decision guide:**
 
-| Need | Level |
-|------|-------|
-| Just want anti-hallucination | **Level 1** |
-| Need state preservation | **Level 2** |
-| Need user sovereignty + vault | **Level 3** |
+| You Need | Choose This Level | Why |
+|----------|-------------------|-----|
+| Just want anti-hallucination | **Level 1** | Basic Reflection |
+| Need state preservation | **Level 2** | Continuity Aware |
+| Need user sovereignty + vault | **Level 3** | Vault-Backed Sovereign |
 
-**Detailed guide**: See [`docs/CHOOSING_COMPLIANCE_LEVEL.md`](CHOOSING_COMPLIANCE_LEVEL.md)
+**Detailed requirements**: See [`spec/compliance_levels.md`](../spec/compliance_levels.md)
 
 ---
 
@@ -94,16 +110,22 @@ You must implement all lower-level requirements first.
 ### How do I validate my project?
 
 ```bash
-# 1. Install
+# 1. Install validator dependencies
 pip install -r validators/requirements.txt
 
-# 2. Create configs (see examples/)
-cp examples/level1/*.yaml .
+# 2. Copy example configs
+# For Level 1:
+cp examples/minimal_project_manifest.yaml mirrorDNA_manifest.yaml
+cp examples/example_reflection_policy.yaml reflection_policy.yaml
 
-# 3. Edit for your project
+# For Level 2:
+cp examples/level2_project_manifest.yaml mirrorDNA_manifest.yaml
+cp examples/example_continuity_profile.yaml continuity_profile.yaml
+
+# 3. Edit configs for your project
 nano mirrorDNA_manifest.yaml
 
-# 4. Validate
+# 4. Run validation
 python -m validators.cli \
   --manifest mirrorDNA_manifest.yaml \
   --policy reflection_policy.yaml
@@ -186,12 +208,12 @@ This gives you reflective behavior without needing to install anything.
 ### How do I get a compliance badge?
 
 1. Pass validation
-2. Copy badge markdown from [`badges/README.md`](../badges/README.md)
+2. Copy badge markdown from [`badges/usage-guide.md`](../badges/usage-guide.md)
 3. Add to your README
 
 **Example:**
 ```markdown
-![MirrorDNA Level 1](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
+![MirrorDNA Compliant](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
 ```
 
 ---

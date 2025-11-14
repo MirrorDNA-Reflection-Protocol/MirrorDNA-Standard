@@ -11,7 +11,22 @@ tags: [MirrorDNA™, Glossary, Terms, Definitions]
 
 # MirrorDNA Glossary
 
-Canonical definitions for terms used across the MirrorDNA Standard and ecosystem.
+**Canonical definitions for terms used across the MirrorDNA Standard and ecosystem.**
+
+## At a Glance
+
+This glossary provides authoritative definitions for all MirrorDNA terminology. When there is ambiguity or disagreement about a term's meaning, this document is the final authority.
+
+**Key Term Categories:**
+- **Protocol Terms**: AHP, Cite or Silence, Reflection, Continuity, Vault
+- **System Components**: ActiveMirrorOS, LingOS, Glyphtrail, AgentDNA
+- **Compliance**: Level 1, Level 2, Level 3, Trust Markers
+- **Technical Artifacts**: Checksums, Lineage, Glyphs, Signatures
+
+**Related Documents:**
+- [Five Principles](principles.md) — Foundational philosophy
+- [Core Specification](mirrorDNA-standard-v1.0.md) — Technical standard
+- [Compliance Levels](compliance_levels.md) — L1, L2, L3 requirements
 
 ---
 

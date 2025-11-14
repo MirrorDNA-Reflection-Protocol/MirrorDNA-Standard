@@ -6,6 +6,17 @@
 
 ---
 
+## At a Glance
+
+This document covers:
+- **Repository Role**: Where MirrorDNA-Standard fits in the ecosystem
+- **Directory Structure**: Detailed walkthrough of each component
+- **Component Interactions**: How parts work together
+- **Design Principles**: Architectural decisions and rationale
+- **Extension Points**: How to add new features safely
+
+---
+
 ## Repository Role
 
 **MirrorDNA-Standard is the PROTOCOL LAYER.**
@@ -135,21 +146,22 @@ manifest = load_and_validate("mirrorDNA_manifest.yaml", "manifest")
 **Structure:**
 ```
 examples/
-├── README.md               ← Quick start guide
-├── level1/                 ← Basic Reflection
-│   ├── project_manifest.yaml
-│   └── reflection_policy.yaml
-├── level2/                 ← Continuity Aware
-│   ├── project_manifest.yaml
-│   ├── reflection_policy.yaml
-│   └── continuity_profile.yaml
-└── level3/                 ← Vault-Backed Sovereign
-    ├── project_manifest.yaml
-    ├── reflection_policy.yaml
-    └── continuity_profile.yaml
+├── README.md                           ← Quick start guide
+├── minimal_project_manifest.yaml       ← Level 1: Basic Reflection
+├── example_reflection_policy.yaml      ← Level 1: Reflection policy
+├── level2_project_manifest.yaml        ← Level 2: Continuity Aware
+├── example_continuity_profile.yaml     ← Level 2: Continuity profile
+├── level3_project_manifest.yaml        ← Level 3: Vault-Backed Sovereign
+├── level3_continuity_profile.yaml      ← Level 3: Advanced continuity
+├── level3_reflection_policy.yaml       ← Level 3: Full reflection policy
+├── minimal-artifact.md.json            ← Sample minimal artifact
+├── complete-artifact.md.json           ← Sample complete artifact
+└── edgecase-invalid-artifact.md.json   ← Test case: deliberately invalid
 ```
 
 **Design principle**: WORKING examples only. Each config must pass validation.
+
+**Usage pattern**: Users copy relevant files based on their target compliance level.
 
 ---
 

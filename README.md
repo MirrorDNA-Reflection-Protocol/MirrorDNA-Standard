@@ -8,7 +8,7 @@
 
 ---
 
-## What Is This?
+## At a Glance
 
 **MirrorDNA-Standard** is the canonical specification and validation toolchain for building reflective AI systems that don't hallucinate, preserve continuity across sessions, and give users sovereign control of their data.
 
@@ -19,16 +19,52 @@
 
 **This is a PROTOCOL LAYER repository** — the spec others implement, not a product itself.
 
+### Part of the MirrorDNA Ecosystem
+
+This repository serves as the constitutional foundation for a broader family of reflective AI projects:
+
+- **MirrorDNA-Standard** (this repo) — Protocol specification and compliance validator
+- **ActiveMirrorOS** — Reference commercial implementation (Level 3 compliant)
+- **LingOS** — Symbolic language operating system layer
+- **Glyphtrail** — Visual identity and continuity tracking system
+- **AgentDNA** — Multi-agent reflection protocols (planned for v2.0)
+
 ---
 
 ## Who This Is For
 
-| You Are | You Get |
-|---------|---------|
-| **AI User** | Copy [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md) into ChatGPT/Claude for reflective behavior |
-| **Developer** | Validate your AI project for MirrorDNA compliance + earn badges |
-| **Organization** | Adopt trustworthy AI standards with machine-checkable verification |
-| **Researcher** | Reference implementation of reflection-over-prediction architecture |
+| You Are | You Get | Where to Start |
+|---------|---------|----------------|
+| **AI User** | Copy-paste reflective behavior into ChatGPT/Claude | → [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md) |
+| **Developer** | Validate your AI project for MirrorDNA compliance + earn badges | → [Quick Start: Validate](#-for-developers-validate-your-project-5-minutes) |
+| **Organization** | Adopt trustworthy AI standards with machine-checkable verification | → [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| **Researcher** | Reference implementation of reflection-over-prediction architecture | → [`spec/mirrorDNA-standard-v1.0.md`](spec/mirrorDNA-standard-v1.0.md) |
+
+### Where to Start (Choose Your Path)
+
+**Path 1: I just want to try reflective AI (2 minutes)**
+1. Open [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md)
+2. Copy all text and paste into ChatGPT/Claude
+3. Say: "Vault open. Load as canonical context."
+4. Done! Your AI now operates with reflection protocols.
+
+**Path 2: I want to validate my AI project (10 minutes)**
+1. Read [Quick Start: For Developers](#-for-developers-validate-your-project-5-minutes)
+2. Copy example configs from [`examples/`](examples/)
+3. Run the validator: `python -m validators.cli --manifest <file> --policy <file>`
+4. Add your compliance badge to your README
+
+**Path 3: I want to understand the specification (30 minutes)**
+1. Read the [Five Principles](spec/principles.md) (5 min)
+2. Read the [Core Specification](spec/mirrorDNA-standard-v1.0.md) (20 min)
+3. Browse [Compliance Levels](spec/compliance_levels.md) to choose your target level (5 min)
+4. Consult the [FAQ](docs/FAQ.md) for common questions
+
+**Path 4: I want to build a MirrorDNA-compliant system (full integration)**
+1. Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) to understand the repo structure
+2. Study the [reference implementation](portable/) (Electron + Obsidian vault)
+3. Review [`examples/`](examples/) for all three compliance levels
+4. Join the development workflow (see [Contributing](#contributing))
 
 ---
 
@@ -57,9 +93,15 @@ git clone https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard.gi
 cd MirrorDNA-Standard
 pip install -r validators/requirements.txt
 
-# 2. Copy example configs
-cp examples/level1/project_manifest.yaml mirrorDNA_manifest.yaml
-cp examples/level1/reflection_policy.yaml reflection_policy.yaml
+# 2. Copy example configs (choose your target level)
+# For Level 1 (basic reflection):
+cp examples/minimal_project_manifest.yaml mirrorDNA_manifest.yaml
+cp examples/example_reflection_policy.yaml reflection_policy.yaml
+
+# For Level 2 (continuity aware):
+cp examples/level2_project_manifest.yaml mirrorDNA_manifest.yaml
+cp examples/example_reflection_policy.yaml reflection_policy.yaml
+cp examples/example_continuity_profile.yaml continuity_profile.yaml
 
 # 3. Edit configs for your project
 nano mirrorDNA_manifest.yaml
@@ -73,7 +115,7 @@ python -m validators.cli \
 # See output report for pass/fail
 ```
 
-**Next**: Add compliance badge to your README (see [`badges/README.md`](badges/README.md))
+**Next**: Add compliance badge to your README (see [`badges/usage-guide.md`](badges/usage-guide.md))
 
 ---
 
@@ -107,20 +149,21 @@ MirrorDNA-Standard/
 │   └── reflection_policy.schema.json
 │
 ├── examples/                      ← Working configs for L1, L2, L3
-│   ├── level1/                         Basic reflection
-│   ├── level2/                         Continuity aware
-│   └── level3/                         Vault-backed sovereign
+│   ├── minimal_project_manifest.yaml   Level 1 example
+│   ├── level2_project_manifest.yaml    Level 2 example
+│   ├── level3_project_manifest.yaml    Level 3 example
+│   └── [additional example configs]
 │
 ├── badges/                        ← SVG compliance badges
-│   └── README.md
+│   ├── verified-reflective.svg
+│   ├── reflective_compliance_*.svg
+│   └── usage-guide.md                  Badge usage instructions
 │
 ├── tests/                         ← Pytest suite
 │
 ├── docs/                          ← Architecture & guides
 │   ├── ARCHITECTURE.md                 How this repo works
-│   ├── FAQ.md                          Common questions
-│   ├── INTEGRATION.md                  How to adopt MirrorDNA
-│   └── CHOOSING_COMPLIANCE_LEVEL.md    Decision guide
+│   └── FAQ.md                          Common questions
 │
 └── portable/                      ← Reference implementation
     ├── launcher/                       Electron desktop app
@@ -277,21 +320,22 @@ This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
 ## Documentation
 
 ### Essential Reading
-- 📋 [**Specification**](spec/mirrorDNA-standard-v1.0.md) — Start here for the full standard
-- ⟡ [**Principles**](spec/principles.md) — Five foundational principles
+- 📋 [**Core Specification**](spec/mirrorDNA-standard-v1.0.md) — Start here for the full standard
+- ⟡ [**Five Principles**](spec/principles.md) — Foundational principles (immutable for v1.x)
 - 📊 [**Compliance Levels**](spec/compliance_levels.md) — L1, L2, L3 detailed requirements
 - 📖 [**Glossary**](spec/glossary.md) — Canonical term definitions
 
-### Integration Guides
-- 🏗️ [**Architecture**](docs/ARCHITECTURE.md) — How this repo works
-- 🔌 [**Integration**](docs/INTEGRATION.md) — How to adopt MirrorDNA
-- ❓ [**FAQ**](docs/FAQ.md) — Common questions
-- 🎯 [**Choosing a Level**](docs/CHOOSING_COMPLIANCE_LEVEL.md) — Decision guide
+### Developer Guides
+- 🏗️ [**Architecture**](docs/ARCHITECTURE.md) — How this repo is organized
+- ❓ [**FAQ**](docs/FAQ.md) — Common questions answered
+- 📖 [**Contributing**](CONTRIBUTING.md) — How to contribute to this project
+- 🗺️ [**Roadmap**](ROADMAP.md) — Future plans (v1.1, v2.0, v3.0)
 
-### Reference
-- 🏅 [**Badges**](badges/README.md) — How to use compliance badges
-- 📝 [**Examples**](examples/README.md) — Working configs for all levels
-- 🛠️ [**Tools**](tools/README.md) — Checksum verifiers, release scripts
+### Reference Materials
+- 🏅 [**Badge Usage**](badges/usage-guide.md) — How to use compliance badges
+- 📝 [**Examples**](examples/README.md) — Working configurations for all levels
+- 🛠️ [**Validator CLI**](validators/README.md) — Validator tool documentation
+- 🔐 [**Security Policy**](SECURITY.md) — Vulnerability reporting
 
 ---
 
@@ -348,7 +392,9 @@ See [`ROADMAP.md`](ROADMAP.md) for:
 
 ## License
 
-This project is licensed under the MIT License - see [`LICENSE`](LICENSE) for details.
+This project is licensed under the **MIT License** - see [`LICENSE.md`](LICENSE.md) for details.
+
+**Open standard**: Anyone can implement MirrorDNA protocols. This specification is vendor-neutral and freely available.
 
 ---
 

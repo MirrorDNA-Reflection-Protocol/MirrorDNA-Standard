@@ -3,13 +3,50 @@
 Thumbs.db
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# Python / Node / build
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+ENV/
+
+# Node / JavaScript
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build artifacts
 dist/
 build/
+out/
+*.whl
+
+# Logs
+*.log
+logs/
+
+# Environment and secrets
+.env
+.env.local
+*.key
+*.pem
+secrets/
 
 # Vault privacy (never upload these)
 **/__PRIV/**
@@ -19,3 +56,13 @@ build/
 
 # Release artifacts (build separately, attach to GitHub Releases)
 *.zip
+*.tar.gz
+*.dmg
+*.exe
+*.AppImage
+
+# Testing
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
