@@ -1,0 +1,186 @@
+{
+  "ecosystem_version": "1.0.0",
+  "last_updated": "2025-11-14",
+  "repositories": [
+    {
+      "name": "MirrorDNA-Standard",
+      "description": "Canonical specification and validation toolchain for reflective AI systems",
+      "status": "public",
+      "role": "spec",
+      "repository_url": "https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard",
+      "compliance_level": "self-validating",
+      "layer": "protocol",
+      "primary_language": "python",
+      "key_features": [
+        "Core MirrorDNA specification",
+        "Three compliance levels (L1, L2, L3)",
+        "Python validator CLI",
+        "JSON schemas",
+        "Reference implementations"
+      ],
+      "dependencies": [],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "MIT"
+    },
+    {
+      "name": "ActiveMirrorOS",
+      "description": "Canonical Level 3 compliant implementation - sovereign reflective AI product",
+      "status": "private",
+      "role": "product",
+      "repository_url": null,
+      "compliance_level": "level_3_vault_backed_sovereign",
+      "layer": "product",
+      "primary_language": "python",
+      "key_features": [
+        "Level 3 MirrorDNA compliance",
+        "User-owned vault storage",
+        "Sovereign identity",
+        "Glyph signatures",
+        "Desktop application"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "Paul Desai",
+      "license": "proprietary"
+    },
+    {
+      "name": "LingOS",
+      "description": "Language operating system - symbolic layer for reflective computation",
+      "status": "private",
+      "role": "sdk",
+      "repository_url": null,
+      "compliance_level": "level_3_vault_backed_sovereign",
+      "layer": "symbolic",
+      "primary_language": "python",
+      "key_features": [
+        "Symbolic computation layer",
+        "Language-level operations",
+        "Integration with MirrorDNA protocol"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "Paul Desai",
+      "license": "proprietary"
+    },
+    {
+      "name": "MirrorDNA-Stress-Harness",
+      "description": "Compliance testing under load - validation stress testing",
+      "status": "private",
+      "role": "testing",
+      "repository_url": null,
+      "compliance_level": "testing_tool",
+      "layer": "testing",
+      "primary_language": "python",
+      "key_features": [
+        "Load testing for MirrorDNA compliance",
+        "Performance benchmarking",
+        "Stress testing validators"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "unknown"
+    },
+    {
+      "name": "Vault-Templates",
+      "description": "Community-contributed vault configurations and templates",
+      "status": "public",
+      "role": "templates",
+      "repository_url": null,
+      "compliance_level": "level_2_continuity_aware",
+      "layer": "templates",
+      "primary_language": "markdown",
+      "key_features": [
+        "Obsidian vault templates",
+        "Reference configurations",
+        "Community contributions",
+        "Best practices"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "MIT"
+    },
+    {
+      "name": "MirrorDNA-Portable-Launcher",
+      "description": "Electron desktop application for portable MirrorDNA runtime",
+      "status": "public",
+      "role": "product",
+      "repository_url": null,
+      "compliance_level": "level_2_continuity_aware",
+      "layer": "application",
+      "primary_language": "javascript",
+      "key_features": [
+        "Electron-based desktop app",
+        "Portable runtime",
+        "Cross-platform support",
+        "Local-first operation"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "MIT",
+      "location": "portable/launcher/"
+    },
+    {
+      "name": "MirrorDNA-Governance",
+      "description": "Governance documents, RFCs, and standardization process",
+      "status": "planned",
+      "role": "governance",
+      "repository_url": null,
+      "compliance_level": "n/a",
+      "layer": "governance",
+      "primary_language": "markdown",
+      "key_features": [
+        "RFC process",
+        "Standardization governance",
+        "Community decision-making",
+        "Steering committee docs"
+      ],
+      "dependencies": [],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "name": "MirrorDNA-Examples",
+      "description": "Example implementations and integration patterns",
+      "status": "planned",
+      "role": "examples",
+      "repository_url": null,
+      "compliance_level": "various",
+      "layer": "examples",
+      "primary_language": "python",
+      "key_features": [
+        "Integration examples",
+        "Real-world use cases",
+        "Migration guides",
+        "Code samples"
+      ],
+      "dependencies": [
+        "MirrorDNA-Standard"
+      ],
+      "maintainer": "MirrorDNA-Reflection-Protocol",
+      "license": "MIT"
+    }
+  ],
+  "ecosystem_layers": {
+    "protocol": "Core specification and standards (MirrorDNA-Standard)",
+    "product": "User-facing applications implementing the protocol",
+    "sdk": "Developer libraries and frameworks",
+    "symbolic": "Language and computational layers",
+    "testing": "Quality assurance and validation tools",
+    "templates": "Reference configurations and boilerplates",
+    "governance": "Community decision-making and standardization",
+    "examples": "Educational and demonstration resources"
+  },
+  "compliance_levels": {
+    "level_1_basic_reflection": "Anti-hallucination and explicit uncertainty",
+    "level_2_continuity_aware": "State preservation across sessions",
+    "level_3_vault_backed_sovereign": "Full user sovereignty with vault storage"
+  }
+}
