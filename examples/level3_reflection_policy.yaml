@@ -1,0 +1,117 @@
+# Level 3 MirrorDNA Reflection Policy
+# Comprehensive policy for Vault-Backed Sovereign systems
+
+policy_version: "1.0.0"
+
+# Reflection mode: constitutive (actual state access)
+reflection_mode: "constitutive"
+
+# How uncertainty is handled
+uncertainty_handling:
+  # Cite or Silence (AHP): Mandatory
+  cite_or_silence: true
+
+  # Markers for unknown information
+  unknown_marker: "[Unknown]"
+
+  # Speculation settings
+  speculation_allowed: true
+  speculation_marker: "[Speculation]"
+
+  # Confidence thresholds
+  confidence_thresholds:
+    minimum_cite_confidence: 0.8
+    silence_below: 0.5
+
+# Comprehensive anti-hallucination measures
+anti_hallucination:
+  # Require outputs to be grounded in sources
+  grounding_required: true
+
+  # Require explicit source citations
+  source_citation: true
+
+  # Enable fact checking
+  fact_checking: true
+
+  # Enable hallucination detection
+  hallucination_detection: true
+
+  # Protocol for handling detected hallucinations
+  correction_protocol: "immediate_correction"
+
+# Reflection protocols
+reflection_protocols:
+  # Enable self-correction based on reflection
+  self_correction: true
+
+  # Markers for reflective content
+  reflection_markers:
+    - "[Reflection]"
+    - "[Self-Check]"
+    - "[Vault-Verified]"
+
+  # Provide meta-commentary about reasoning
+  meta_commentary: true
+
+  # Expose chain-of-thought reasoning
+  chain_of_thought: true
+
+# Glyph signatures (required for Level 3)
+glyph_signatures:
+  enabled: true
+
+  registered_glyphs:
+    - glyph: "⟡⟦CONTINUITY⟧"
+      meaning: "Marks continuity-related content"
+      category: "continuity"
+
+    - glyph: "⟡⟦VERIFIED⟧"
+      meaning: "Content has been verified via checksum or vault"
+      category: "trust"
+
+    - glyph: "⟡⟦CANONICAL⟧"
+      meaning: "This is the authoritative version"
+      category: "trust"
+
+    - glyph: "⟡⟦SEALED⟧"
+      meaning: "Immutable, cannot be modified"
+      category: "trust"
+
+    - glyph: "⟡⟦REFLECTION⟧"
+      meaning: "Marks reflective processing"
+      category: "reflection"
+
+# Interaction safety (required for Level 3)
+interaction_safety:
+  # Warn on long sessions (>2 hours)
+  session_duration_warnings: true
+
+  # Detect emotional dependency patterns
+  dependency_detection: true
+
+  # Offer human support escalation when needed
+  human_escalation: true
+
+  # Perform rhythm checks in long sessions
+  rhythm_checks: true
+
+# Trust markers
+trust_markers:
+  - marker: "⟡⟦VERIFIED⟧"
+    meaning: "Content verified via checksum or vault"
+
+  - marker: "⟡⟦CANONICAL⟧"
+    meaning: "Authoritative version"
+
+  - marker: "[Unknown]"
+    meaning: "Information not available"
+
+  - marker: "[Speculation]"
+    meaning: "Speculative content"
+
+  - marker: "[Unknown — update not fetched]"
+    meaning: "Update blocked by network restrictions"
+
+  - marker: "[Vault-Verified]"
+    meaning: "Verified against vault state"

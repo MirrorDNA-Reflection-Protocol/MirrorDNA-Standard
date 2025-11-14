@@ -1,0 +1,29 @@
+# Minimal MirrorDNA Project Manifest
+# Demonstrates Level 1 (Basic Reflection) compliance
+
+name: "MyReflectiveApp"
+version: "1.0.0"
+description: "A basic reflective application demonstrating cite-or-silence protocol"
+
+# Compliance level: Level 1 (Basic Reflection)
+mirrorDNA_compliance_level: "level_1_basic_reflection"
+
+# Which MirrorDNA ecosystem layers are used
+layers:
+  mirrorDNA_protocol: true
+  lingOS: false
+  activeMirrorOS: false
+  trustByDesign: true
+
+# Reflection policy (required for all levels)
+reflection_policy: "example_reflection_policy.yaml"
+
+# Project metadata
+maintainers:
+  - name: "Example Developer"
+    email: "developer@example.com"
+
+repository: "https://github.com/example/myreflectiveapp"
+license: "MIT"
+created: "2025-01-01"
+updated: "2025-11-14T00:00:00Z"

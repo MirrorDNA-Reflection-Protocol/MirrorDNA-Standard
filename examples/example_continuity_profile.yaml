@@ -1,0 +1,63 @@
+# Example MirrorDNA Continuity Profile
+# Suitable for Level 2 (Continuity Aware) projects
+
+profile_version: "1.0.0"
+
+# Primary continuity mechanism
+continuity_mechanism: "local_state"
+
+# State persistence configuration
+state_persistence:
+  # Enable persistent state
+  enabled: true
+
+  # Storage type
+  storage_type: "file_system"
+
+  # Storage location (relative or absolute path)
+  storage_location: "./data/continuity"
+
+  # Encrypt storage
+  encryption: true
+
+  # Validate checksums
+  checksum_validation: true
+
+# Session management
+session_management:
+  # Track sessions explicitly
+  session_tracking: true
+
+  # Session ID format
+  session_id_format: "UUID"
+
+  # Maximum session duration (0 = unlimited)
+  max_session_duration: 0
+
+  # New sessions inherit state from previous
+  session_inheritance: true
+
+# Continuity guarantees
+continuity_guarantees:
+  # Preserve user/system identity across sessions
+  identity_preservation: true
+
+  # Ensure state consistency
+  state_consistency: true
+
+  # Track lineage and ancestry
+  lineage_tracking: true
+
+  # Implement anti-hallucination measures
+  anti_hallucination: true
+
+# Recovery and rollback
+recovery:
+  # Enable rollback to previous states
+  rollback_enabled: true
+
+  # How often snapshots are taken
+  snapshot_frequency: "per_session"
+
+  # How long snapshots are retained
+  retention_policy: "Keep last 30 days"

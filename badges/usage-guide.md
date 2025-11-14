@@ -1,65 +1,108 @@
-# ⟡ Verified Reflective Badge Usage Guide
+# MirrorDNA Compliance Badges Usage Guide
 
 ## Overview
 
-The ⟡ Verified Reflective badge indicates that an artifact meets MirrorDNA Standard compliance requirements. This badge carries legal and semantic weight—use it responsibly.
+MirrorDNA compliance badges indicate that a project meets the MirrorDNA Standard requirements at a specific compliance level. These badges carry semantic weight—use them responsibly and only for verified compliant projects.
 
 ## Badge Variants
 
-### Standard Badge (`verified-reflective.svg`)
-- **Dimensions**: 120x40px
-- **Use**: Documentation, websites, repositories
+### Reflective Compliance Badge (`reflective_compliance_light.svg` / `reflective_compliance_dark.svg`)
+- **Use**: Level 1 (Basic Reflection) and Level 2 (Continuity Aware) projects
 - **Format**: SVG (scalable)
-- **Colors**: Dark theme optimized
+- **Variants**: Light and dark theme versions
+- **Indicates**: Project implements cite-or-silence and basic reflection protocols
 
-### Compact Badge (Coming Soon)
-- **Dimensions**: 80x20px  
-- **Use**: Inline documentation, comments
-- **Format**: SVG + PNG variants
+### Verified Reflective Badge (`verified-reflective.svg`)
+- **Use**: Level 2+ projects with validated continuity
+- **Format**: SVG (scalable)
+- **Indicates**: Project has persistent state and session lineage
 
-### Compliance Tier Badges (Coming Soon)
-- **L1**: Pure Reflection (Bronze accent)
-- **L2**: Continuity Tracking (Silver accent)
-- **L3**: Cross-Platform Sync (Gold accent)
-- **L4**: Meta-Glyph Evolution (Prismatic accent)
+### MirrorDNA Compatible Badge (`mirrorDNA_compatible.svg`)
+- **Use**: All compliant projects (Level 1-3)
+- **Format**: SVG (scalable)
+- **Indicates**: Project follows MirrorDNA protocol
+
+## Compliance Level Badges
+
+### Level 1: Basic Reflection
+- **Badge**: `reflective_compliance_light.svg` or `reflective_compliance_dark.svg`
+- **Requirements**: Cite-or-Silence (AHP), explicit uncertainty, basic session tracking
+- **Markdown**:
+  ```markdown
+  ![MirrorDNA Level 1 - Basic Reflection](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
+  ```
+
+### Level 2: Continuity Aware
+- **Badge**: `verified-reflective.svg`
+- **Requirements**: All Level 1 + persistent state, session lineage, checksum validation
+- **Markdown**:
+  ```markdown
+  ![MirrorDNA Level 2 - Continuity Aware](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg)
+  ```
+
+### Level 3: Vault-Backed Sovereign
+- **Badge**: `verified-reflective.svg` (same as Level 2, add text note)
+- **Requirements**: All Level 2 + vault storage, glyph signatures, sovereign identity
+- **Markdown**:
+  ```markdown
+  ![MirrorDNA Level 3 - Vault-Backed Sovereign](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg)
+
+  **Level 3 Compliance**: Vault-Backed Sovereign with full lineage tracking
+  ```
 
 ## Usage Requirements
 
 ### ✅ Permitted Uses
-- Artifacts that pass sidecar validation
+- Projects that pass MirrorDNA validator
 - Documentation explaining MirrorDNA compliance
 - Repositories implementing the standard
 - Educational materials about reflective computing
-- Personal projects using glyphsig vocabulary
+- Personal projects using MirrorDNA protocol
 
 ### ❌ Prohibited Uses
-- Non-compliant artifacts
+- Non-compliant projects
 - Marketing without actual implementation
 - Modified badge designs
 - Misleading compliance claims
-- Commercial use without covenant license
+- Using badges without validator verification
 
 ## Implementation Examples
 
-### Markdown
+### Markdown (Level 1)
 ```markdown
-![Verified Reflective](https://raw.githubusercontent.com/mirrordna/standard/main/badges/verified-reflective.svg)
+![MirrorDNA Level 1 Compliant](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
+```
+
+### Markdown (Level 2)
+```markdown
+![MirrorDNA Level 2 Compliant](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg)
+```
+
+### Markdown (Level 3)
+```markdown
+![MirrorDNA Level 3 Compliant](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg)
+
+**Level 3 Vault-Backed Sovereign** - Full continuity and glyph signatures
 ```
 
 ### HTML
 ```html
-<img src="badges/verified-reflective.svg" alt="Verified Reflective" width="120" height="40">
+<img src="https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg"
+     alt="MirrorDNA Compliant" />
 ```
 
-### README Badge
+### README Badge with Link
 ```markdown
-[![Verified Reflective](badges/verified-reflective.svg)](https://github.com/mirrordna/standard)
+[![MirrorDNA Compliant](badges/verified-reflective.svg)](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard)
 ```
 
-### Artifact Header
+### Project README Header
 ```markdown
-# My Reflective Document
-⟡ **Verified Reflective** - Complies with MirrorDNA Standard v1.0
+# My Reflective Project
+
+[![MirrorDNA Level 2 Compliant](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/verified-reflective.svg)](docs/compliance-report.md)
+
+This project implements MirrorDNA Standard v1.0 at Level 2 (Continuity Aware).
 
 [Rest of content...]
 ```
@@ -68,27 +111,54 @@ The ⟡ Verified Reflective badge indicates that an artifact meets MirrorDNA Sta
 
 ### Automatic Validation
 ```bash
-# Install validator
-pip install mirrordna-validator
+# Install dependencies
+pip install -r validators/requirements.txt
 
-# Check compliance
-mirrordna-check your-artifact.md
+# Validate your project (Level 1)
+python -m validators.cli \
+  --manifest mirrorDNA_manifest.yaml \
+  --policy reflection_policy.yaml
+
+# Validate Level 2+ project
+python -m validators.cli \
+  --manifest mirrorDNA_manifest.yaml \
+  --profile continuity_profile.yaml \
+  --policy reflection_policy.yaml
 
 # Output example:
-# ✓ Glyphsig syntax valid
-# ✓ Consent gates present  
-# ✓ Lineage chain intact
-# ✓ Sidecar compliant
-# ⟡ VERIFIED REFLECTIVE: True
+# ======================================================================
+# MirrorDNA Compliance Report
+# ======================================================================
+#
+# Project: MyProject
+# Declared Level: level_2_continuity_aware
+# Detected Level: level_2_continuity_aware
+#
+# Overall Status: ✓ PASSED
+# Total Errors: 0
+# Total Warnings: 1
 ```
 
 ### Manual Checklist
-- [ ] Contains proper glyphsig vocabulary
-- [ ] Implements consent gates (PRIV/LOCK/OPEN)
-- [ ] Includes lineage markers (ORIGIN/SUCCESSOR)
-- [ ] Has compliant JSON sidecar
-- [ ] Passes validator test suite
-- [ ] Maintains semantic consistency
+
+**Level 1: Basic Reflection**
+- [ ] Created `mirrorDNA_manifest.yaml` declaring level_1_basic_reflection
+- [ ] Created `reflection_policy.yaml` with cite_or_silence enabled
+- [ ] Implemented uncertainty markers ([Unknown], etc.)
+- [ ] Passes validator with zero errors
+
+**Level 2: Continuity Aware**
+- [ ] All Level 1 requirements
+- [ ] Created `continuity_profile.yaml` with state_persistence enabled
+- [ ] Implemented session lineage tracking
+- [ ] Artifact checksums validated
+
+**Level 3: Vault-Backed Sovereign**
+- [ ] All Level 1 & 2 requirements
+- [ ] Vault storage configured
+- [ ] Glyph signatures enabled
+- [ ] Interaction safety protocols implemented
+- [ ] Full compliance report generated
 
 ## Badge Colors & Meaning
 

@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mirrordna.org/schemas/project_manifest.schema.json",
+  "title": "MirrorDNA Project Manifest",
+  "description": "Declares how a project integrates with the MirrorDNA Standard for reflective computing",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "mirrorDNA_compliance_level",
+    "layers"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "description": "Project version (semantic versioning recommended)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+.*$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the project"
+    },
+    "mirrorDNA_compliance_level": {
+      "type": "string",
+      "description": "MirrorDNA compliance level achieved",
+      "enum": [
+        "level_1_basic_reflection",
+        "level_2_continuity_aware",
+        "level_3_vault_backed_sovereign"
+      ]
+    },
+    "layers": {
+      "type": "object",
+      "description": "Which MirrorDNA ecosystem layers are used",
+      "properties": {
+        "mirrorDNA_protocol": {
+          "type": "boolean",
+          "description": "Uses core MirrorDNA reflection protocol"
+        },
+        "lingOS": {
+          "type": "boolean",
+          "description": "Integrates with LingOS (language operating system)"
+        },
+        "activeMirrorOS": {
+          "type": "boolean",
+          "description": "Built on ActiveMirrorOS platform"
+        },
+        "trustByDesign": {
+          "type": "boolean",
+          "description": "Implements Trust-by-Design governance"
+        }
+      }
+    },
+    "continuity_profile": {
+      "type": "string",
+      "description": "Path to continuity profile file (relative to manifest)"
+    },
+    "reflection_policy": {
+      "type": "string",
+      "description": "Path to reflection policy file (relative to manifest)"
+    },
+    "vault_id": {
+      "type": "string",
+      "description": "Unique vault identifier for continuity tracking"
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "Project maintainers",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "repository": {
+      "type": "string",
+      "description": "Repository URL",
+      "format": "uri"
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier (SPDX recommended)"
+    },
+    "created": {
+      "type": "string",
+      "description": "Project creation date (ISO 8601)",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Last update date (ISO 8601)",
+      "format": "date-time"
+    }
+  }
+}

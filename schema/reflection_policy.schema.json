@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mirrordna.org/schemas/reflection_policy.schema.json",
+  "title": "MirrorDNA Reflection Policy",
+  "description": "Defines how a system handles reflection, uncertainty, and anti-hallucination measures",
+  "type": "object",
+  "required": [
+    "policy_version",
+    "reflection_mode",
+    "uncertainty_handling"
+  ],
+  "properties": {
+    "policy_version": {
+      "type": "string",
+      "description": "Version of this reflection policy",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "reflection_mode": {
+      "type": "string",
+      "description": "Primary reflection mode",
+      "enum": [
+        "constitutive",
+        "simulated",
+        "hybrid"
+      ]
+    },
+    "uncertainty_handling": {
+      "type": "object",
+      "description": "How uncertainty is handled in the system",
+      "required": ["cite_or_silence"],
+      "properties": {
+        "cite_or_silence": {
+          "type": "boolean",
+          "description": "Whether cite-or-silence (AHP) is enforced"
+        },
+        "unknown_marker": {
+          "type": "string",
+          "description": "Marker used to indicate unknown/uncertain information",
+          "default": "[Unknown]"
+        },
+        "speculation_allowed": {
+          "type": "boolean",
+          "description": "Whether speculation is allowed (must be clearly marked)"
+        },
+        "speculation_marker": {
+          "type": "string",
+          "description": "Marker used to indicate speculation",
+          "default": "[Speculation]"
+        },
+        "confidence_thresholds": {
+          "type": "object",
+          "description": "Confidence thresholds for different operations",
+          "properties": {
+            "minimum_cite_confidence": {
+              "type": "number",
+              "description": "Minimum confidence to cite (0.0-1.0)",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "silence_below": {
+              "type": "number",
+              "description": "Confidence below which silence is enforced (0.0-1.0)",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          }
+        }
+      }
+    },
+    "anti_hallucination": {
+      "type": "object",
+      "description": "Anti-hallucination measures",
+      "properties": {
+        "grounding_required": {
+          "type": "boolean",
+          "description": "Whether all statements must be grounded in sources"
+        },
+        "source_citation": {
+          "type": "boolean",
+          "description": "Whether sources must be explicitly cited"
+        },
+        "fact_checking": {
+          "type": "boolean",
+          "description": "Whether automated fact-checking is enabled"
+        },
+        "hallucination_detection": {
+          "type": "boolean",
+          "description": "Whether hallucination detection mechanisms are in place"
+        },
+        "correction_protocol": {
+          "type": "string",
+          "description": "Protocol for handling detected hallucinations",
+          "enum": ["immediate_correction", "flag_for_review", "silent_logging", "none"]
+        }
+      }
+    },
+    "reflection_protocols": {
+      "type": "object",
+      "description": "Protocols for reflective behavior",
+      "properties": {
+        "self_correction": {
+          "type": "boolean",
+          "description": "Whether system can self-correct based on reflection"
+        },
+        "reflection_markers": {
+          "type": "array",
+          "description": "Markers used to indicate reflective content",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meta_commentary": {
+          "type": "boolean",
+          "description": "Whether meta-commentary about reasoning is provided"
+        },
+        "chain_of_thought": {
+          "type": "boolean",
+          "description": "Whether chain-of-thought reasoning is exposed"
+        }
+      }
+    },
+    "glyph_signatures": {
+      "type": "object",
+      "description": "Use of glyph signatures for semantic marking",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether glyph signatures are used"
+        },
+        "registered_glyphs": {
+          "type": "array",
+          "description": "List of registered glyphs and their meanings",
+          "items": {
+            "type": "object",
+            "required": ["glyph", "meaning"],
+            "properties": {
+              "glyph": {
+                "type": "string",
+                "description": "The glyph character/symbol"
+              },
+              "meaning": {
+                "type": "string",
+                "description": "Semantic meaning of the glyph"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of glyph",
+                "enum": ["continuity", "reflection", "trust", "identity", "custom"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "interaction_safety": {
+      "type": "object",
+      "description": "Safety protocols for user interactions",
+      "properties": {
+        "session_duration_warnings": {
+          "type": "boolean",
+          "description": "Whether warnings are issued for long sessions"
+        },
+        "dependency_detection": {
+          "type": "boolean",
+          "description": "Whether emotional dependency patterns are detected"
+        },
+        "human_escalation": {
+          "type": "boolean",
+          "description": "Whether escalation to human support is offered when needed"
+        },
+        "rhythm_checks": {
+          "type": "boolean",
+          "description": "Whether periodic rhythm checks are performed in long sessions"
+        }
+      }
+    },
+    "trust_markers": {
+      "type": "array",
+      "description": "Trust markers used in this system",
+      "items": {
+        "type": "object",
+        "required": ["marker", "meaning"],
+        "properties": {
+          "marker": {
+            "type": "string",
+            "description": "The trust marker"
+          },
+          "meaning": {
+            "type": "string",
+            "description": "What this marker indicates"
+          }
+        }
+      }
+    }
+  }
+}

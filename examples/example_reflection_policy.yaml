@@ -1,0 +1,63 @@
+# Example MirrorDNA Reflection Policy
+# Suitable for Level 1 and Level 2 projects
+
+policy_version: "1.0.0"
+
+# Reflection mode: constitutive (actual state), simulated (pattern-based), or hybrid
+reflection_mode: "constitutive"
+
+# How uncertainty is handled
+uncertainty_handling:
+  # Cite or Silence (AHP): Required for all levels
+  cite_or_silence: true
+
+  # Markers for unknown information
+  unknown_marker: "[Unknown]"
+
+  # Whether speculation is allowed (must be marked)
+  speculation_allowed: true
+  speculation_marker: "[Speculation]"
+
+# Anti-hallucination measures
+anti_hallucination:
+  # Require outputs to be grounded in sources
+  grounding_required: true
+
+  # Require explicit source citations
+  source_citation: true
+
+  # Enable fact checking (optional)
+  fact_checking: false
+
+  # Enable hallucination detection
+  hallucination_detection: false
+
+  # Protocol for handling detected hallucinations
+  correction_protocol: "immediate_correction"
+
+# Reflection protocols
+reflection_protocols:
+  # Enable self-correction based on reflection
+  self_correction: true
+
+  # Markers for reflective content
+  reflection_markers:
+    - "[Reflection]"
+    - "[Self-Check]"
+
+  # Provide meta-commentary about reasoning
+  meta_commentary: false
+
+  # Expose chain-of-thought reasoning
+  chain_of_thought: false
+
+# Trust markers used in this system
+trust_markers:
+  - marker: "[Unknown]"
+    meaning: "Information is not available or cannot be verified"
+
+  - marker: "[Speculation]"
+    meaning: "This is speculative or hypothetical content"
+
+  - marker: "[Unverified]"
+    meaning: "This information has not been verified against sources"

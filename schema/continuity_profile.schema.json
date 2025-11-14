@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mirrordna.org/schemas/continuity_profile.schema.json",
+  "title": "MirrorDNA Continuity Profile",
+  "description": "Defines how a system achieves and maintains continuity across sessions",
+  "type": "object",
+  "required": [
+    "profile_version",
+    "continuity_mechanism",
+    "state_persistence"
+  ],
+  "properties": {
+    "profile_version": {
+      "type": "string",
+      "description": "Version of this continuity profile",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "continuity_mechanism": {
+      "type": "string",
+      "description": "Primary mechanism used to achieve continuity",
+      "enum": [
+        "vault_backed",
+        "blockchain_anchored",
+        "distributed_ledger",
+        "local_state",
+        "hybrid"
+      ]
+    },
+    "state_persistence": {
+      "type": "object",
+      "description": "How state is persisted across sessions",
+      "required": ["enabled", "storage_type"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether state persistence is enabled"
+        },
+        "storage_type": {
+          "type": "string",
+          "description": "Type of storage used",
+          "enum": [
+            "file_system",
+            "database",
+            "vault",
+            "distributed_storage",
+            "memory_only"
+          ]
+        },
+        "storage_location": {
+          "type": "string",
+          "description": "Path or URI to storage location"
+        },
+        "encryption": {
+          "type": "boolean",
+          "description": "Whether storage is encrypted"
+        },
+        "checksum_validation": {
+          "type": "boolean",
+          "description": "Whether checksums are used to validate state integrity"
+        }
+      }
+    },
+    "vault_configuration": {
+      "type": "object",
+      "description": "Vault-specific configuration (if using vault_backed)",
+      "properties": {
+        "vault_type": {
+          "type": "string",
+          "description": "Type of vault implementation",
+          "enum": ["obsidian", "custom", "distributed", "cloud"]
+        },
+        "vault_path": {
+          "type": "string",
+          "description": "Path to vault root"
+        },
+        "vault_id": {
+          "type": "string",
+          "description": "Unique vault identifier"
+        },
+        "sync_enabled": {
+          "type": "boolean",
+          "description": "Whether vault sync is enabled"
+        }
+      }
+    },
+    "session_management": {
+      "type": "object",
+      "description": "How sessions are managed and tracked",
+      "properties": {
+        "session_tracking": {
+          "type": "boolean",
+          "description": "Whether sessions are explicitly tracked"
+        },
+        "session_id_format": {
+          "type": "string",
+          "description": "Format for session identifiers (e.g., UUID, timestamp-based)"
+        },
+        "max_session_duration": {
+          "type": "integer",
+          "description": "Maximum session duration in minutes (0 = unlimited)"
+        },
+        "session_inheritance": {
+          "type": "boolean",
+          "description": "Whether new sessions inherit state from previous sessions"
+        }
+      }
+    },
+    "continuity_guarantees": {
+      "type": "object",
+      "description": "Guarantees provided by this continuity profile",
+      "properties": {
+        "identity_preservation": {
+          "type": "boolean",
+          "description": "Guarantees preservation of user/system identity across sessions"
+        },
+        "state_consistency": {
+          "type": "boolean",
+          "description": "Guarantees consistency of state across sessions"
+        },
+        "lineage_tracking": {
+          "type": "boolean",
+          "description": "Tracks lineage and ancestry of sessions/artifacts"
+        },
+        "anti_hallucination": {
+          "type": "boolean",
+          "description": "Implements anti-hallucination measures (cite-or-silence)"
+        }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "description": "Recovery and rollback capabilities",
+      "properties": {
+        "rollback_enabled": {
+          "type": "boolean",
+          "description": "Whether rollback to previous states is supported"
+        },
+        "snapshot_frequency": {
+          "type": "string",
+          "description": "How often snapshots are taken",
+          "enum": ["per_session", "hourly", "daily", "manual", "never"]
+        },
+        "retention_policy": {
+          "type": "string",
+          "description": "How long snapshots are retained"
+        }
+      }
+    }
+  }
+}

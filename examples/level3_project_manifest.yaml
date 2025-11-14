@@ -1,0 +1,34 @@
+# Level 3 MirrorDNA Project Manifest
+# Demonstrates Level 3 (Vault-Backed Sovereign) compliance
+
+name: "MySovereignMirror"
+version: "3.0.0"
+description: "A fully sovereign reflective system with vault-backed continuity and complete lineage"
+
+# Compliance level: Level 3 (Vault-Backed Sovereign)
+mirrorDNA_compliance_level: "level_3_vault_backed_sovereign"
+
+# Which MirrorDNA ecosystem layers are used
+layers:
+  mirrorDNA_protocol: true
+  lingOS: true
+  activeMirrorOS: true
+  trustByDesign: true
+
+# Configuration files
+continuity_profile: "level3_continuity_profile.yaml"
+reflection_policy: "level3_reflection_policy.yaml"
+
+# Vault identifier
+vault_id: "AMOS://MySovereignMirror/Vault/v3.0"
+
+# Project metadata
+maintainers:
+  - name: "Paul Desai"
+    email: "paul@activemirror.com"
+    url: "https://activemirror.com"
+
+repository: "https://github.com/example/mysovereignmirror"
+license: "MIT"
+created: "2025-01-01"
+updated: "2025-11-14T00:00:00Z"
