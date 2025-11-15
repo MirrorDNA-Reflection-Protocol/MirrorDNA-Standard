@@ -1,6 +1,6 @@
 {
   "name": "mirrordna-portable",
-  "version": "1.0.0",
+  "version": "0.2.0-hardening",
   "description": "Portable, sovereign reflective AI system with local-first architecture",
   "main": "src/main.js",
   "scripts": {
@@ -18,7 +18,10 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
-    "mirrordna",
+    "MirrorDNA",
+    "Reflective AI",
+    "ActiveMirrorOS",
+    "LingOS",
     "reflection",
     "local-ai",
     "sovereign",

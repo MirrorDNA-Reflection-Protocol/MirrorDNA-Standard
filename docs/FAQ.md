@@ -136,7 +136,7 @@ The validator outputs:
 Example:
 ```
 [FAILED] Continuity Check: No session lineage found
-Recommendation: Add 'predecessor_session' field to continuity_profile.yaml
+Suggested action: Add 'predecessor_session' field to continuity_profile.yaml
 ```
 
 ---

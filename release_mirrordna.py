@@ -1,4 +1,7 @@
 # ── MirrorDNA Release Automator ──
+# MirrorDNA Standard - Research Prototype Only
+# Bound to Master Citation v15.2 | FEU Contract: Fact/Estimate/Unknown
+# Information only - Not medical advice - No autonomous decisions
 # Save as release_mirrordna.py and run: python3 release_mirrordna.py
 # Requires: Python 3, git, GitHub CLI (gh) authenticated
 

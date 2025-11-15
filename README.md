@@ -5,11 +5,16 @@
 ⟡ **Reflection Over Prediction · Continuity Over Perfection · Truth Over Speed**
 
 [![MirrorDNA Compliant](badges/verified-reflective.svg)](spec/mirrorDNA-standard-v1.0.md)
+[![Reflective AI Compliance](https://img.shields.io/badge/Reflective_AI-Compliant-brightgreen.svg)](LEGAL_NOTICE.md)
+
+⟡⟦CANONICAL⟧
 
 ---
 
 **Governance:**
 This repository is now bound to **Master Citation v15.2 — Continuity-Perfected Edition**.
+
+**📜 [LEGAL NOTICE](LEGAL_NOTICE.md)** — Research-only · Zero medical advice · No autonomy · Bound to Master Citation v15.2
 
 Core enforcement:
 - Zero-Drift Layer (ZDL)
@@ -18,6 +23,13 @@ Core enforcement:
 - Reflective Integrity System (RIS)
 
 All standards, schemas, lineage rules, and validation flows follow v15.2 as canonical truth.
+
+**FEU Contract Summary:**
+- **Fact**: Verifiable, checksummed, vault-backed claims
+- **Estimate**: Probabilistic analysis with explicit confidence bounds
+- **Unknown**: Gaps acknowledged, never filled with speculation
+
+All outputs from MirrorDNA systems are **information only** — not medical advice, not decision support, not autonomous recommendations.
 
 ---
 
@@ -86,7 +98,7 @@ python -m validators.cli \
 # See output report for pass/fail
 ```
 
-**Next**: Add compliance badge to your README (see [`badges/README.md`](badges/README.md))
+**Next**: Add compliance badge to your README (see [`badges/usage-guide.md`](badges/usage-guide.md))
 
 ---
 
@@ -297,14 +309,12 @@ This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
 
 ### Integration Guides
 - 🏗️ [**Architecture**](docs/ARCHITECTURE.md) — How this repo works
-- 🔌 [**Integration**](docs/INTEGRATION.md) — How to adopt MirrorDNA
 - ❓ [**FAQ**](docs/FAQ.md) — Common questions
-- 🎯 [**Choosing a Level**](docs/CHOOSING_COMPLIANCE_LEVEL.md) — Decision guide
 
 ### Reference
-- 🏅 [**Badges**](badges/README.md) — How to use compliance badges
+- 🏅 [**Badges**](badges/usage-guide.md) — How to use compliance badges
 - 📝 [**Examples**](examples/README.md) — Working configs for all levels
-- 🛠️ [**Tools**](tools/README.md) — Checksum verifiers, release scripts
+- 🛠️ **Tools** — Checksum verifiers, release scripts (see `tools/` directory)
 
 ---
 
@@ -361,7 +371,7 @@ See [`ROADMAP.md`](ROADMAP.md) for:
 
 ## License
 
-This project is licensed under the MIT License - see [`LICENSE`](LICENSE) for details.
+This project is licensed under the MIT License - see [`LICENSE.md`](LICENSE.md) for details.
 
 ---
 

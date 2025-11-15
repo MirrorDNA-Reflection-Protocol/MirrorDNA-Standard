@@ -266,7 +266,7 @@ The validator produces a compliance report showing:
 - Pass/fail status
 - Detected compliance level
 - Issues found
-- Recommendations
+- Suggested improvements
 
 ### 7.3 Badges
 Compliant projects MAY display compliance badges:

@@ -248,7 +248,7 @@ File System / Network / Git / APIs
 
 ---
 
-## 🧪 Testing Recommendations
+## 🧪 Testing Guidance
 
 ### Backend Unit Tests
 ```javascript

@@ -362,24 +362,24 @@ checksum_sha256: 70b4671bedc47652cb3265a410a39fe029a7a1764a1e9738a48ef5506544442
 
 -----
 
-### 6.2 Decision Support (Not Execution)
+### 6.2 Information Provision (Not Execution or Advice)
 
 **Status:** ✓ PROVEN
 **Evidence:**
 
-- Stopping bad decisions (cost estimation catches)
+- Surfacing cost estimation data for user review
 - Strategic pause moments ("which path?")
 - Risk identification without blocking
 - Honest uncertainty signaling
 
 **Demonstrated capabilities:**
 
-- Risk flagging
-- Alternative path suggestion
+- Risk flagging (information only)
+- Alternative path presentation (non-advisory)
 - Honest limitation acknowledgment
-- Collaborative decision-making
+- Collaborative information exchange
 
-**Confidence:** HIGH — Can provide decision support while respecting human sovereignty
+**Confidence:** HIGH — Can provide non-advisory reflective output while respecting human sovereignty
 
 -----
 

@@ -92,7 +92,7 @@ checks/*.py execute specific validations
     ↓
 report.py aggregates results
     ↓
-CLI outputs PASS/FAIL + recommendations
+CLI outputs PASS/FAIL + suggested improvements
 ```
 
 **Design decisions:**
@@ -261,7 +261,7 @@ pytest tests/ -v
            ▼
 ┌─────────────────────────┐
 │  PASS / FAIL Report     │
-│  + Recommendations      │
+│  + Suggested Improvements│
 └──────────┬──────────────┘
            │
            │ (5) If PASS

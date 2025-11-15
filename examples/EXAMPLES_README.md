@@ -84,7 +84,7 @@ python -m validators.cli \
 3. **Interpret results:**
    - ✓ PASSED: Configuration meets declared compliance level
    - ✗ FAILED: Errors found, see details in output
-   - Warnings: Non-critical issues or recommendations
+   - Warnings: Non-critical issues or suggested improvements
 
 ## Creating Your Own Configuration
 

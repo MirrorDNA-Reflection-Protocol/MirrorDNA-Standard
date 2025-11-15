@@ -75,7 +75,7 @@ MirrorDNA Portable is a **fully sovereign, USB-portable reflective AI system** w
 | Maturity | Newer | Proven |
 | Mobile | In progress | Limited |
 
-**Recommendation**: **Tauri** for smaller bundle size and better security
+**Suggestion**: **Tauri** for smaller bundle size and better security
 
 **Launcher Responsibilities:**
 - Display glyph UI and status indicators
