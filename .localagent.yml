@@ -1,0 +1,25 @@
+# LocalAgent Config for MirrorDNA-Standard
+# Defines common development commands for this repo
+
+name: MirrorDNA-Standard
+path: /Users/pauldesai/Documents/GitHub/MirrorDNA-Standard
+type: specification
+
+commands:
+  dev_install: |
+    cd /Users/pauldesai/Documents/GitHub/MirrorDNA-Standard
+    echo "No installation needed - documentation repo"
+  
+  dev_test: |
+    cd /Users/pauldesai/Documents/GitHub/MirrorDNA-Standard
+    echo "Running markdown validation..."
+    find . -name "*.md" -type f | head -5
+  
+  dev_status: |
+    cd /Users/pauldesai/Documents/GitHub/MirrorDNA-Standard
+    git status
+    git log -1 --oneline
+  
+  dev_sync: |
+    cd /Users/pauldesai/Documents/GitHub/MirrorDNA-Standard
+    git pull origin main
