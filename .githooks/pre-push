@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# MirrorDNA Pre-Push Hook
+# Verifies vault integrity and lineage before push
+#
+# Install: ln -s ../../.githooks/pre-push .git/hooks/pre-push
+# Or: git config core.hooksPath .githooks
+
+set -e
+
+echo "⟡⟦PRE-PUSH ENFORCEMENT⟧"
+echo ""
+
+# Check if vault exists
+if [ ! -d "vault" ] && [ ! -d "../vault" ]; then
+    echo "⚠ No vault directory found. Skipping vault verification."
+    echo ""
+    exit 0
+fi
+
+# Determine vault path
+VAULT_PATH="vault"
+if [ ! -d "$VAULT_PATH" ]; then
+    VAULT_PATH="../vault"
+fi
+
+echo "→ Verifying vault integrity..."
+
+# Run vault manager report
+if ! python tools/vault_manager.py --vault "$VAULT_PATH" report > /dev/null 2>&1; then
+    echo "✗ Vault integrity check failed"
+    echo "  Run: python tools/vault_manager.py --vault $VAULT_PATH report"
+    echo "  Or use 'git push --no-verify' to bypass (not recommended)"
+    exit 1
+fi
+
+echo "✓ Vault integrity verified"
+
+# Run full enforcement suite on changed files (optional, can be slow)
+# Uncomment to enable:
+# echo ""
+# echo "→ Running full enforcement suite..."
+# if ! python tools/enforce_all.py --target . --vault "$VAULT_PATH"; then
+#     echo "✗ Enforcement suite failed"
+#     exit 1
+# fi
+
+echo ""
+echo "✓ Pre-push checks passed"
+echo ""
+
+exit 0

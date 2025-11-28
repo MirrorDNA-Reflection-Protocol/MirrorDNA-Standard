@@ -97,6 +97,32 @@ class ComplianceReport:
         lines.append("=" * 70)
         return "\n".join(lines)
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert report to dictionary for JSON/YAML output."""
+        return {
+            'project_name': self.project_name,
+            'declared_level': self.declared_level,
+            'detected_level': self.detected_level,
+            'overall_passed': self.overall_passed,
+            'summary': {
+                'total_errors': self.get_total_errors(),
+                'total_warnings': self.get_total_warnings(),
+                'total_checks': len(self.results),
+                'checks_passed': sum(1 for r in self.results if r.passed),
+                'checks_failed': sum(1 for r in self.results if not r.passed)
+            },
+            'results': [
+                {
+                    'check_name': r.check_name,
+                    'passed': r.passed,
+                    'errors': r.errors,
+                    'warnings': r.warnings
+                }
+                for r in self.results
+            ],
+            'recommendations': self.recommendations
+        }
+
     def format_colored(self) -> str:
         """Format report with ANSI color codes."""
         # ANSI color codes

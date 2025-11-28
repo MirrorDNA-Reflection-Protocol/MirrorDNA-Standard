@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# MirrorDNA Commit-Msg Hook
+# Validates commit messages for FEU tagging and glyph signatures
+#
+# Install: ln -s ../../.githooks/commit-msg .git/hooks/commit-msg
+# Or: git config core.hooksPath .githooks
+
+set -e
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+echo "⟡⟦COMMIT MESSAGE VALIDATION⟧"
+
+# Skip validation for merge commits
+if echo "$COMMIT_MSG" | grep -q "^Merge branch"; then
+    echo "Merge commit detected. Skipping validation."
+    exit 0
+fi
+
+# Skip validation for commits that start with special markers
+if echo "$COMMIT_MSG" | grep -qE "^(Revert|fixup!|squash!)"; then
+    echo "Special commit type detected. Skipping validation."
+    exit 0
+fi
+
+# Check for conventional commit format (optional but recommended)
+if ! echo "$COMMIT_MSG" | grep -qE "^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?:"; then
+    echo "⚠ Warning: Commit message doesn't follow conventional commits format"
+    echo "  Recommended: feat|fix|docs|style|refactor|test|chore|perf|ci|build(scope): message"
+    # Don't fail, just warn
+fi
+
+# Check for minimum message length
+MSG_LENGTH=$(echo "$COMMIT_MSG" | head -1 | wc -c)
+if [ "$MSG_LENGTH" -lt 10 ]; then
+    echo "✗ Commit message too short (minimum 10 characters)"
+    exit 1
+fi
+
+# Check for glyph signatures in spec/standard commits
+if echo "$COMMIT_MSG" | grep -qE "(spec/|standard|constitutional)"; then
+    if ! echo "$COMMIT_MSG" | grep -q "⟡⟦"; then
+        echo "⚠ Warning: Standard/spec commit without glyph signature"
+        echo "  Consider adding appropriate glyphs: ⟡⟦STANDARD⟧ ⟡⟦LAW⟧ etc."
+        # Don't fail, just warn
+    fi
+fi
+
+echo "✓ Commit message validated"
+exit 0

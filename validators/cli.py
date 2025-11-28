@@ -69,7 +69,7 @@ For more information, see: https://github.com/MirrorDNA-Reflection-Protocol/Mirr
     parser.add_argument(
         '--json',
         action='store_true',
-        help='Output report as JSON (not yet implemented)'
+        help='Output report as JSON'
     )
     parser.add_argument(
         '-v', '--verbose',
@@ -224,11 +224,9 @@ For more information, see: https://github.com/MirrorDNA-Reflection-Protocol/Mirr
 
     # Output report
     if args.json:
-        # TODO: Implement JSON output
-        print("JSON output not yet implemented")
-        return 1
-
-    if args.no_color:
+        import json
+        print(json.dumps(report.to_dict(), indent=2))
+    elif args.no_color:
         print(report.format_text())
     else:
         print(report.format_colored())

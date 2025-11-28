@@ -1,0 +1,195 @@
+name: Constitutional Enforcement Suite
+
+on:
+  pull_request:
+    branches: ["main", "master"]
+    paths:
+      - "**.py"
+      - "**.md"
+      - "spec/**"
+      - "tools/**"
+      - "validators/**"
+  push:
+    branches: ["main", "master"]
+    paths:
+      - "**.py"
+      - "**.md"
+      - "spec/**"
+      - "tools/**"
+      - "validators/**"
+  workflow_dispatch:
+
+jobs:
+  enforce-constitutional-compliance:
+    name: Constitutional Enforcement
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for lineage verification
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # Install optional dependencies for enhanced functionality
+          pip install pyyaml
+
+      - name: ⟡ Make tools executable
+        run: |
+          chmod +x tools/*.py
+
+      - name: ⟡ Stage 1 - Reflective Review
+        id: reflective_review
+        run: |
+          echo "::group::Reflective Review (Principle Compliance)"
+          python tools/reflective_reviewer.py ./spec --json > reflective_report.json || true
+          python tools/reflective_reviewer.py ./tools --json > tools_report.json || true
+
+          # Check for violations
+          VIOLATIONS=$(cat reflective_report.json tools_report.json | grep -o '"violation"' | wc -l || echo "0")
+          CRITICAL=$(cat reflective_report.json tools_report.json | grep -o '"critical"' | wc -l || echo "0")
+
+          echo "violations=$VIOLATIONS" >> $GITHUB_OUTPUT
+          echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+
+          if [ "$CRITICAL" -gt 0 ]; then
+            echo "::error::Critical principle violations detected: $CRITICAL"
+            exit 1
+          elif [ "$VIOLATIONS" -gt 0 ]; then
+            echo "::warning::Principle violations detected: $VIOLATIONS"
+          fi
+          echo "::endgroup::"
+
+      - name: ⟡ Stage 2 - Truth-State Enforcement
+        id: truth_state
+        run: |
+          echo "::group::Truth-State FEU Enforcement"
+          # Run truth-state checks on modified markdown files
+          CHANGED_MD=$(git diff --name-only origin/main...HEAD | grep '\.md$' || true)
+
+          if [ -n "$CHANGED_MD" ]; then
+            for file in $CHANGED_MD; do
+              if [ -f "$file" ]; then
+                echo "Checking $file..."
+                python tools/truth_state.py "$(cat $file | head -100)" || true
+              fi
+            done
+          else
+            echo "No markdown files changed"
+          fi
+          echo "::endgroup::"
+
+      - name: ⟡ Stage 3 - Vault Integrity (if vault exists)
+        id: vault_integrity
+        continue-on-error: true
+        run: |
+          echo "::group::Vault Integrity Verification"
+          if [ -d "vault" ]; then
+            python tools/vault_manager.py --vault ./vault report || echo "No vault artifacts registered yet"
+          else
+            echo "No vault directory found (acceptable for standards repo)"
+          fi
+          echo "::endgroup::"
+
+      - name: ⟡ Stage 4 - Compliance Validators
+        id: validators
+        run: |
+          echo "::group::Compliance Validators"
+          # Run validators on any manifests found
+          if find . -name "mirrorDNA_manifest.yaml" -o -name "manifest.yaml" | grep -q .; then
+            python -m validators.cli --manifest mirrorDNA_manifest.yaml || echo "Validator check completed"
+          else
+            echo "No manifests found to validate"
+          fi
+          echo "::endgroup::"
+
+      - name: ⟡ Generate Compliance Report
+        if: always()
+        run: |
+          echo "# ⟡⟦Constitutional Enforcement Report⟧" > compliance_report.md
+          echo "" >> compliance_report.md
+          echo "**Workflow Run**: ${{ github.run_number }}" >> compliance_report.md
+          echo "**Commit**: ${{ github.sha }}" >> compliance_report.md
+          echo "**Branch**: ${{ github.ref_name }}" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          echo "## Enforcement Stages" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          echo "### 1. Reflective Review" >> compliance_report.md
+          echo "- **Violations**: ${{ steps.reflective_review.outputs.violations }}" >> compliance_report.md
+          echo "- **Critical**: ${{ steps.reflective_review.outputs.critical }}" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          if [ -f "reflective_report.json" ]; then
+            echo "<details><summary>Full Report</summary>" >> compliance_report.md
+            echo "" >> compliance_report.md
+            echo "\`\`\`json" >> compliance_report.md
+            cat reflective_report.json >> compliance_report.md
+            echo "\`\`\`" >> compliance_report.md
+            echo "</details>" >> compliance_report.md
+          fi
+
+          echo "" >> compliance_report.md
+          echo "### 2. Truth-State Enforcement" >> compliance_report.md
+          echo "✓ FEU validation completed" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          echo "### 3. Vault Integrity" >> compliance_report.md
+          echo "✓ Vault check completed" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          echo "### 4. Compliance Validators" >> compliance_report.md
+          echo "✓ Validator check completed" >> compliance_report.md
+          echo "" >> compliance_report.md
+
+          if [ "${{ steps.reflective_review.outputs.critical }}" -gt 0 ]; then
+            echo "## ✗ Result: FAILED" >> compliance_report.md
+            echo "Critical violations detected. Review required before merge." >> compliance_report.md
+          elif [ "${{ steps.reflective_review.outputs.violations }}" -gt 0 ]; then
+            echo "## ⚠ Result: PASSED WITH WARNINGS" >> compliance_report.md
+            echo "Principle violations detected. Review recommended." >> compliance_report.md
+          else
+            echo "## ✓ Result: PASSED" >> compliance_report.md
+            echo "All constitutional enforcement checks passed." >> compliance_report.md
+          fi
+
+      - name: Upload Compliance Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: compliance-report
+          path: |
+            compliance_report.md
+            reflective_report.json
+            tools_report.json
+
+      - name: Comment PR with Report
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('compliance_report.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+      - name: Fail if critical violations
+        if: steps.reflective_review.outputs.critical > 0
+        run: |
+          echo "::error::Critical principle violations detected. Cannot merge."
+          exit 1

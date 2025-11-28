@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+#
+# MirrorDNA Pre-Commit Hook
+# Enforces constitutional compliance before commits
+#
+# Install: ln -s ../../.githooks/pre-commit .git/hooks/pre-commit
+# Or: git config core.hooksPath .githooks
+
+set -e
+
+echo "⟡⟦PRE-COMMIT ENFORCEMENT⟧"
+echo ""
+
+# Get list of staged Python and Markdown files
+STAGED_PY=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$' || true)
+STAGED_MD=$(git diff --cached --name-only --diff-filter=ACM | grep '\.md$' || true)
+
+if [ -z "$STAGED_PY" ] && [ -z "$STAGED_MD" ]; then
+    echo "No Python or Markdown files staged. Skipping enforcement."
+    exit 0
+fi
+
+echo "Staged files for review:"
+echo "$STAGED_PY" | sed 's/^/  - /'
+echo "$STAGED_MD" | sed 's/^/  - /'
+echo ""
+
+# Run Reflective Reviewer on staged files
+echo "→ Running Reflective Reviewer..."
+FAILURES=0
+
+for file in $STAGED_PY $STAGED_MD; do
+    if [ -f "$file" ]; then
+        if ! python tools/reflective_reviewer.py "$file" --format text 2>&1 | grep -q "✓"; then
+            echo "  ✗ $file failed philosophical audit"
+            FAILURES=$((FAILURES + 1))
+        else
+            echo "  ✓ $file passed"
+        fi
+    fi
+done
+
+if [ $FAILURES -gt 0 ]; then
+    echo ""
+    echo "✗ Pre-commit check failed: $FAILURES file(s) have principle violations"
+    echo "  Fix violations or use 'git commit --no-verify' to bypass (not recommended)"
+    exit 1
+fi
+
+echo ""
+echo "✓ All staged files pass constitutional enforcement"
+echo ""
+
+exit 0
