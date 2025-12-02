@@ -165,6 +165,7 @@ jobs:
 
       - name: Upload Compliance Report
         if: always()
+        # Use v4 to avoid deprecated upload-artifact major version
         uses: actions/upload-artifact@v4
         with:
           name: compliance-report
