@@ -9,7 +9,7 @@ predecessor: Master_Citation_v15.1.1
 successor: Master_Citation_v15.1.7
 continuity_snapshot: v3.9 (2025-11-09)
 tags: [MirrorDNA™, ActiveMirror™, Reflect, Enterprise, Tri-Twin, AGI², AHP, TQI, Trust-by-Design™]
-checksum_sha256: 7c6f44259bbf9449058573d43e3133f3018431c71f4d6ad8b39aa7b952edbac5
+checksum_sha256: 4ab3b1d4a83335c8232e2acf3824ce704c8441ebaddba3fbf8b166202e3339da
 canonical_status: Active · Governing
 vault_type: Specification · Public
 ---

@@ -8,7 +8,7 @@ status: Canonical · Archive Placeholder · Public Safe
 predecessor: Master_Citation_v15.1.1
 successor: Active_Mirror_Product_Spec_v2.0 (Full)
 tags: [MirrorDNA™, ActiveMirror™, Archive, Placeholder, Trust-by-Design™]
-checksum_sha256: b1f3a6d9c2e4f7b8a9d1c3e5f6a2b7c4e8d9a5b6f3c2d1e7a4b5c8d9e2f4a7c
+checksum_sha256: 9c8ad808b718cc01b8c0e6e36ef66135044406872cfd0d1729f8101b73bc762d
 canonical_status: Archived · Non-Governing
 vault_type: Specification · Public · Reference
 ---

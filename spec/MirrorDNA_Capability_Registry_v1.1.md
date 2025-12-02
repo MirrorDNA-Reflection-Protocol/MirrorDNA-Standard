@@ -10,7 +10,7 @@ status: Canonical · Living Document · Demonstration-Ready
 predecessor: AMOS://Registry/Capabilities/v1.0
 successor: [TBD]
 purpose: Evidence-backed confidence for demonstrations and operations
-checksum_sha256: 72403a91e12b43e5785987cdafc995e0e33ed0e85bd32cb7060a4f7c75568ca3
+checksum_sha256: c697714ee5f445c4c801eb916318a505596ee921ef420f09c4998940dcced9d5
 ---
 
 # MirrorDNA Capability Registry v1.1
