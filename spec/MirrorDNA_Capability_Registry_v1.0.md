@@ -9,7 +9,7 @@ status: Canonical · Living Document
 purpose: Demonstration-Ready Evidence of Proven Capabilities
 predecessor: none
 successor: AMOS://Registry/Capabilities/v1.1
-checksum_sha256: 70b4671bedc47652cb3265a410a39fe029a7a1764a1e9738a48ef55065444424
+checksum_sha256: 2e23ce9c24eeb4baabeb4181719c4b74ec6a50003ddab9c9e3360fb931acc374
 ---
 
 # MirrorDNA Capability Registry v1.0

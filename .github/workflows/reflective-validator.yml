@@ -20,6 +20,6 @@ jobs:
         run: pip install pyyaml
       - name: Validate canonical trio
         run: |
-          python validators/validator.py 00_MASTER_CITATION.md
+          python validators/validator.py 01_MASTER_CITATION_ABSTRACT.md
           python validators/validator.py spec/Reflection_Chain_Manifest_v1.0.md
           python validators/validator.py spec/Reflection_Chain_Addendum_v1.1.md
