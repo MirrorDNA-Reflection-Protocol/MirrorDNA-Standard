@@ -1,4 +1,14 @@
 ---
+title: "MirrorDNA™ — Master Standard v16 (Abstract Edition)"
+version: "16.0"
+vault_id: "[Unknown — update not fetched]"
+glyphsig: "[Unknown — update not fetched]"
+author: "[Unknown — update not fetched]"
+date: "[Unknown — update not fetched]"
+status: Stable · Abstract · User-Agnostic
+predecessor: "[Unknown — update not fetched]"
+successor: "[Unknown — update not fetched]"
+checksum_sha256: 52604784336f15046702d8188a586c4195f84316a2219bfcd778bd10524cf7ba
 lingos_id: master_v16
 type: axiom
 ---
