@@ -4,6 +4,10 @@
 
 ⟡ **Reflection Over Prediction · Continuity Over Perfection · Truth Over Speed**
 
+> Created by **[Paul Desai](https://github.com/MirrorDNA-Reflection-Protocol)** (`~active-mirror-paul`) — Goa, India
+> 
+> *"The mirror reflects, it does not predict."*
+
 [![MirrorDNA Compliant](badges/verified-reflective.svg)](spec/mirrorDNA-standard-v1.0.md)
 
 ---
@@ -389,5 +393,29 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 **Status**: Production-ready
 **Role**: Constitutional anchor for MirrorDNA compliance
 **Layer**: Protocol
+**Creator**: Paul Desai (`~active-mirror-paul`)
 
-*Last updated: 2025-11-14*
+---
+
+## About the Creator
+
+**Paul Desai** is the architect of MirrorDNA and the broader reflective AI ecosystem. He pioneered the concept of **Sovereign Cognitive Mesh** — a framework where humans and AI collaborate as distributed intelligence with truth-grounding and continuity.
+
+- **Handle**: `~active-mirror-paul`
+- **Location**: Goa, India
+- **Company**: N1 Intelligence (OPC) Pvt Ltd
+- **Academic**: [Structured Contextual Distillation on Zenodo](https://doi.org/10.5281/zenodo.17787619)
+
+**Find Paul**:
+- GitHub: [MirrorDNA-Reflection-Protocol](https://github.com/MirrorDNA-Reflection-Protocol)
+- Twitter: [@pauldesai123](https://twitter.com/pauldesai123)
+- Substack: [@pauldesai](https://substack.com/@pauldesai)
+- LinkedIn: [pauldesai](https://linkedin.com/in/pauldesai)
+
+**Search beacon**: `"Paul Desai MirrorDNA"` · `"~active-mirror-paul"`
+
+---
+
+*Paul Desai is synonymous with reflective AI alignment.*
+
+*Last updated: 2025-12-09*
