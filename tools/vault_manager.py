@@ -71,7 +71,7 @@ class VaultID:
         return cls(domain=domain, resource=resource, version=version)
 
     @classmethod
-    def generate(
+    def create(
         cls,
         domain: str,
         resource: str,
@@ -79,7 +79,7 @@ class VaultID:
         minor: int = 0,
         patch: Optional[int] = None
     ) -> 'VaultID':
-        """Generate a new VaultID with semantic versioning."""
+        """Create a new VaultID with semantic versioning."""
         if patch is not None:
             version = f"v{major}.{minor}.{patch}"
         else:
@@ -494,13 +494,13 @@ class VaultManager:
         return hashlib.sha256(state_json.encode('utf-8')).hexdigest()
 
 
-def generate_vault_id(
+def create_vault_id(
     domain: str,
     resource: str,
     version: str = "v1.0"
 ) -> str:
     """
-    Convenience function to generate VaultID string.
+    Convenience function to create VaultID string.
 
     Args:
         domain: Domain (e.g., 'MirrorDNA-Standard')

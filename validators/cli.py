@@ -2,7 +2,11 @@
 """
 MirrorDNA Compliance Validator CLI
 
+VaultID: AMOS://MirrorDNA-Standard/Validators/CLI/v1.0
+GlyphSig: ⟡⟦CONTINUITY⟧ · ⟡⟦TRUST⟧ · ⟡⟦VERIFIED⟧
+
 Command-line interface for validating MirrorDNA compliance.
+Ensures session tracking and vault integrity.
 """
 
 import sys
