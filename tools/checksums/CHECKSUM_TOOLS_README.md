@@ -1,4 +1,7 @@
+#!/bin/bash
 # Checksum Tools — MirrorDNA Integrity Verification
+# VaultID: MDN-003
+# GlyphSig: ⟡
 
 ## Purpose
 These tools maintain and verify SHA256 checksums in MirrorDNA markdown files to ensure integrity and support the **Anti-Hallucination Protocol (AHP)**.
@@ -7,6 +10,9 @@ These tools maintain and verify SHA256 checksums in MirrorDNA markdown files to 
 
 ### 1. `checksum_verifier.sh`
 **Verifies** that a file's declared checksum matches its actual content.
+- [Fact] Exit codes:
+  - `0` = checksum valid
+  - `1` = checksum invalid
 
 **Usage:**
 ```bash
@@ -20,35 +26,27 @@ These tools maintain and verify SHA256 checksums in MirrorDNA markdown files to 
   Checksum: 788ccffe78de2633332c3b1629a002f283c5337d5df327ede84c6997750a143a
 ```
 
-**Exit codes:**
-- `0` = checksum valid
-- `1` = checksum invalid
-
 ---
 
 ### 2. `checksum_updater.sh`
 **Updates** the `checksum_sha256:` field with the correct hash.
+- [Fact] What it does:
+  - Removes the existing `checksum_sha256:` line
+  - Calculates SHA256 of the remaining content
+  - Updates the file with the new checksum
+  - Creates backup as `.bak` (removed on success)
 
 **Usage:**
 ```bash
 ./checksum_updater.sh 00_MASTER_CITATION.md
 ```
 
-**What it does:**
-1. Removes the existing `checksum_sha256:` line
-2. Calculates SHA256 of the remaining content
-3. Updates the file with the new checksum
-4. Creates backup as `.bak` (removed on success)
-
-**When to use:**
-- After editing any file with a checksum field
-- Before committing changes to GitHub
-- When verification fails
-
 ---
 
 ### 3. `verify_repo_checksums.sh`
 **Batch verifies** all files in the repository.
+- [Fact] Output:
+  - Total files, Valid, Invalid
 
 **Usage:**
 ```bash
@@ -168,16 +166,16 @@ If checksums are broken, the entire trust chain weakens. These tools ensure:
 
 ## Troubleshooting
 
-**Q: Checksum fails after I edited the file**  
+**Q: Checksum fails after I edited the file**
 A: Run `./checksum_updater.sh <file.md>` to recalculate.
 
-**Q: Should I commit .bak files?**  
+**Q: Should I commit .bak files?**
 A: No. The updater script removes them on success. Add `*.bak` to `.gitignore`.
 
-**Q: What if I don't have shasum?**  
+**Q: What if I don't have shasum?**
 A: Install coreutils (macOS: `brew install coreutils`, Linux: usually pre-installed).
 
-**Q: Can I use these on Windows?**  
+**Q: Can I use these on Windows?**
 A: Yes, via Git Bash or WSL. Native PowerShell version coming soon.
 
 ---
