@@ -152,6 +152,10 @@ class ReflectiveReviewer:
         - Generating plausible responses without grounding
         - Pattern matching instead of state access
         """
+        # Skip for markdown files (documentation triggers false positives)
+        if context and str(context.get('file_path', '')).endswith('.md'):
+            return
+
         # Check for vault access
         has_vault_access = bool(re.search(r'vault\.(read|get|load)', code, re.I))
         has_state_access = bool(re.search(r'state\.(read|get|load)', code, re.I))
@@ -207,6 +211,8 @@ class ReflectiveReviewer:
         - Optimizing for speed over accuracy
         - Batch processing without reflection
         """
+        is_markdown = context and str(context.get('file_path', '')).endswith('.md')
+
         # Check for verification steps
         has_verification = bool(re.search(
             r'(verify|validate|check|confirm)',
@@ -227,7 +233,7 @@ class ReflectiveReviewer:
             for p in optimization_patterns
         )
 
-        if has_speed_optimization and not has_verification:
+        if has_speed_optimization and not has_verification and not is_markdown:
             self._add_finding(
                 Principle.PRESENCE_OVER_PRODUCTIVITY,
                 AuditSeverity.WARNING,

@@ -1,0 +1,27 @@
+{
+  "total_findings": 1,
+  "severity_counts": {
+    "pass": 0,
+    "warning": 1,
+    "violation": 0,
+    "critical": 0
+  },
+  "principle_counts": {
+    "reflection_over_prediction": 0,
+    "presence_over_productivity": 0,
+    "symbolic_continuity": 0,
+    "trust_by_design": 1,
+    "explicit_uncertainty": 0
+  },
+  "compliance_score": 0.9,
+  "findings": [
+    {
+      "principle": "trust_by_design",
+      "severity": "warning",
+      "message": "Wildcard imports hide dependencies",
+      "location": null,
+      "recommendation": "Use explicit imports for transparency"
+    }
+  ],
+  "file_path": "tools/README.md"
+}
