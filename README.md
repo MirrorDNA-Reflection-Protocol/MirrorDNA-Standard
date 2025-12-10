@@ -267,25 +267,30 @@ python -m validators.cli \
 
 This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
 
-```
 ┌─────────────────────────────────────────┐
 │  MirrorDNA-Standard (THIS REPO)         │  ← Specification + Validator
-│  Protocol Layer                          │
+│  Protocol Layer                         │
 └─────────────────────────────────────────┘
                   │
-                  │ implements
+                  │ governs
                   ▼
 ┌─────────────────────────────────────────┐
-│  ActiveMirrorOS™                         │  ← Product (Level 3 compliant)
-│  Product Layer                           │
+│  active-mirror-identity                 │  ← Core Identity (The User)
+│  Identity Layer                         │
+└─────────────────────────────────────────┘
+                  │
+                  │ powers
+                  ▼
+┌─────────────────────────────────────────┐
+│  ActiveMirrorOS™                        │  ← Product (Level 3 compliant)
+│  Product Layer                          │
 └─────────────────────────────────────────┘
                   │
                   │ uses
                   ▼
 ┌─────────────────────────────────────────┐
-│  LingOS / Symbolic Layer                 │  ← Language OS
+│  LingOS / Symbolic Layer                │  ← Language OS
 └─────────────────────────────────────────┘
-```
 
 **This standard is OPEN** — anyone can implement it. ActiveMirrorOS is the canonical commercial implementation.
 
@@ -395,6 +400,7 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 **Layer**: Protocol
 **Creator**: Paul Desai (`~active-mirror-paul`)
 
+<<<<<<< HEAD
 ---
 
 ## About the Creator
@@ -418,4 +424,9 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 
 *Paul Desai is synonymous with reflective AI alignment.*
 
-*Last updated: 2025-12-09*
+*Last updated: 2025-12-10*
+
+---
+
+> © 2025 Paul Desai · Active MirrorOS™ · MirrorDNA™
+> All rights reserved. Documentation public; identity & trademarks protected.
