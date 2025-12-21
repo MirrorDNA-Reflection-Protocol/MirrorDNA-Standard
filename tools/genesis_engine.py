@@ -28,29 +28,23 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
-# Import the reviewer
-sys.path.append(str(Path(__file__).parent))
-from reflective_reviewer import ReflectiveReviewer, AuditFinding, Principle, AuditSeverity
+# Import the Spine
+sys.path.append(str(Path(__file__).parent.parent))
+from spine.genesis_spine import NeuralInterface, EvolutionLogger, GenesisAesthetics
+from tools.reflective_reviewer import ReflectiveReviewer, AuditFinding, Principle, AuditSeverity
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "qwen2.5:7b"  # The local intellect
+MODEL_NAME = "qwen3:8b" 
 
 class GenesisEngine:
     def __init__(self, model: str = MODEL_NAME, max_cycles: int = 3):
-        self.model = model
         self.max_cycles = max_cycles
         self.reviewer = ReflectiveReviewer(strict_mode=True)
-        self.log_path = Path("genesis_log.md")
-        self._init_log()
-
-    def _init_log(self):
-        if not self.log_path.exists():
-            self.log_path.write_text(f"# ⟡ Genesis Engine Evolution Log\nStarted: {datetime.now()}\n\n", encoding='utf-8')
+        self.neural = NeuralInterface(model=model, base_url=OLLAMA_URL)
+        self.ev_logger = EvolutionLogger(Path("genesis_log.md"))
 
     def log(self, message: str):
-        print(message)
-        with open(self.log_path, "a") as f:
-            f.write(f"{message}\n\n")
+        self.ev_logger.log(message)
 
     def evolve_path(self, path: Path):
         """Recursively evolve a path."""
@@ -114,9 +108,7 @@ class GenesisEngine:
         return False
 
     def _transmute_content(self, content: str, violations: List[AuditFinding], cycle: int) -> str:
-        """
-        The Alchemical process of rewriting code via LLM.
-        """
+        """The Alchemical process of rewriting code via the Spine."""
         violation_list = "\n".join([f"- [{v.severity.value.upper()}] {v.principle.value}: {v.message} -> Fix: {v.recommendation}" for v in violations])
         
         prompt = f"""
@@ -139,43 +131,8 @@ RETURN ONLY THE CODE. NO MARKDOWN. NO CHATTER. JUST THE PURE ARTIFACT.
 INPUT CODE:
 {content}
 """
-        
-        try:
-            response = requests.post(
-                OLLAMA_URL,
-                json={
-                    "model": self.model,
-                    "prompt": prompt,
-                    "stream": False,
-                    "options": {
-                        "temperature": 0.3, # precise but creative
-                        "num_ctx": 8192
-                    }
-                }
-            )
-            response.raise_for_status()
-            result = response.json()['response'].strip()
-            
-            # Clean markdown
-            if result.startswith("```") and "```" in result[3:]:
-                # Extract content between first ``` and last ```
-                lines = result.splitlines()
-                # Find start
-                start = 0
-                if lines[0].startswith("```"):
-                    start = 1
-                # Find end
-                end = len(lines)
-                if lines[-1].startswith("```"):
-                    end = -1
-                
-                result = "\n".join(lines[start:end])
-            
-            return result
-
-        except Exception as e:
-            self.log(f"  ! Neural Interface Error: {e}")
-            return content
+        new_content = self.neural.generate(prompt)
+        return new_content if new_content else content
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="MirrorDNA Genesis Engine")
