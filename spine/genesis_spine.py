@@ -40,15 +40,13 @@ class SemanticCache:
         self.cache_path.write_text(json.dumps(self.cache, indent=2))
 
 class NeuralInterface:
-    def __init__(self, model="qwen3:8b", base_url="http://localhost:11434/api/generate"):
+    def __init__(self, model="qwen3-8b-turbo", base_url="http://localhost:5002/v1/chat/completions"):
         self.model = model
         self.base_url = base_url
         self.cache = SemanticCache(Path("/Users/mirror-admin/Documents/MirrorDNA-Vault/ActiveMirrorOS/Logs/neural_cache.json"))
 
     def generate(self, prompt: str, temperature=0.3) -> str:
-        """Calls the local LLM and returns cleaned content, with caching."""
-        # Use first 500 chars of prompt as key to avoid massive keys, 
-        # but for perfect matching, we should hash it.
+        """Calls the MirrorBrain V1 API and returns cleaned content, with caching."""
         import hashlib
         prompt_hash = hashlib.sha256(prompt.encode()).hexdigest()
         
@@ -57,20 +55,26 @@ class NeuralInterface:
             return cached
 
         try:
+            # PROJECT OMEGA: Use V1 Chat Completion format
             response = requests.post(
                 self.base_url,
                 json={
                     "model": self.model,
-                    "prompt": prompt,
+                    "messages": [{"role": "user", "content": prompt}],
                     "stream": False,
-                    "options": {
-                        "temperature": temperature,
-                        "num_ctx": 8192
-                    }
+                    "max_tokens": 1024
                 }
             )
             response.raise_for_status()
-            result = response.json().get('response', '').strip()
+            data = response.json()
+            
+            # Extract content from AXIOM response
+            result = data["choices"][0]["message"]["content"]
+            
+            # Remove reflection markers for raw tool consumption
+            if "◈ Pattern:" in result:
+                result = result.split("◈ Pattern:")[0].strip()
+            
             cleaned = self._clean_markdown(result)
             
             if cleaned:
@@ -78,7 +82,7 @@ class NeuralInterface:
                 
             return cleaned
         except Exception as e:
-            print(f"  ! Neural Interface Error: {e}")
+            print(f"  ! Neural Interface (V1) Error: {e}")
             return ""
 
     def _clean_markdown(self, text: str) -> str:
