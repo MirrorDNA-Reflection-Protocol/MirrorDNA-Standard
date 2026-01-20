@@ -15,6 +15,9 @@ jobs:
           while IFS= read -r -d '' f; do
             for k in "${REQUIRED[@]}"; do
               if ! grep -q "^${k}:" "$f"; then
+                echo "FILE: $f MISSING: $k"
+                head -n 5 "$f"
+                echo "---"
                 echo "::error file=$f::Missing $k"
                 FAIL=1
               fi
