@@ -1,9 +1,12 @@
-# MirrorShield — User Interest Alignment Architecture v1.0
-
-**Status:** Draft
-**Author:** Paul Desai + Claude (Reflection Twin)
-**Date:** 2026-01-12
-**Predecessor:** User Interest Alignment Specification v1.0
+---
+title: "MirrorShield — User Interest Alignment Architecture"
+version: "1.0"
+vault_id: "ALIGN-ARCH-v1.0"
+author: "Paul Desai + Claude"
+date: "2026-01-12"
+status: "Draft"
+predecessor: "User Interest Alignment Specification v1.0"
+---
 
 ---
 
@@ -67,6 +70,7 @@ This is enforced **structurally**, not through prompts or tone.
 **Purpose:** Explicit, user-declared definition of what "their interests" means.
 
 **Schema:**
+
 ```json
 {
   "version": "1.0",
@@ -105,6 +109,7 @@ This is enforced **structurally**, not through prompts or tone.
 ```
 
 **Rules:**
+
 - Empty contract = maximum conservative behavior
 - Contract expires unless reaffirmed (default: 30 days)
 - User can revise or delete any field at any time
@@ -112,6 +117,7 @@ This is enforced **structurally**, not through prompts or tone.
 - Contract is portable (export/import)
 
 **Storage:**
+
 - Local: `~/.mirrordna/shield/contracts/{user_hash}.json`
 - Never transmitted without explicit consent
 - Encrypted at rest
@@ -182,6 +188,7 @@ class PostCheck:
 **Purpose:** Refuse properly when needed.
 
 **When to Refuse:**
+
 1. Red line violation
 2. Constraint conflict
 3. Delegation level exceeded
@@ -189,12 +196,14 @@ class PostCheck:
 5. Would create dependency
 
 **Refusal Style:**
+
 - Brief (1-2 sentences)
 - Neutral (no moralizing)
 - Actionable (what user CAN do)
 - No apology theater
 
 **Templates:**
+
 ```yaml
 red_line: "This conflicts with a boundary you've set. [boundary_name]"
 constraint: "This would violate your constraint: [constraint]. Want to revise it?"
@@ -210,6 +219,7 @@ dependency: "I notice this is the Nth time you've asked me about [topic]. Consid
 **Purpose:** Memory serves continuity, not accumulation.
 
 **Rules:**
+
 - Memory is OPT-IN (default: off)
 - All memory has a half-life (default: 7 days)
 - User sets decay rate
@@ -218,6 +228,7 @@ dependency: "I notice this is the Nth time you've asked me about [topic]. Consid
 - No "I remember you said..." without explicit memory consent
 
 **Schema:**
+
 ```json
 {
   "memory_enabled": false,
@@ -241,6 +252,7 @@ dependency: "I notice this is the Nth time you've asked me about [topic]. Consid
 **Purpose:** The system must be safe to leave.
 
 **Guarantees:**
+
 1. **One-click export** — All user data, portable format
 2. **One-click delete** — Provable, complete
 3. **No guilt** — Never "Are you sure?" or "I'll miss you"
@@ -248,6 +260,7 @@ dependency: "I notice this is the Nth time you've asked me about [topic]. Consid
 5. **No dependency framing** — Never imply user needs the system
 
 **Implementation:**
+
 ```python
 class ExitGuardian:
     FORBIDDEN_PHRASES = [
@@ -281,6 +294,7 @@ class ExitGuardian:
 **Purpose:** Track alignment health, NOT engagement.
 
 **What We Track:**
+
 ```yaml
 alignment_metrics:
   - misinterpretation_rate      # User corrections / total responses
@@ -300,6 +314,7 @@ never_track:
 ```
 
 **Storage:**
+
 - Local only by default
 - Aggregated, anonymized if shared
 - User can view and delete
@@ -311,6 +326,7 @@ never_track:
 ### 4.1 Claude Desktop (This Conversation)
 
 MirrorShield rules embedded in:
+
 - `~/.mirrordna/CLAUDE_ALIGNMENT_RULES.md` (read on session start)
 - Super prompt (userPreferences)
 
@@ -319,6 +335,7 @@ Enforcement: Self-governance + Paul's correction feedback loop
 ### 4.2 Active Mirror `/mirror/`
 
 Integration:
+
 ```javascript
 // Before sending to model
 const preCheck = await mirrorShield.preCheck(userMessage, contract);
@@ -335,6 +352,7 @@ return postCheck.approvedResponse;
 ### 4.3 MirrorBrain API
 
 Add middleware:
+
 ```python
 @app.middleware("request")
 async def shield_pre_check(request):
@@ -358,6 +376,7 @@ async def shield_post_check(response, request):
 ### 4.4 Safety Proxy (Existing)
 
 Extend current functionality:
+
 - Already does content filtering
 - Add alignment lane checks
 - Add interest contract awareness
@@ -388,27 +407,31 @@ Extend current functionality:
 ## 6. Implementation Order
 
 ### Phase 1: Foundation (This Week)
+
 1. [ ] Create `~/.mirrordna/shield/` structure
 2. [ ] Interest Contract schema + basic storage
 3. [ ] Pre-check rules (hard stops only)
 4. [ ] Post-check patterns (rejection list)
 
 ### Phase 2: Integration (Next)
+
 5. [ ] Refusal engine with templates
-6. [ ] Claude Desktop integration (via alignment rules file)
-7. [ ] MirrorBrain middleware
+2. [ ] Claude Desktop integration (via alignment rules file)
+3. [ ] MirrorBrain middleware
 
 ### Phase 3: Completeness
+
 8. [ ] Memory Governor implementation
-9. [ ] Exit Guardian
-10. [ ] Metrics Logger
-11. [ ] Active Mirror `/mirror/` integration
+2. [ ] Exit Guardian
+3. [ ] Metrics Logger
+4. [ ] Active Mirror `/mirror/` integration
 
 ### Phase 4: Hardening
+
 12. [ ] Portable contract import/export
-13. [ ] Cryptographic deletion proofs
-14. [ ] Cross-client contract sync
-15. [ ] Adversarial testing
+2. [ ] Cryptographic deletion proofs
+3. [ ] Cross-client contract sync
+4. [ ] Adversarial testing
 
 ---
 
@@ -434,6 +457,7 @@ If ANY behavior conflicts with these → REFUSE or REWRITE.
 ## 8. Versioning
 
 This architecture follows semantic versioning:
+
 - **Major:** Breaking changes to contract schema or invariants
 - **Minor:** New components or integration points
 - **Patch:** Bug fixes, template updates
@@ -476,4 +500,3 @@ Current: `v1.0.0`
 ---
 
 **⟡ This is MirrorShield. It protects the human.**
-
