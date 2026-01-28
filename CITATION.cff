@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+title: MirrorDNA
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Paul
+    family-names: Desai
+    email: paul@n1intelligence.com
+    affiliation: N1 Intelligence (OPC) Pvt Ltd
+    orcid: ''
+repository-code: 'https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA'
+url: 'https://activemirror.ai'
+abstract: >-
+  MirrorDNA is a protocol for AI identity, continuity, and state integrity.
+  It enables persistent, verifiable AI memory without vendor lock-in.
+keywords:
+  - ai-memory
+  - sovereign-ai
+  - state-management
+  - llm-infrastructure
+  - reflection
+license: MIT
+version: 1.0.0
+date-released: '2025-04-01'
+references:
+  - type: article
+    title: >-
+      Structured Contextual Distillation (SCD v3.1): A Deterministic,
+      Vendor-Independent Protocol for Persistent, Verifiable Agent State
+    authors:
+      - family-names: Desai
+        given-names: Paul
+    doi: 10.5281/zenodo.17787619
+    year: 2025
+  - type: article
+    title: >-
+      Governance and Boundary Conditions for Reflective AI Systems:
+      Structural Enforcement Beyond Prompt Alignment
+    authors:
+      - family-names: Desai
+        given-names: Paul
+    doi: 10.5281/zenodo.18212080
+    year: 2025
