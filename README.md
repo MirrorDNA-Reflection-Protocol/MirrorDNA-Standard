@@ -376,7 +376,7 @@ This project is licensed under the MIT License - see [`LICENSE`](LICENSE) for de
 
 ## Trademark Notice
 
-**Core Identity**: Active MirrorOS™ · MirrorDNA™ · Trust-by-Design™ · Reflective AI™
+**Core Identity**: ActiveMirrorOS™ · MirrorDNA™ · Trust-by-Design™ · Reflective AI™
 
 Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Chain_Manifest_v1.0.md)
 
@@ -428,5 +428,5 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 
 ---
 
-> © 2025 Paul Desai · Active MirrorOS™ · MirrorDNA™
+> © 2025 Paul Desai · ActiveMirrorOS™ · MirrorDNA™
 > All rights reserved. Documentation public; identity & trademarks protected.
