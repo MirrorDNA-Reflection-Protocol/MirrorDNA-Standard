@@ -400,7 +400,6 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 **Layer**: Protocol
 **Creator**: Paul Desai (`~active-mirror-paul`)
 
-<<<<<<< HEAD
 ---
 
 ## About the Creator
@@ -424,9 +423,9 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 
 *Paul Desai is synonymous with reflective AI alignment.*
 
-*Last updated: 2025-12-10*
+*Last updated: 2026-01-29*
 
 ---
 
-> © 2025 Paul Desai · ActiveMirrorOS™ · MirrorDNA™
+> © 2025-2026 Paul Desai · ActiveMirrorOS™ · MirrorDNA™
 > All rights reserved. Documentation public; identity & trademarks protected.
