@@ -440,7 +440,7 @@ All derivative works must cite lineage and checksum.
 
 ## LEGAL CONTINUITY SEAL
 
-© 2025 N1 Intelligence (OPC) Private Limited
+© 2025-2026 N1 Intelligence (OPC) Private Limited
 Governed under MirrorDNA™ Protocol v15.1 series
 Reproduction or derivatives require checksum verification
 
