@@ -15,7 +15,7 @@ tags: [Tools, Enforcement, Governance, Constitutional]
 
 ## Overview
 
-This directory contains constitutional enforcement tools for the MirrorDNA Standard. These tools implement the governance frameworks defined in Master Citation v15.2+ and enable automated compliance verification, philosophical auditing, and wisdom-gated decision making.
+This directory contains constitutional enforcement tools for the MirrorDNA Standard. These tools implement the governance frameworks defined in Master Citation v15.3+ and enable automated compliance verification, philosophical auditing, and wisdom-gated decision making.
 
 ## Core Tools
 
@@ -27,7 +27,7 @@ This directory contains constitutional enforcement tools for the MirrorDNA Stand
 
 **Purpose**: Auto-FEU Constitutional Law enforcement
 
-Implements Truth-State Law as defined in Master Citation v15.2:
+Implements Truth-State Law as defined in Master Citation v15.3:
 - **[Fact]** — Verified in Vault or verified via citation
 - **[Estimate]** — Reasoned but not verified
 - **[Unknown]** — Not found in Vault; unverifiable
@@ -86,7 +86,7 @@ report = enforcer.generate_feu_report([
 
 **Purpose**: VaultID tracking, checksum generation, lineage management
 
-Implements vault governance per Master Citation v15.2:
+Implements vault governance per Master Citation v15.3:
 - VaultID generation and validation
 - SHA-256 checksum computation
 - Lineage chain tracking (predecessor/successor)
@@ -364,7 +364,7 @@ chmod +x tools/*.py
 
 ## Constitutional Status
 
-These tools implement constitutional law per Master Citation v15.2:
+These tools implement constitutional law per Master Citation v15.3:
 
 - **Auto-FEU**: Mandatory across all MirrorDNA systems
 - **Vault Primacy**: Vault = System, vault overrides everything
