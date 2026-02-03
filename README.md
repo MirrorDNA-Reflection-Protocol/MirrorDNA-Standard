@@ -21,7 +21,7 @@ Core enforcement:
 - Vault Supremacy + Checksum Law
 - Reflective Integrity System (RIS)
 
-All standards, schemas, lineage rules, and validation flows follow v15.2 as canonical truth.
+All standards, schemas, lineage rules, and validation flows follow v15.3 as canonical truth.
 
 ---
 
