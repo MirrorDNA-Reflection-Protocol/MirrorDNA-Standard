@@ -13,7 +13,7 @@
 ---
 
 **Governance:**
-This repository is now bound to **Master Citation v15.2 — Continuity-Perfected Edition**.
+This repository is now bound to **Master Citation v15.3 — Continuity-Perfected Edition**.
 
 Core enforcement:
 - Zero-Drift Layer (ZDL)
@@ -294,6 +294,8 @@ This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
 
 **This standard is OPEN** — anyone can implement it. ActiveMirrorOS is the canonical commercial implementation.
 
+**Consumer Product:** [Active Mirror](https://activemirror.ai) — AI Twins, BrainScan, Sovereign Mode. Live since January 2026.
+
 ---
 
 ## Documentation
@@ -423,7 +425,7 @@ Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Cha
 
 *Paul Desai is synonymous with reflective AI alignment.*
 
-*Last updated: 2026-01-29*
+*Last updated: 2026-02-03*
 
 ---
 
