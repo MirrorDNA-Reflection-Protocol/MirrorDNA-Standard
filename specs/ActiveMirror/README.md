@@ -116,9 +116,9 @@ All specifications maintain symbolic continuity through:
 
 ## Legal
 
-© 2025 N1 Intelligence (OPC) Private Limited
+© 2025-2026 N1 Intelligence (OPC) Private Limited
 **Active Mirror™**, **MirrorDNA™**, and **Trust-by-Design™** are trademarks.
-All specifications licensed under MirrorDNA™ Protocol v15.1 series.
+All specifications licensed under MirrorDNA™ Protocol v15.3 series.
 
 Reproduction or derivative works require:
 - Citation of lineage
