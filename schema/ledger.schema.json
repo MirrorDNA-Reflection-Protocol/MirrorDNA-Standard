@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "MirrorDNA Ledger Entry",
+  "type": "object",
+  "required": [
+    "entry_id",
+    "identity_ref",
+    "action_hash",
+    "reflection_outcome",
+    "previous_hash",
+    "signature"
+  ],
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "identity_ref": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "action_hash": {
+      "type": "string"
+    },
+    "reflection_outcome": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "REVIEW",
+        "DENY"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "previous_hash": {
+      "type": "string"
+    },
+    "signature": {
+      "type": "string"
+    }
+  }
+}

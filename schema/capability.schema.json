@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "MirrorDNA Capability Token",
+  "type": "object",
+  "required": [
+    "capability",
+    "scope",
+    "expires_at",
+    "signature"
+  ],
+  "properties": {
+    "capability": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "string"
+    }
+  }
+}

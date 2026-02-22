@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "MirrorDNA Intent Envelope",
+  "type": "object",
+  "required": [
+    "intent_id",
+    "action_type",
+    "parameters"
+  ],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "action_type": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "requested_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

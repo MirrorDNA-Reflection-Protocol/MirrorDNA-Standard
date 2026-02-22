@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "MirrorDNA Identity Object",
+  "type": "object",
+  "required": [
+    "identity_id",
+    "version",
+    "constraints",
+    "governance_profile",
+    "hash"
+  ],
+  "properties": {
+    "identity_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "version": {
+      "type": "string"
+    },
+    "constraints": {
+      "type": "object"
+    },
+    "governance_profile": {
+      "type": "object"
+    },
+    "trust_domain": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hash": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema#",
+  "title": "DeterministicAutonomyMatrix",
+  "type": "object",
+  "required": [
+    "version",
+    "risk_tiers",
+    "governance_tiers",
+    "rules",
+    "defaults"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "risk_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "examples"
+        ]
+      }
+    },
+    "governance_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "requirements"
+        ]
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "risk_id",
+          "max_autonomy",
+          "required_governance"
+        ]
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "required": [
+        "fail_closed",
+        "escalation_enabled"
+      ],
+      "properties": {
+        "fail_closed": {
+          "type": "boolean"
+        },
+        "escalation_enabled": {
+          "type": "boolean"
+        },
+        "unknown_action_policy": {
+          "type": "string",
+          "enum": [
+            "block",
+            "require_human",
+            "sandbox_only"
+          ]
+        }
+      }
+    }
+  }
+}
