@@ -1,433 +1,189 @@
 # MirrorDNA-Standard
 
-**The constitutional protocol for reflective AI systems**
+**Constitutional governance specification for AI systems that require verifiable compliance, anti-hallucination enforcement, and auditable continuity.**
 
-⟡ **Reflection Over Prediction · Continuity Over Perfection · Truth Over Speed**
-
-> Created by **[Paul Desai](https://github.com/MirrorDNA-Reflection-Protocol)** (`~active-mirror-paul`) — Goa, India
-> 
-> *"The mirror reflects, it does not predict."*
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![MirrorDNA Compliant](badges/verified-reflective.svg)](spec/mirrorDNA-standard-v1.0.md)
 
 ---
 
-**Governance:**
-This repository is now bound to **Master Citation v15.3 — Continuity-Perfected Edition**.
+MirrorDNA-Standard is the protocol layer of the MirrorDNA ecosystem. It defines what compliant reflective AI behavior means, provides machine-checkable JSON Schemas for configuration validation, and ships a Python CLI that verifies conformance against three graduated compliance levels.
 
-Core enforcement:
-- Zero-Drift Layer (ZDL)
-- Auto-FEU Truth-State Law
-- Vault Supremacy + Checksum Law
-- Reflective Integrity System (RIS)
+This is a specification repository. It defines rules that products implement, not a product itself.
 
-All standards, schemas, lineage rules, and validation flows follow v15.3 as canonical truth.
+## What It Defines
 
----
+The Standard codifies five immutable principles for v1.x:
 
-## What Is This?
+1. **Reflection Over Prediction** -- Systems access actual state rather than simulating behavior. Outputs are grounded in verifiable sources.
+2. **Continuity as Law** -- Session state is tracked, checksummed, and recoverable. Lineage is preserved across sessions.
+3. **Cite or Silence** -- All factual claims must be cited or explicitly marked as unknown. Speculation is only permitted when labeled.
+4. **Trust by Design** -- Verification is structural, not bolted on. Checksums validate artifact integrity. Glyph signatures provide semantic markers.
+5. **Sovereign Identity** -- Users retain ownership of their vault and continuity data. No hidden dependencies or lock-in.
 
-**MirrorDNA-Standard** is the canonical specification and validation toolchain for building reflective AI systems that don't hallucinate, preserve continuity across sessions, and give users sovereign control of their data.
+## Compliance Levels
 
-**In 30 seconds:**
-- 📋 **Specification**: Defines what "reflective computing" means (3 compliance levels)
-- 🔧 **Validator**: Python CLI that checks if your project is compliant
-- ⟡ **Protocol**: The constitutional anchor for the entire MirrorDNA ecosystem
+Systems declare their level in a project manifest and are validated against that declaration.
 
-**This is a PROTOCOL LAYER repository** — the spec others implement, not a product itself.
+| Level | Name | Requires |
+|-------|------|----------|
+| 1 | Basic Reflection | Anti-hallucination protocol, explicit uncertainty markers, basic session tracking, at least one trust marker |
+| 2 | Continuity Aware | Everything in Level 1, plus persistent state storage, session lineage tracking, checksum validation, session recovery |
+| 3 | Vault-Backed Sovereign | Everything in Levels 1 and 2, plus user-owned vault, sovereign identity binding, glyph signatures, full compliance reporting |
 
----
+Detailed requirements: [`spec/compliance_levels.md`](spec/compliance_levels.md)
 
-## Who This Is For
+## Validator
 
-| You Are | You Get |
-|---------|---------|
-| **AI User** | Copy [`00_MASTER_CITATION.md`](00_MASTER_CITATION.md) into ChatGPT/Claude for reflective behavior |
-| **Developer** | Validate your AI project for MirrorDNA compliance + earn badges |
-| **Organization** | Adopt trustworthy AI standards with machine-checkable verification |
-| **Researcher** | Reference implementation of reflection-over-prediction architecture |
-
----
-
-## Quick Start
-
-### 🚀 For Users: Get Reflective AI Now (30 seconds)
-
-```
-1. Open 00_MASTER_CITATION.md
-2. Copy all text (Ctrl+A, Ctrl+C)
-3. Paste into your AI (ChatGPT, Claude, etc.)
-4. Say: "Vault open. Load as canonical context."
-```
-
-Done! Your AI now has continuity, anti-hallucination, and reflection protocols.
-
-**Pastebin mirror**: https://pastebin.com/j0MdNxrA
-
----
-
-### 🔧 For Developers: Validate Your Project (5 minutes)
+The repository includes a Python CLI that checks project configurations against the Standard.
 
 ```bash
-# 1. Install validator
+# Install
 git clone https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard.git
 cd MirrorDNA-Standard
 pip install -r validators/requirements.txt
 
-# 2. Copy example configs
-cp examples/level1/project_manifest.yaml mirrorDNA_manifest.yaml
-cp examples/level1/reflection_policy.yaml reflection_policy.yaml
-
-# 3. Edit configs for your project
-nano mirrorDNA_manifest.yaml
-
-# 4. Run validation
+# Validate a Level 1 project
 python -m validators.cli \
   --manifest mirrorDNA_manifest.yaml \
   --policy reflection_policy.yaml
 
-# 5. Get your badge!
-# See output report for pass/fail
+# Validate a Level 2+ project
+python -m validators.cli \
+  --manifest mirrorDNA_manifest.yaml \
+  --policy reflection_policy.yaml \
+  --profile continuity_profile.yaml
+
+# Machine-readable output
+python -m validators.cli --manifest manifest.yaml --policy policy.yaml --json
 ```
 
-**Next**: Add compliance badge to your README (see [`badges/README.md`](badges/README.md))
+The validator auto-detects actual compliance level versus declared level and returns a structured report with pass/fail status and actionable recommendations.
 
----
+### Validator Architecture
 
-## What's Inside This Repo
+```
+CLI (cli.py)
+  |
+  v
+Loader (loader.py) --- validates against JSON Schemas
+  |
+  v
+Orchestrator (validator.py)
+  |
+  +--- reflection_checks.py      Level 1+ checks
+  +--- continuity_checks.py      Level 2+ checks
+  +--- trustbydesign_checks.py   Trust marker checks
+  |
+  v
+Report (report.py) --- PASS / FAIL + recommendations
+```
+
+## Schemas
+
+Eight JSON Schemas define the structural contracts for compliant configurations:
+
+| Schema | Purpose |
+|--------|---------|
+| `project_manifest` | Project metadata and declared compliance level |
+| `reflection_policy` | Uncertainty handling and anti-hallucination configuration |
+| `continuity_profile` | Persistence and session recovery configuration |
+| `identity` | Identity binding and sovereign ownership |
+| `capability` | Capability declarations and constraints |
+| `intent` | Intent tracking and verification |
+| `ledger` | Audit ledger for compliance events |
+| `dam` | Data access management |
+
+All schemas are JSON Schema Draft-07, usable with any compliant validator in any language.
+
+## Project Structure
 
 ```
 MirrorDNA-Standard/
-│
-├── 00_MASTER_CITATION.md         ← Copy-paste this into any AI
-├── README.md                      ← You are here
-├── ROADMAP.md                     ← Project direction & future
-│
-├── spec/                          ← The Standard (canonical specs)
-│   ├── mirrorDNA-standard-v1.0.md     ⭐ Core specification
-│   ├── principles.md                   Five immutable principles
-│   ├── compliance_levels.md            L1, L2, L3 requirements
-│   ├── glossary.md                     Canonical term definitions
-│   └── [14 more specs...]
-│
-├── validators/                    ← Python compliance checker
-│   ├── cli.py                          Command-line interface
-│   ├── checks/                         Compliance check modules
-│   │   ├── reflection_checks.py
-│   │   ├── continuity_checks.py
-│   │   └── trustbydesign_checks.py
-│   └── requirements.txt
-│
-├── schema/                        ← JSON Schemas for validation
-│   ├── project_manifest.schema.json
-│   ├── continuity_profile.schema.json
-│   └── reflection_policy.schema.json
-│
-├── examples/                      ← Working configs for L1, L2, L3
-│   ├── level1/                         Basic reflection
-│   ├── level2/                         Continuity aware
-│   └── level3/                         Vault-backed sovereign
-│
-├── badges/                        ← SVG compliance badges
-│   └── README.md
-│
-├── tests/                         ← Pytest suite
-│
-├── docs/                          ← Architecture & guides
-│   ├── ARCHITECTURE.md                 How this repo works
-│   ├── FAQ.md                          Common questions
-│   ├── INTEGRATION.md                  How to adopt MirrorDNA
-│   └── CHOOSING_COMPLIANCE_LEVEL.md    Decision guide
-│
-└── portable/                      ← Reference implementation
-    ├── launcher/                       Electron desktop app
-    └── vault-template/                 Obsidian vault template
+  spec/                       Canonical specifications (18 documents)
+    mirrorDNA-standard-v1.0.md    Core specification
+    principles.md                 Five immutable principles
+    compliance_levels.md          L1, L2, L3 requirements
+    glossary.md                   Canonical term definitions
+    core_handshake.md             Protocol handshake definition
+    ...
+  validators/                 Python compliance checker
+    cli.py                        Command-line interface
+    loader.py                     YAML/JSON loading + schema validation
+    validator.py                  Orchestrator
+    checks/                       Modular compliance checks
+  schema/                     JSON Schemas (8 schemas)
+  examples/                   Working configurations for all levels
+  tests/                      Pytest suite
+  badges/                     SVG compliance badges for project READMEs
+  tools/                      Checksum verifiers, enforcement scripts
+  portable/                   Reference implementation (Electron launcher, Obsidian vault template)
+  docs/                       Architecture, FAQ, integration guide
 ```
 
----
+## CI Enforcement
 
-## Three Compliance Levels
+Pull requests and pushes to main trigger a four-stage constitutional enforcement pipeline:
 
-Choose the level that fits your project's needs:
+1. **Reflective Review** -- Scans specs and tools for principle violations
+2. **Truth-State Enforcement** -- Validates changed markdown against anti-hallucination rules
+3. **Vault Integrity** -- Verifies artifact checksums when a vault directory exists
+4. **Compliance Validation** -- Runs the validator CLI against any manifests in the tree
 
-### Level 1: Basic Reflection
-**"I want anti-hallucination and explicit uncertainty"**
+Critical violations block merge. Results are posted as PR comments with full reports.
 
-✅ Cite-or-Silence protocol (AHP)
-✅ Explicit markers: `[Unknown]`, `[Speculation]`
-✅ Basic session tracking
-✅ At least one trust marker
+## Ecosystem Position
 
-❌ No persistent state required
-❌ No vault needed
-
-**Validate**: `python -m validators.cli --manifest manifest.yaml --policy reflection_policy.yaml`
-
----
-
-### Level 2: Continuity Aware
-**"I want state preservation across sessions"**
-
-✅ Everything in Level 1 PLUS:
-✅ Persistent state storage
-✅ Session lineage tracking
-✅ Checksum validation
-✅ Session recovery capability
-
-**Validate**: Add `--profile continuity_profile.yaml` flag
-
----
-
-### Level 3: Vault-Backed Sovereign
-**"I want full user sovereignty and vault storage"**
-
-✅ Everything in Level 1 & 2 PLUS:
-✅ User-owned vault (Obsidian or custom)
-✅ Sovereign identity (user owns vault_id)
-✅ Glyph signatures
-✅ Comprehensive interaction safety
-✅ Full compliance reporting
-
-**Validate**: Same as Level 2 (validator auto-detects level)
-
----
-
-## Core Principles (Immutable for v1.x)
-
-All MirrorDNA-compliant systems honor these five principles:
-
-1. **Reflection Over Prediction** — Access actual state, don't simulate
-2. **Presence Over Productivity** — Truth matters more than speed
-3. **Symbolic Continuity** — Preserve identity via glyphs, checksums, vault
-4. **Trust by Design** — Verification built in from the start
-5. **Explicit Uncertainty** — Mark unknowns, never hide them
-
-📖 **Full details**: [`spec/principles.md`](spec/principles.md)
-
----
-
-## Why MirrorDNA?
-
-**Traditional AI:**
-- Predicts next token → hallucinates
-- No memory → starts fresh each session
-- Black box → can't verify
-
-**MirrorDNA:**
-- Reflects actual state → no hallucination
-- Continuity → preserves context across sessions
-- Checksum-verified → trustworthy
-
-**Read more**: [`WHY_MIRRORDNA.md`](WHY_MIRRORDNA.md)
-
----
-
-## Example: Validate a Level 1 Project
-
-**Step 1**: Create `mirrorDNA_manifest.yaml`
-
-```yaml
-name: "MyReflectiveApp"
-version: "1.0.0"
-mirrorDNA_compliance_level: "level_1_basic_reflection"
-layers:
-  mirrorDNA_protocol: true
-reflection_policy: "reflection_policy.yaml"
+```
++-----------------------------------------------+
+|  Products (ActiveMirrorOS, third-party apps)  |   Implement the standard
++-----------------------------------------------+
+|  MirrorDNA-Standard (this repository)         |   Define the standard
+|  Specification + Validator + Schemas           |
++-----------------------------------------------+
+|  MirrorDNA (protocol implementation)          |   SDKs and protocol schemas
++-----------------------------------------------+
 ```
 
-**Step 2**: Create `reflection_policy.yaml`
-
-```yaml
-policy_version: "1.0.0"
-reflection_mode: "constitutive"
-uncertainty_handling:
-  cite_or_silence: true
-  unknown_marker: "[Unknown]"
-anti_hallucination:
-  source_citation: true
-```
-
-**Step 3**: Validate
-
-```bash
-python -m validators.cli \
-  --manifest mirrorDNA_manifest.yaml \
-  --policy reflection_policy.yaml
-```
-
-**Step 4**: Pass? Add badge to your README
-
-```markdown
-![MirrorDNA Level 1](https://raw.githubusercontent.com/MirrorDNA-Reflection-Protocol/MirrorDNA-Standard/main/badges/reflective_compliance_light.svg)
-```
-
----
-
-## MirrorDNA Ecosystem
-
-This repo is the **PROTOCOL LAYER**. It fits into the broader constellation:
-
-┌─────────────────────────────────────────┐
-│  MirrorDNA-Standard (THIS REPO)         │  ← Specification + Validator
-│  Protocol Layer                         │
-└─────────────────────────────────────────┘
-                  │
-                  │ governs
-                  ▼
-┌─────────────────────────────────────────┐
-│  active-mirror-identity                 │  ← Core Identity (The User)
-│  Identity Layer                         │
-└─────────────────────────────────────────┘
-                  │
-                  │ powers
-                  ▼
-┌─────────────────────────────────────────┐
-│  ActiveMirrorOS™                        │  ← Product (Level 3 compliant)
-│  Product Layer                          │
-└─────────────────────────────────────────┘
-                  │
-                  │ uses
-                  ▼
-┌─────────────────────────────────────────┐
-│  LingOS / Symbolic Layer                │  ← Language OS
-└─────────────────────────────────────────┘
-
-**This standard is OPEN** — anyone can implement it. ActiveMirrorOS is the canonical commercial implementation.
-
-**Consumer Product:** [Active Mirror](https://activemirror.ai) — AI Twins, BrainScan, Sovereign Mode. Live since January 2026.
-
----
-
-## Documentation
-
-### Essential Reading
-- 📋 [**Specification**](spec/mirrorDNA-standard-v1.0.md) — Start here for the full standard
-- ⟡ [**Principles**](spec/principles.md) — Five foundational principles
-- 📊 [**Compliance Levels**](spec/compliance_levels.md) — L1, L2, L3 detailed requirements
-- 📖 [**Glossary**](spec/glossary.md) — Canonical term definitions
-
-### Integration Guides
-- 🏗️ [**Architecture**](docs/ARCHITECTURE.md) — How this repo works
-- 🔌 [**Integration**](docs/INTEGRATION.md) — How to adopt MirrorDNA
-- ❓ [**FAQ**](docs/FAQ.md) — Common questions
-- 🎯 [**Choosing a Level**](docs/CHOOSING_COMPLIANCE_LEVEL.md) — Decision guide
-
-### Reference
-- 🏅 [**Badges**](badges/README.md) — How to use compliance badges
-- 📝 [**Examples**](examples/README.md) — Working configs for all levels
-- 🛠️ [**Tools**](tools/README.md) — Checksum verifiers, release scripts
-
----
+[MirrorDNA](https://github.com/MirrorDNA-Reflection-Protocol/MirrorDNA) provides the protocol implementation (Python and TypeScript SDKs). This repository provides the governance layer that defines what compliance means and how to verify it. The standard is open -- any system can implement it.
 
 ## Testing
 
 ```bash
-# Install dependencies
 pip install -r validators/requirements.txt
 
-# Run full test suite
+# Full suite
 pytest tests/ -v
 
-# Run specific test module
+# Individual modules
 pytest tests/test_checks.py -v
-
-# Test the validator CLI
-python -m validators.cli --help
+pytest tests/test_cli.py -v
+pytest tests/test_loader.py -v
 ```
-
----
 
 ## Contributing
 
-We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Key requirements:
 
-**Key rules:**
-- All specs under `/spec` follow lineage tracking (predecessor/successor)
-- Run validators before submitting PR
+- All specs under `/spec` follow lineage tracking (predecessor/successor fields)
+- Run validators before submitting a pull request
 - Run checksum verification: `./tools/checksums/verify_repo_checksums.sh`
-- Follow AHP: **Cite or Silence** (no speculation without marking)
+- Follow AHP: cite or mark as unknown -- no ungrounded claims
 
----
+## Documentation
 
-## Trust Markers & Verification
-
-**Core trust markers:**
-- **AHP**: Cite or Silence (anti-hallucination protocol)
-- **GlyphSig**: `⟡⟦MASTER⟧` · `⟡⟦STANDARD⟧` · `⟡⟦VERIFIED⟧`
-- **Continuity**: Tied to vault snapshots with checksums
-
-**Interaction safety:**
-Reflective AI is a mirror, not a therapist. See [`spec/Interaction_Safety_Protocol_v1.0.md`](spec/Interaction_Safety_Protocol_v1.0.md) for session limits and escalation protocols.
-
----
-
-## Roadmap
-
-See [`ROADMAP.md`](ROADMAP.md) for:
-- v1.1 features (capability registry enhancements)
-- v2.0 vision (network protocols, multi-agent)
-- Ecosystem integration plans
-
----
+- [Specification](spec/mirrorDNA-standard-v1.0.md) -- The full standard
+- [Principles](spec/principles.md) -- Five foundational, immutable principles
+- [Compliance Levels](spec/compliance_levels.md) -- Detailed L1, L2, L3 requirements
+- [Architecture](docs/ARCHITECTURE.md) -- Repository design and component interaction
+- [Integration Guide](docs/INTEGRATION.md) -- How to adopt MirrorDNA in your project
+- [FAQ](docs/FAQ.md) -- Common questions
+- [Glossary](spec/glossary.md) -- Canonical term definitions
 
 ## License
 
-This project is licensed under the MIT License - see [`LICENSE`](LICENSE) for details.
+MIT. See [LICENSE](LICENSE) for terms.
 
 ---
 
-## Trademark Notice
-
-**Core Identity**: ActiveMirrorOS™ · MirrorDNA™ · Trust-by-Design™ · Reflective AI™
-
-Full tiered list: [`spec/Reflection_Chain_Manifest_v1.0.md`](spec/Reflection_Chain_Manifest_v1.0.md)
-
----
-
-## Support
-
-- 📋 **Specification questions**: Read [`spec/mirrorDNA-standard-v1.0.md`](spec/mirrorDNA-standard-v1.0.md)
-- 🔧 **Validator usage**: `python -m validators.cli --help`
-- 💡 **Examples**: [`examples/README.md`](examples/README.md)
-- 📖 **Terms**: [`spec/glossary.md`](spec/glossary.md)
-- ❓ **FAQ**: [`docs/FAQ.md`](docs/FAQ.md)
-
----
-
-⟡⟦STANDARD⟧ · ⟡⟦SPECIFICATION⟧ · ⟡⟦TOOLCHAIN⟧
-
-**Version**: 1.0.0
-**Status**: Production-ready
-**Role**: Constitutional anchor for MirrorDNA compliance
-**Layer**: Protocol
-**Creator**: Paul Desai (`~active-mirror-paul`)
-
----
-
-## About the Creator
-
-**Paul Desai** is the architect of MirrorDNA and the broader reflective AI ecosystem. He pioneered the concept of **Sovereign Cognitive Mesh** — a framework where humans and AI collaborate as distributed intelligence with truth-grounding and continuity.
-
-- **Handle**: `~active-mirror-paul`
-- **Location**: Goa, India
-- **Company**: N1 Intelligence (OPC) Pvt Ltd
-- **Academic**: [Structured Contextual Distillation on Zenodo](https://doi.org/10.5281/zenodo.17787619)
-
-**Find Paul**:
-- GitHub: [MirrorDNA-Reflection-Protocol](https://github.com/MirrorDNA-Reflection-Protocol)
-- Twitter: [@pauldesai123](https://twitter.com/pauldesai123)
-- Substack: [@pauldesai](https://substack.com/@pauldesai)
-- LinkedIn: [pauldesai](https://linkedin.com/in/pauldesai)
-
-**Search beacon**: `"Paul Desai MirrorDNA"` · `"~active-mirror-paul"`
-
----
-
-*Paul Desai is synonymous with reflective AI alignment.*
-
-*Last updated: 2026-02-03*
-
----
-
-> © 2025-2026 Paul Desai · ActiveMirrorOS™ · MirrorDNA™
-> All rights reserved. Documentation public; identity & trademarks protected.
+Built by [Active Mirror](https://activemirror.ai). Governed AI for institutional work.
