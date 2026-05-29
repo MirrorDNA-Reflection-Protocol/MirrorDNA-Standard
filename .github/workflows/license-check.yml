@@ -1,0 +1,61 @@
+name: License Compliance
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'requirements.txt'
+      - 'pyproject.toml'
+      - 'go.mod'
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  license-check:
+    name: Third-Party License Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for Node.js project
+        id: check-node
+        run: test -f package.json && echo "found=true" >> $GITHUB_OUTPUT || echo "found=false" >> $GITHUB_OUTPUT
+
+      - name: Check for Python project
+        id: check-python
+        run: (test -f requirements.txt || test -f pyproject.toml) && echo "found=true" >> $GITHUB_OUTPUT || echo "found=false" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        if: steps.check-node.outputs.found == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        if: steps.check-node.outputs.found == 'true'
+        run: npm ci --ignore-scripts 2>/dev/null || npm install --ignore-scripts
+
+      - name: Run license checker (Node.js)
+        if: steps.check-node.outputs.found == 'true'
+        run: |
+          npx license-checker --summary --failOn "GPL-3.0;AGPL-3.0;SSPL-1.0;EUPL-1.1;EUPL-1.2" || {
+            echo "::error::Restrictive license detected in dependencies. Review before merging."
+            exit 1
+          }
+
+      - name: License summary
+        if: steps.check-node.outputs.found == 'true'
+        run: npx license-checker --csv --out license-report.csv 2>/dev/null || true
+
+      - name: Upload license report
+        if: steps.check-node.outputs.found == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-report
+          path: license-report.csv
+          retention-days: 90
